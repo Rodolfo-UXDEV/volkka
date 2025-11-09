@@ -135,6 +135,321 @@ label.active-label:has(input.form-check-input:checked) {
   box-shadow: 0 0 0 0.25rem rgba(196, 22, 23, 0.25) !important;
 }
 
+
+
+/*--- CSS Formulário ---*/
+
+.text-muted-light {
+    color: #aaa !important;
+}
+
+.text-highlight-pink {
+    color: #c41617;
+}
+
+.text-highlight-red {
+    color: #E53935;
+}
+
+.btn-pink {
+    background-color: #c41617;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.375rem;
+}
+
+.btn-pink:hover {
+    background-color: #c2185b;
+    color: #fff;
+}
+
+.btn-outline-pink {
+    border-color: #c41617;
+    color: #c41617;
+    font-weight: 700;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.375rem;
+}
+
+.btn-outline-pink:hover {
+    background-color: #c41617;
+    color: #fff;
+}
+
+/* --- Stepper (Barra de Progresso) --- */
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.step-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #3a3a3a;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    border: 2px solid #555;
+    transition: all 0.3s ease;
+}
+
+.step-item.active .step-icon {
+    background-color: #c41617;
+    border-color: #c41617;
+    color: #fff;
+}
+
+.step-item.completed .step-icon {
+    background-color: #4DB6AC;
+    /* Verde do "Continuar" */
+    border-color: #4DB6AC;
+    color: #fff;
+}
+
+.stepper::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0%;
+    right: 0%;
+    height: 2px;
+    background-color: #555;
+    z-index: 0;
+}
+
+.step-connector {
+    flex-grow: 1;
+}
+
+/* Radios Customizados */
+.form-check-input[type="radio"] {
+    border: 2px solid #aaa;
+    background-color: transparent;
+}
+
+.form-check-input[type="radio"]:checked {
+    background-color: #c41617;
+    border-color: #c41617;
+    box-shadow: none;
+}
+
+.form-check-label {
+    font-size: 0.9rem;
+}
+
+/* --- Step 2: Botões de Tag --- */
+.tag-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.tag-btn {
+    background-color: transparent;
+    border: 1px solid #777;
+    color: #ccc;
+    padding: 0.375rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.tag-btn.active,
+.tag-btn:hover {
+    background-color: #c41617;
+    border-color: #c41617;
+    color: #fff;
+}
+
+/* --- Step 3: Upload de Imagem --- */
+.image-preview-box {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed #555;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2d2d2d;
+    position: relative;
+}
+
+.image-preview-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.image-preview-controls {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.image-preview-controls .btn-icon {
+    background-color: #c41617;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.image-preview-controls .btn-icon.delete {
+    background-color: #444;
+}
+
+.upload-placeholder {
+    font-size: 3rem;
+    color: #555;
+}
+
+.btn-add-image {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    color: #f0f0f0;
+}
+
+/* --- Step 4: Estilos dos Planos (Copiados de selecao-planos.html) --- */
+.plan-card,
+.summary-card,
+.time-card {
+    background-color: #2d2d2d;
+    border: 1px solid #444;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.plan-card.active,
+.time-card.active {
+    border-color: #E53935;
+    box-shadow: 0 0 15px rgba(229, 57, 53, 0.3);
+}
+
+.plan-card .card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+}
+
+.plan-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+.plan-icon {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #888;
+}
+
+.plan-info h5 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.plan-info h5 .bi-info-circle-fill {
+    font-size: 0.9rem;
+    color: #888;
+    margin-left: 0.25rem;
+}
+
+.plan-info p {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 0;
+}
+
+.plan-price {
+    font-size: 0.9rem;
+    color: #f0f0f0;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.form-select-dark {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    color: #f0f0f0;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23aaa' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-select-dark:focus {
+    background-color: #3a3a3a;
+    border-color: #E53935;
+    color: #f0f0f0;
+    box-shadow: 0 0 0 0.25rem rgba(229, 57, 53, 0.25);
+}
+
+.time-card .list-group-item {
+    background-color: transparent;
+    border: none;
+    color: #f0f0f0;
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.time-card .list-group-item.active {
+    background-color: #E53935;
+    border-radius: 0.375rem;
+    color: #fff;
+}
+
+.time-card .list-group-item .bi-check-lg {
+    font-size: 1.25rem;
+    margin-right: 0.75rem;
+}
+
+.summary-card {
+    padding: 1rem;
+}
+
+.summary-card hr {
+    border-top: 1px solid #555;
+}
+
+.summary-card .btn-continue {
+    background-color: #4DB6AC;
+    /* Verde-azulado da imagem */
+    border: none;
+    font-weight: 700;
+    padding: 0.75rem;
+}
+
+.summary-card .btn-continue:hover {
+    background-color: #26a69a;
+}
+
+
+
+
 /*-----------------------------------*/
 
 :root,
@@ -226,10 +541,10 @@ label.active-label:has(input.form-check-input:checked) {
   --bs-tertiary-bg: #f8f9fa;
   --bs-tertiary-bg-rgb: 248, 249, 250;
   --bs-heading-color: inherit;
-  --bs-link-color: #0d6efd;
+  --bs-link-color: #c41617;
   --bs-link-color-rgb: 13, 110, 253;
   --bs-link-decoration: underline;
-  --bs-link-hover-color: #0a58ca;
+  --bs-link-hover-color: #8a281b;
   --bs-link-hover-color-rgb: 10, 88, 202;
   --bs-code-color: #d63384;
   --bs-highlight-color: #212529;
@@ -2582,13 +2897,13 @@ textarea.form-control-lg {
   filter: brightness(90%);
 }
 .form-check-input:focus {
-  border-color: #86b7fe;
+  border-color: #c41617;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(253, 13, 13, 0.25);
 }
 .form-check-input:checked {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #c41617;
+  border-color: #c41617;
 }
 .form-check-input:checked[type=checkbox] {
   --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
@@ -3150,6 +3465,7 @@ textarea.form-control-lg {
   --bs-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
   --bs-btn-disabled-opacity: 0.65;
   --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb), .5);
+  --bs-icon-color: #000000;
   display: inline-block;
   padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
   font-family: var(--bs-btn-font-family);
@@ -3168,6 +3484,7 @@ textarea.form-control-lg {
   border-radius: var(--bs-btn-border-radius);
   background-color: var(--bs-btn-bg);
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  fill: var(--bs-icon-color);
 }
 @media (prefers-reduced-motion: reduce) {
   .btn {
@@ -3178,6 +3495,7 @@ textarea.form-control-lg {
   color: var(--bs-btn-hover-color);
   background-color: var(--bs-btn-hover-bg);
   border-color: var(--bs-btn-hover-border-color);
+  fill: var(--bs-icon-hover-color)
 }
 .btn-check + .btn:hover {
   color: var(--bs-btn-color);
@@ -3518,6 +3836,16 @@ textarea.form-control-lg {
   --bs-btn-border-color: #c41617;
   --bs-btn-hover-color: #FFFFFF;
   --bs-btn-hover-bg: #8a281b;
+  --bs-btn-hover-border-color: #8a281b;
+  --bs-icon-hover-color: #ffffff;
+  --bs-icon-color: #c41617;
+}
+
+.btn-outline-red-2 {
+  --bs-btn-color: #c41617;
+  --bs-btn-border-color: #c41617;
+  --bs-btn-hover-color: #c41617;
+  --bs-btn-hover-bg: #ffe3e3;
   --bs-btn-hover-border-color: #8a281b;
 }
 
@@ -4123,7 +4451,7 @@ textarea.form-control-lg {
 .nav-pills {
   --bs-nav-pills-border-radius: var(--bs-border-radius);
   --bs-nav-pills-link-active-color: #fff;
-  --bs-nav-pills-link-active-bg: #0d6efd;
+  --bs-nav-pills-link-active-bg: #c41617;
 }
 .nav-pills .nav-link {
   border-radius: var(--bs-nav-pills-border-radius);
@@ -8942,6 +9270,10 @@ textarea.form-control-lg {
   color: #11ABE3 !important;
 }
 
+.text-teal{
+  color: var(--bs-teal);
+}
+
 .text-body-secondary {
   --bs-text-opacity: 1;
   color: var(--bs-secondary-color) !important;
@@ -9594,6 +9926,9 @@ textarea.form-control-lg {
   }
   .w-sm-100{
     width: 100% !important;
+  }
+  .w-sm-75{
+    width: 75% !important;
   }
   .float-sm-start {
     float: left !important;

@@ -114,44 +114,152 @@ window.addEventListener("scroll", function() {
 //------------------------------
 
 
-// Pega a referência do modal
-document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('md-header-pub');
-    const modalManager = document.querySelector('md-modal-login');
 
-    // VERIFICA SE AMBOS OS COMPONENTES FORAM ENCONTRADOS
-    if (header && modalManager) {
-        // Se ambos existem, adiciona o listener
-        header.addEventListener('loginRequisitado', () => {
-            console.log('Página Principal: Ouvi o evento "loginRequisitado"!');
-            
-            // VERIFICA SE O MÉTODO EXISTE ANTES DE CHAMAR
-            if (typeof modalManager.abrirModalLogin === 'function') {
-                modalManager.abrirModalLogin();
+// Código para abrir os MODAIS
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Configuração para o Modal de LOGIN ---
+    const headerPub = document.querySelector('md-header-pub');
+    const modalLoginManager = document.querySelector('md-modal-login');
+
+    if (headerPub && modalLoginManager) {
+        headerPub.addEventListener('loginRequisitado', () => {
+            console.log('Página: Ouvi o evento "loginRequisitado"!');
+            if (typeof modalLoginManager.abrirModalLogin === 'function') {
+                modalLoginManager.abrirModalLogin();
             } else {
-                console.error('Erro: O componente <md-modal-login> foi encontrado, mas não possui o método "abrirModalLogin".');
+                console.error('Erro: <md-modal-login> não tem o método "abrirModalLogin".');
             }
         });
     } else {
-        // Se algum não foi encontrado, avisa no console qual deles está faltando
-        if (!header) {
-            console.error('Erro de Depuração: O componente <md-header-pub> não foi encontrado na página.');
-        }
-        if (!modalManager) {
-            console.error('Erro de Depuração: O componente <md-modal-login> não foi encontrado na página.');
-        }
+        if (!headerPub) console.error('Erro: Componente <md-header-pub> não encontrado.');
+        if (!modalLoginManager) console.error('Erro: Componente <md-modal-login> não encontrado.');
     }
-});
+
+    // --- Configuração para o Modal ÁREA DE MEMBRO ---
+    const headerInterna = document.querySelector('md-header-interna');
+    const modalAreaMembroManager = document.querySelector('md-modal-areamembro');
+
+    if (headerInterna && modalAreaMembroManager) {
+        // ⚠️ IMPORTANTE: Use o nome correto do evento disparado pelo headerInterna
+        headerInterna.addEventListener('areaMembroRequisitado', () => { 
+            console.log('Página: Ouvi o evento "areaMembroRequisitado"!');
+            if (typeof modalAreaMembroManager.abrirModalAreaMembro === 'function') {
+                modalAreaMembroManager.abrirModalAreaMembro();
+            } else {
+                console.error('Erro: <md-modal-areamembro> não tem o método "abrirModalAreaMembro".');
+            }
+        });
+    } else {
+        if (!headerInterna) console.error('Erro: Componente <md-header-interna> não encontrado.');
+        if (!modalAreaMembroManager) console.error('Erro: Componente <md-modal-areamembro> não encontrado.');
+    }
+
+}); // Fim do DOMContentLoaded
 //------------------------------
 
+//--------- JS Formulario ------------
+document.addEventListener("DOMContentLoaded", function () {
+    let currentStep = 1;
+    const totalSteps = 4;
 
+    const btnProxima = document.getElementById("btn-proxima");
+    const btnVoltar = document.getElementById("btn-voltar");
 
+    // Armazena os ícones originais de cada etapa
+    const originalIcons = {
+        1: '<i class="bi bi-person-fill"></i>',
+        2: '<i class="bi bi-tags-fill"></i>',
+        3: '<i class="bi bi-camera-fill"></i>',
+        4: '<i class="bi bi-check-all"></i>'
+    };
 
+    // Ícone de concluído (o "check")
+    const completedIcon = '<i class="bi bi-check-lg"></i>';
 
+    // Função para mostrar a etapa correta
+    function showStep(step) {
+        // Esconde todas as etapas
+        document.querySelectorAll(".form-step").forEach((el) => {
+            el.style.display = "none";
+        });
+        // Mostra a etapa atual
+        document.getElementById(`step-${step}`).style.display = "block";
 
+        // Atualiza o stepper
+        updateStepper(step);
 
+        // Atualiza os botões
+        // Botão VOLTAR
+        if (step === 1) {
+            btnVoltar.style.visibility = "hidden";
+        } else {
+            btnVoltar.style.visibility = "visible";
+        }
 
+        // Botão PRÓXIMA
+        if (step === totalSteps) {
+            btnProxima.innerHTML = 'TERMINAR <i class="bi bi-check-lg"></i>';
+        } else {
+            btnProxima.innerHTML = 'PRÓXIMA <i class="bi bi-chevron-right"></i>';
+        }
+    }
 
+    // Função para atualizar o stepper
+    function updateStepper(step) {
+        for (let i = 1; i <= totalSteps; i++) {
+            const stepItem = document.getElementById(`step-item-${i}`);
+            const stepIcon = stepItem.querySelector('.step-icon'); // Seleciona o contêiner do ícone
+
+            if (i < step) {
+                // Etapa concluída
+                stepItem.classList.remove("active");
+                stepItem.classList.add("completed");
+                stepIcon.innerHTML = completedIcon; // Define o ícone de "check"
+            } else if (i === step) {
+                // Etapa ativa
+                stepItem.classList.remove("completed");
+                stepItem.classList.add("active");
+                stepIcon.innerHTML = originalIcons[i]; // Restaura o ícone original
+            } else {
+                // Etapa futura
+                stepItem.classList.remove("active");
+                stepItem.classList.remove("completed");
+                stepIcon.innerHTML = originalIcons[i]; // Garante que é o ícone original
+            }
+        }
+    }
+
+    // Event Listeners para os botões
+    btnProxima.addEventListener("click", function () {
+        if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+        } else {
+            // Lógica de "Terminar" - ex: submeter o formulário
+            alert("Formulário enviado!");
+        }
+    });
+
+    btnVoltar.addEventListener("click", function () {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+
+    // Toggle para botões de tag (Etapa 2)
+    document.querySelectorAll(".tag-btn").forEach(button => {
+        button.addEventListener("click", function (e) {
+            e.preventDefault(); // Previne comportamento padrão se for <button>
+            this.classList.toggle("active");
+        });
+    });
+
+    // Inicializa na Etapa 1
+    showStep(currentStep);
+});
+//------------------------------
 
 
 
@@ -215,6 +323,15 @@ document.addEventListener('DOMContentLoaded', function () {
     updateTotal();
 });
 //-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
 /*!
   * Bootstrap v5.3.3 (https://getbootstrap.com/)
