@@ -37,13 +37,13 @@ export class MDModalareamembro extends HTMLElement{
                                 </a>
                             </div> 
                             <div class="w-100 bg-light p-3 rounded-3 border border-1 border-light-subtle shadow-sm">
-                                <a href="#" class="d-flex align-items-center justify-content-between gap-2 link-red fw-bold fs-6">
+                                <a href="meusanuncios.html" class="d-flex align-items-center justify-content-between gap-2 link-red fw-bold fs-6">
                                 <div class="d-flex align-items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
                                     <path fill="currentColor" d="M13.333 4.872c2.357 0 3.536 0 4.268.75.732.752.732 1.96.732 4.378s0 3.626-.732 4.377c-.732.751-1.91.751-4.268.751H6.667c-2.357 0-3.536 0-4.268-.75-.732-.752-.732-1.96-.732-4.378 0-2.417 0-3.626.732-4.377.732-.751 1.91-.751 4.268-.751h6.666Z"></path>
                                     <path fill="currentColor" fill-rule="evenodd" d="M16.875 2.308c0 .354-.28.64-.625.64H3.75a.633.633 0 0 1-.625-.64c0-.354.28-.641.625-.641h12.5c.345 0 .625.287.625.64Zm0 15.384c0 .354-.28.641-.625.641H3.75a.633.633 0 0 1-.625-.64c0-.355.28-.642.625-.642h12.5c.345 0 .625.287.625.641Z" clip-rule="evenodd"></path>
                                     </svg>
-                                    ANÚNCIOS
+                                    MEUS ANÚNCIOS
                                 </div>
                                 
                                 <svg width="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">

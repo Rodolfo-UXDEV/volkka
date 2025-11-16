@@ -22,15 +22,15 @@ function validarSenha() {
 
 function atualizarEstado(elemento, valido) {
   if (valido) {
-      elemento.classList.remove("invalid");
-      elemento.classList.add("valid");
-      elemento.innerHTML = "✅ " + elemento.textContent.slice(2);
+    elemento.classList.remove("invalid");
+    elemento.classList.add("valid");
+    elemento.innerHTML = "✅ " + elemento.textContent.slice(2);
   } else {
-      elemento.classList.remove("valid");
-      elemento.classList.add("invalid");
-      elemento.innerHTML = "❌ " + elemento.textContent.slice(2);
+    elemento.classList.remove("valid");
+    elemento.classList.add("invalid");
+    elemento.innerHTML = "❌ " + elemento.textContent.slice(2);
   }
-} 
+}
 //------------------------------
 
 
@@ -40,16 +40,16 @@ function toggleSenha() {
   var icone = document.querySelector(".toggle-password");
 
   if (senha.type === "password") {
-      senha.type = "text";
+    senha.type = "text";
   } else {
-      senha.type = "password";
+    senha.type = "password";
   }
 }
 //------------------------------
 
 
 //---- JS Mostrar Modal 18+ ----
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   var myModal = new bootstrap.Modal(document.getElementById('meuModal'));
   myModal.show();
 });
@@ -61,32 +61,32 @@ let lastScrollTop = 0;
 let navbar = document.getElementById("navbar");
 let footer = document.getElementById("footer");
 
-window.addEventListener("scroll", function() {  
-let scrollTop = window.scrollY || document.documentElement.scrollTop;
+window.addEventListener("scroll", function () {
+  let scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-if (scrollTop > lastScrollTop) {
-  // Rola para baixo - Esconde navbar e footer
-  navbar.classList.add("hide");
-  footer.classList.add("hide-footer");
+  if (scrollTop > lastScrollTop) {
+    // Rola para baixo - Esconde navbar e footer
+    navbar.classList.add("hide");
+    footer.classList.add("hide-footer");
   } else {
     // Rola para cima - Mostra navbar e footer
     navbar.classList.remove("hide");
     footer.classList.remove("hide-footer");
-    }
+  }
 
-    lastScrollTop = scrollTop;
+  lastScrollTop = scrollTop;
 });
 //------------------------------
 
 
 //---- JS para campo de busca fixo home ----
-window.addEventListener("scroll", function() {
+window.addEventListener("scroll", function () {
   var elemento = document.getElementById("meuElemento");
 
   if (window.scrollY > 600) { // Se rolar mais de 200px, exibe
-      elemento.style.display = "block";
+    elemento.style.display = "block";
   } else {
-      elemento.style.display = "none";
+    elemento.style.display = "none";
   }
 });
 //------------------------------
@@ -94,23 +94,23 @@ window.addEventListener("scroll", function() {
 
 //---- JS para limitar a quantidade de caracteres de uma frase ----
 
- // Define o limite de caracteres no mobile
- const limiteMobile = 80;
+// Define o limite de caracteres no mobile
+const limiteMobile = 80;
 
- // Verifica se a tela é mobile
- if (window.innerWidth <= 576) {
-   // Seleciona todos os elementos com a classe "frase-limitada"
-   const frases = document.querySelectorAll('.frase-limitada');
+// Verifica se a tela é mobile
+if (window.innerWidth <= 576) {
+  // Seleciona todos os elementos com a classe "frase-limitada"
+  const frases = document.querySelectorAll('.frase-limitada');
 
-   frases.forEach(frase => {
-     const textoOriginal = frase.innerText;
+  frases.forEach(frase => {
+    const textoOriginal = frase.innerText;
 
-     // Se o texto for maior que o limite, corta e adiciona reticências
-     if (textoOriginal.length > limiteMobile) {
-       frase.innerText = textoOriginal.slice(0, limiteMobile) + '...';
-     }
-   });
- }
+    // Se o texto for maior que o limite, corta e adiciona reticências
+    if (textoOriginal.length > limiteMobile) {
+      frase.innerText = textoOriginal.slice(0, limiteMobile) + '...';
+    }
+  });
+}
 //------------------------------
 
 
@@ -118,146 +118,354 @@ window.addEventListener("scroll", function() {
 // Código para abrir os MODAIS
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Configuração para o Modal de LOGIN ---
-    const headerPub = document.querySelector('md-header-pub');
-    const modalLoginManager = document.querySelector('md-modal-login');
+  // --- Configuração para o Modal de LOGIN ---
+  const headerPub = document.querySelector('md-header-pub');
+  const modalLoginManager = document.querySelector('md-modal-login');
 
-    if (headerPub && modalLoginManager) {
-        headerPub.addEventListener('loginRequisitado', () => {
-            console.log('Página: Ouvi o evento "loginRequisitado"!');
-            if (typeof modalLoginManager.abrirModalLogin === 'function') {
-                modalLoginManager.abrirModalLogin();
-            } else {
-                console.error('Erro: <md-modal-login> não tem o método "abrirModalLogin".');
-            }
-        });
-    } else {
-        if (!headerPub) console.error('Erro: Componente <md-header-pub> não encontrado.');
-        if (!modalLoginManager) console.error('Erro: Componente <md-modal-login> não encontrado.');
-    }
+  if (headerPub && modalLoginManager) {
+    headerPub.addEventListener('loginRequisitado', () => {
+      console.log('Página: Ouvi o evento "loginRequisitado"!');
+      if (typeof modalLoginManager.abrirModalLogin === 'function') {
+        modalLoginManager.abrirModalLogin();
+      } else {
+        console.error('Erro: <md-modal-login> não tem o método "abrirModalLogin".');
+      }
+    });
+  } else {
+    if (!headerPub) console.error('Erro: Componente <md-header-pub> não encontrado.');
+    if (!modalLoginManager) console.error('Erro: Componente <md-modal-login> não encontrado.');
+  }
 
-    // --- Configuração para o Modal ÁREA DE MEMBRO ---
-    const headerInterna = document.querySelector('md-header-interna');
-    const modalAreaMembroManager = document.querySelector('md-modal-areamembro');
+  // --- Configuração para o Modal ÁREA DE MEMBRO ---
+  const headerInterna = document.querySelector('md-header-interna');
+  const modalAreaMembroManager = document.querySelector('md-modal-areamembro');
 
-    if (headerInterna && modalAreaMembroManager) {
-        // ⚠️ IMPORTANTE: Use o nome correto do evento disparado pelo headerInterna
-        headerInterna.addEventListener('areaMembroRequisitado', () => { 
-            console.log('Página: Ouvi o evento "areaMembroRequisitado"!');
-            if (typeof modalAreaMembroManager.abrirModalAreaMembro === 'function') {
-                modalAreaMembroManager.abrirModalAreaMembro();
-            } else {
-                console.error('Erro: <md-modal-areamembro> não tem o método "abrirModalAreaMembro".');
-            }
-        });
-    } else {
-        if (!headerInterna) console.error('Erro: Componente <md-header-interna> não encontrado.');
-        if (!modalAreaMembroManager) console.error('Erro: Componente <md-modal-areamembro> não encontrado.');
-    }
+  if (headerInterna && modalAreaMembroManager) {
+    // ⚠️ IMPORTANTE: Use o nome correto do evento disparado pelo headerInterna
+    headerInterna.addEventListener('areaMembroRequisitado', () => {
+      console.log('Página: Ouvi o evento "areaMembroRequisitado"!');
+      if (typeof modalAreaMembroManager.abrirModalAreaMembro === 'function') {
+        modalAreaMembroManager.abrirModalAreaMembro();
+      } else {
+        console.error('Erro: <md-modal-areamembro> não tem o método "abrirModalAreaMembro".');
+      }
+    });
+  } else {
+    if (!headerInterna) console.error('Erro: Componente <md-header-interna> não encontrado.');
+    if (!modalAreaMembroManager) console.error('Erro: Componente <md-modal-areamembro> não encontrado.');
+  }
 
 }); // Fim do DOMContentLoaded
 //------------------------------
 
 //--------- JS Formulario ------------
 document.addEventListener("DOMContentLoaded", function () {
-    let currentStep = 1;
-    const totalSteps = 4;
+  let currentStep = 1;
+  const totalSteps = 4;
 
-    const btnProxima = document.getElementById("btn-proxima");
-    const btnVoltar = document.getElementById("btn-voltar");
+  const btnProxima = document.getElementById("btn-proxima");
+  const btnVoltar = document.getElementById("btn-voltar");
 
-    // Armazena os ícones originais de cada etapa
-    const originalIcons = {
-        1: '<i class="bi bi-person-fill"></i>',
-        2: '<i class="bi bi-tags-fill"></i>',
-        3: '<i class="bi bi-camera-fill"></i>',
-        4: '<i class="bi bi-check-all"></i>'
-    };
+  // Armazena os ícones originais de cada etapa
+  const originalIcons = {
+    1: '<i class="bi bi-person-fill"></i>',
+    2: '<i class="bi bi-tags-fill"></i>',
+    3: '<i class="bi bi-camera-fill"></i>',
+    4: '<i class="bi bi-check-all"></i>'
+  };
 
-    // Ícone de concluído (o "check")
-    const completedIcon = '<i class="bi bi-check-lg"></i>';
+  // Ícone de concluído (o "check")
+  const completedIcon = '<i class="bi bi-check-lg"></i>';
 
-    // Função para mostrar a etapa correta
-    function showStep(step) {
-        // Esconde todas as etapas
-        document.querySelectorAll(".form-step").forEach((el) => {
-            el.style.display = "none";
-        });
-        // Mostra a etapa atual
-        document.getElementById(`step-${step}`).style.display = "block";
+  // Função para mostrar a etapa correta
+  function showStep(step) {
+    // Esconde todas as etapas
+    document.querySelectorAll(".form-step").forEach((el) => {
+      el.style.display = "none";
+    });
+    // Mostra a etapa atual
+    document.getElementById(`step-${step}`).style.display = "block";
 
-        // Atualiza o stepper
-        updateStepper(step);
+    // Atualiza o stepper
+    updateStepper(step);
 
-        // Atualiza os botões
-        // Botão VOLTAR
-        if (step === 1) {
-            btnVoltar.style.visibility = "hidden";
-        } else {
-            btnVoltar.style.visibility = "visible";
-        }
-
-        // Botão PRÓXIMA
-        if (step === totalSteps) {
-            btnProxima.innerHTML = 'TERMINAR <i class="bi bi-check-lg"></i>';
-        } else {
-            btnProxima.innerHTML = 'PRÓXIMA <i class="bi bi-chevron-right"></i>';
-        }
+    // Atualiza os botões
+    // Botão VOLTAR
+    if (step === 1) {
+      btnVoltar.style.visibility = "hidden";
+    } else {
+      btnVoltar.style.visibility = "visible";
     }
 
-    // Função para atualizar o stepper
-    function updateStepper(step) {
-        for (let i = 1; i <= totalSteps; i++) {
-            const stepItem = document.getElementById(`step-item-${i}`);
-            const stepIcon = stepItem.querySelector('.step-icon'); // Seleciona o contêiner do ícone
+    // Botão PRÓXIMA
+    if (step === totalSteps) {
+      btnProxima.innerHTML = 'TERMINAR <i class="bi bi-check-lg"></i>';
+    } else {
+      btnProxima.innerHTML = 'PRÓXIMA <i class="bi bi-chevron-right"></i>';
+    }
+  }
 
-            if (i < step) {
-                // Etapa concluída
-                stepItem.classList.remove("active");
-                stepItem.classList.add("completed");
-                stepIcon.innerHTML = completedIcon; // Define o ícone de "check"
-            } else if (i === step) {
-                // Etapa ativa
-                stepItem.classList.remove("completed");
-                stepItem.classList.add("active");
-                stepIcon.innerHTML = originalIcons[i]; // Restaura o ícone original
-            } else {
-                // Etapa futura
-                stepItem.classList.remove("active");
-                stepItem.classList.remove("completed");
-                stepIcon.innerHTML = originalIcons[i]; // Garante que é o ícone original
-            }
-        }
+  // Função para atualizar o stepper
+  function updateStepper(step) {
+    for (let i = 1; i <= totalSteps; i++) {
+      const stepItem = document.getElementById(`step-item-${i}`);
+      const stepIcon = stepItem.querySelector('.step-icon'); // Seleciona o contêiner do ícone
+
+      if (i < step) {
+        // Etapa concluída
+        stepItem.classList.remove("active");
+        stepItem.classList.add("completed");
+        stepIcon.innerHTML = completedIcon; // Define o ícone de "check"
+      } else if (i === step) {
+        // Etapa ativa
+        stepItem.classList.remove("completed");
+        stepItem.classList.add("active");
+        stepIcon.innerHTML = originalIcons[i]; // Restaura o ícone original
+      } else {
+        // Etapa futura
+        stepItem.classList.remove("active");
+        stepItem.classList.remove("completed");
+        stepIcon.innerHTML = originalIcons[i]; // Garante que é o ícone original
+      }
+    }
+  }
+
+  // Event Listeners para os botões
+  btnProxima.addEventListener("click", function () {
+    if (currentStep < totalSteps) {
+      currentStep++;
+      showStep(currentStep);
+    } else {
+      // Lógica de "Terminar" - ex: submeter o formulário
+      alert("Formulário enviado!");
+    }
+  });
+
+  btnVoltar.addEventListener("click", function () {
+    if (currentStep > 1) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  });
+
+  // Toggle para botões de tag (Etapa 2)
+  document.querySelectorAll(".tag-btn").forEach(button => {
+    button.addEventListener("click", function (e) {
+      e.preventDefault(); // Previne comportamento padrão se for <button>
+      this.classList.toggle("active");
+    });
+  });
+
+  // --- LÓGICA DA ETAPA 3: UPLOAD DE FOTOS ---
+
+  const fileInput = document.getElementById('image-file-input');
+  const previewContainer = document.getElementById('image-preview-container');
+  const addPlaceholder = document.getElementById('add-photo-placeholder');
+  const btnAddImageMain = document.getElementById('btn-add-image-main');
+  const btnRemoveAll = document.getElementById('btn-remove-all');
+  const MAX_PHOTOS = 6;
+
+  // Gatilhos para abrir o seletor de arquivos
+  addPlaceholder.addEventListener('click', () => fileInput.click());
+  btnAddImageMain.addEventListener('click', () => fileInput.click());
+
+  // Processa os arquivos selecionados
+  fileInput.addEventListener('change', function (event) {
+    const files = event.target.files;
+    let currentPhotoCount = previewContainer.querySelectorAll('.image-preview-item').length;
+
+    for (const file of files) {
+      if (currentPhotoCount >= MAX_PHOTOS) {
+        // Usamos um 'alert' simples aqui, mas o ideal seria um modal customizado
+        console.warn(`Limite de ${MAX_PHOTOS} fotos atingido.`);
+        break;
+      }
+
+      // Validação de tipo (redundante com 'accept', mas boa prática)
+      if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+        console.warn(`Arquivo ignorado (tipo inválido): ${file.name}`);
+        continue;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        createPreviewBox(e.target.result);
+        updatePhotoUploaderState();
+      };
+      reader.readAsDataURL(file);
+      currentPhotoCount++;
     }
 
-    // Event Listeners para os botões
-    btnProxima.addEventListener("click", function () {
-        if (currentStep < totalSteps) {
-            currentStep++;
-            showStep(currentStep);
+    // Limpa o valor do input para permitir selecionar o mesmo arquivo novamente
+    event.target.value = null;
+  });
+
+  // Cria o card de prévia da imagem
+  function createPreviewBox(dataUrl) {
+    const isFirstImage = previewContainer.querySelectorAll('.image-preview-item').length === 0;
+
+    const box = document.createElement('div');
+    // Adicionamos .image-preview-item para contagem
+    box.classList.add('image-preview-box', 'image-preview-item');
+
+    // Marca a primeira foto como principal (borda rosa)
+    if (isFirstImage) {
+      box.style.borderColor = '#E91E63';
+    }
+
+    box.innerHTML = `
+                    <img src="${dataUrl}" alt="Preview">
+                    <div class="image-preview-controls">
+                        <button class="btn-icon star ${isFirstImage ? 'active' : ''}" title="Marcar como principal">
+                            <i class="bi bi-star-fill"></i>
+                        </button>
+                        <button class="btn-icon delete" title="Excluir foto">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </div>
+                `;
+    // Insere a nova prévia *antes* do botão de adicionar (+)
+    previewContainer.insertBefore(box, addPlaceholder);
+  }
+
+  // Atualiza a visibilidade do botão de adicionar
+  function updatePhotoUploaderState() {
+    const currentPhotoCount = previewContainer.querySelectorAll('.image-preview-item').length;
+    if (currentPhotoCount >= MAX_PHOTOS) {
+      addPlaceholder.style.display = 'none';
+      btnAddImageMain.style.display = 'none';
+    } else {
+      addPlaceholder.style.display = 'flex'; // 'flex' é o padrão
+      btnAddImageMain.style.display = 'inline-block';
+    }
+  }
+
+  // Gerencia cliques nos botões (Deletar, Marcar Principal) usando delegação
+  previewContainer.addEventListener('click', function (event) {
+    const target = event.target;
+
+    // Clicou no botão DELETAR
+    const deleteButton = target.closest('.btn-icon.delete');
+    if (deleteButton) {
+      const box = deleteButton.closest('.image-preview-box');
+      const wasMain = box.style.borderColor.includes('233, 30, 99'); // Checa se a cor é #E91E63
+
+      box.remove();
+
+      // Se a foto principal foi deletada, marca a *nova* primeira foto como principal
+      if (wasMain) {
+        const firstItem = previewContainer.querySelector('.image-preview-item');
+        if (firstItem) {
+          setAsMainPhoto(firstItem);
+        }
+      }
+      updatePhotoUploaderState();
+      return;
+    }
+
+    // Clicou no botão ESTRELA (Marcar como principal)
+    const starButton = target.closest('.btn-icon.star');
+    if (starButton) {
+      const box = starButton.closest('.image-preview-box');
+      setAsMainPhoto(box);
+    }
+  });
+
+  // Botão "Remover Tudo"
+  btnRemoveAll.addEventListener('click', function () {
+    previewContainer.querySelectorAll('.image-preview-item').forEach(box => box.remove());
+    updatePhotoUploaderState();
+  });
+
+  // Função auxiliar para definir a foto principal
+  function setAsMainPhoto(boxToMakeMain) {
+    // 1. Reseta todas as outras
+    previewContainer.querySelectorAll('.image-preview-item').forEach(box => {
+      box.style.borderColor = '#555'; // Cor padrão
+      box.querySelector('.btn-icon.star').classList.remove('active');
+    });
+
+    // 2. Ativa a selecionada
+    boxToMakeMain.style.borderColor = '#E91E63'; // Cor de destaque
+    boxToMakeMain.querySelector('.btn-icon.star').classList.add('active');
+  }
+
+  // --- LÓGICA DA ETAPA 4: SELEÇÃO DE PLANOS ---
+  const planContainer = document.getElementById('plan-container');
+  const summaryPlanName = document.getElementById('summary-plan-name');
+  const summaryPlanCredits = document.getElementById('summary-plan-credits');
+  const summaryPlanPrice = document.getElementById('summary-plan-price');
+
+  if (planContainer) {
+    planContainer.addEventListener('click', function (event) {
+      const clickedCard = event.target.closest('.plan-card');
+
+      // Se o clique não foi em um card, ou se o card já está ativo, não faz nada
+      if (!clickedCard || clickedCard.classList.contains('active')) {
+        return;
+      }
+
+      // 1. Obter os dados do card clicado
+      const planName = clickedCard.dataset.planName;
+      const planCredits = clickedCard.dataset.planCredits;
+      const planPrice = clickedCard.dataset.planPrice;
+
+      // 2. Resetar todos os cards
+      planContainer.querySelectorAll('.plan-card').forEach(card => {
+        card.classList.remove('active');
+        // Resetar select
+        const select = card.querySelector('select');
+        if (select) {
+          select.disabled = true;
+          select.style.borderColor = '#555'; // Cor padrão
+        }
+        // Resetar label
+        const label = card.querySelector('.form-label');
+        if (label) {
+          label.classList.remove('text-highlight-red');
+          label.classList.add('text-muted-light');
+        }
+      });
+
+      // 3. Ativar o card clicado
+      clickedCard.classList.add('active');
+
+      // Ativar o select do card clicado
+      const activeSelect = clickedCard.querySelector('select');
+      if (activeSelect) {
+        activeSelect.disabled = false;
+        activeSelect.style.borderColor = '#E53935'; // Cor de destaque
+      }
+
+      // Ativar a label do card clicado
+      const activeLabel = clickedCard.querySelector('.form-label');
+      if (activeLabel) {
+        activeLabel.classList.add('text-highlight-red');
+        activeLabel.classList.remove('text-muted-light');
+      }
+
+      // 4. Atualizar o sumário
+      if (summaryPlanName) {
+        summaryPlanName.textContent = planName;
+      }
+      if (summaryPlanCredits) {
+        summaryPlanCredits.textContent = `${planCredits} Créditos`;
+      }
+      if (summaryPlanPrice) {
+        if (planPrice) {
+          summaryPlanPrice.textContent = `${planPrice} R$`;
+          summaryPlanPrice.style.display = 'block';
         } else {
-            // Lógica de "Terminar" - ex: submeter o formulário
-            alert("Formulário enviado!");
+          // Se não houver preço em R$, esconde o elemento
+          summaryPlanPrice.textContent = '';
+          summaryPlanPrice.style.display = 'none';
         }
+      }
     });
+  }
 
-    btnVoltar.addEventListener("click", function () {
-        if (currentStep > 1) {
-            currentStep--;
-            showStep(currentStep);
-        }
-    });
-
-    // Toggle para botões de tag (Etapa 2)
-    document.querySelectorAll(".tag-btn").forEach(button => {
-        button.addEventListener("click", function (e) {
-            e.preventDefault(); // Previne comportamento padrão se for <button>
-            this.classList.toggle("active");
-        });
-    });
-
-    // Inicializa na Etapa 1
-    showStep(currentStep);
+  // Inicializa na Etapa 1
+  showStep(currentStep);
 });
 //------------------------------
 
@@ -266,61 +474,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //-----------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function () {
-    const radioButtons = document.querySelectorAll('input[name="creditos"]');
-    const totalValueElement = document.getElementById('totalValue');
-    const creditOptionDivs = document.querySelectorAll('.credit-option');
+  const radioButtons = document.querySelectorAll('input[name="creditos"]');
+  const totalValueElement = document.getElementById('totalValue');
+  const creditOptionDivs = document.querySelectorAll('.credit-option');
 
-    // Função para formatar o valor como moeda brasileira (BRL)
-    function formatCurrency(value) {
-        return parseFloat(value).toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        });
-    }
-
-    // Função para atualizar o total
-    function updateTotal() {
-        let selectedPrice = 0;
-        const selectedRadio = document.querySelector('input[name="creditos"]:checked');
-        
-        // Remove a classe 'selected' de todas as opções
-        creditOptionDivs.forEach(div => {
-            div.classList.remove('selected');
-        });
-
-        if (selectedRadio) {
-            selectedPrice = parseFloat(selectedRadio.value); // Ou selectedRadio.dataset.price se você preferir usar data attributes
-            
-            // Adiciona a classe 'selected' ao label pai do radio selecionado
-            if (selectedRadio.closest('.credit-option')) {
-                selectedRadio.closest('.credit-option').classList.add('selected');
-            }
-        }
-        
-        totalValueElement.textContent = formatCurrency(selectedPrice);
-    }
-
-    // Adiciona o event listener para cada radio button
-    radioButtons.forEach(radio => {
-        radio.addEventListener('change', updateTotal);
+  // Função para formatar o valor como moeda brasileira (BRL)
+  function formatCurrency(value) {
+    return parseFloat(value).toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
     });
+  }
 
-    // Adiciona event listener para os divs para permitir clique no div inteiro
-    // e para aplicar o estilo visual de selecionado.
+  // Função para atualizar o total
+  function updateTotal() {
+    let selectedPrice = 0;
+    const selectedRadio = document.querySelector('input[name="creditos"]:checked');
+
+    // Remove a classe 'selected' de todas as opções
     creditOptionDivs.forEach(div => {
-        div.addEventListener('click', function() {
-            const radioInside = this.querySelector('input[type="radio"]');
-            if (radioInside && !radioInside.checked) {
-                radioInside.checked = true;
-                // Dispara o evento 'change' manualmente para garantir que updateTotal seja chamado
-                const event = new Event('change', { bubbles: true });
-                radioInside.dispatchEvent(event);
-            }
-        });
+      div.classList.remove('selected');
     });
 
-    // Inicializa o total (caso algum rádio já venha marcado ou para garantir R$ 0,00)
-    updateTotal();
+    if (selectedRadio) {
+      selectedPrice = parseFloat(selectedRadio.value); // Ou selectedRadio.dataset.price se você preferir usar data attributes
+
+      // Adiciona a classe 'selected' ao label pai do radio selecionado
+      if (selectedRadio.closest('.credit-option')) {
+        selectedRadio.closest('.credit-option').classList.add('selected');
+      }
+    }
+
+    totalValueElement.textContent = formatCurrency(selectedPrice);
+  }
+
+  // Adiciona o event listener para cada radio button
+  radioButtons.forEach(radio => {
+    radio.addEventListener('change', updateTotal);
+  });
+
+  // Adiciona event listener para os divs para permitir clique no div inteiro
+  // e para aplicar o estilo visual de selecionado.
+  creditOptionDivs.forEach(div => {
+    div.addEventListener('click', function () {
+      const radioInside = this.querySelector('input[type="radio"]');
+      if (radioInside && !radioInside.checked) {
+        radioInside.checked = true;
+        // Dispara o evento 'change' manualmente para garantir que updateTotal seja chamado
+        const event = new Event('change', { bubbles: true });
+        radioInside.dispatchEvent(event);
+      }
+    });
+  });
+
+  // Inicializa o total (caso algum rádio já venha marcado ou para garantir R$ 0,00)
+  updateTotal();
 });
 //-----------------------------------------------------------------
 
@@ -340,9 +548,10 @@ document.addEventListener('DOMContentLoaded', function () {
   */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.bootstrap = factory());
-})(this, (function () { 'use strict';
+    typeof define === 'function' && define.amd ? define(factory) :
+      (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.bootstrap = factory());
+})(this, (function () {
+  'use strict';
 
   /**
    * --------------------------------------------------------------------------
@@ -532,7 +741,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     return findShadowRoot(element.parentNode);
   };
-  const noop = () => {};
+  const noop = () => { };
 
   /**
    * Trick to restart an element's animation
@@ -2214,7 +2423,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     var _ref = isElement(element) ? getWindow(element) : window,
-        visualViewport = _ref.visualViewport;
+      visualViewport = _ref.visualViewport;
 
     var addVisualOffsets = !isLayoutViewport() && isFixedStrategy;
     var x = (clientRect.left + (addVisualOffsets && visualViewport ? visualViewport.offsetLeft : 0)) / scaleX;
@@ -2265,17 +2474,17 @@ document.addEventListener('DOMContentLoaded', function () {
       return true;
     } // then fallback to custom implementation with Shadow DOM support
     else if (rootNode && isShadowRoot(rootNode)) {
-        var next = child;
+      var next = child;
 
-        do {
-          if (next && parent.isSameNode(next)) {
-            return true;
-          } // $FlowFixMe[prop-missing]: need a better way to handle this...
+      do {
+        if (next && parent.isSameNode(next)) {
+          return true;
+        } // $FlowFixMe[prop-missing]: need a better way to handle this...
 
 
-          next = next.parentNode || next.host;
-        } while (next);
-      } // Give up, the result is false
+        next = next.parentNode || next.host;
+      } while (next);
+    } // Give up, the result is false
 
 
     return false;
@@ -2292,7 +2501,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function getDocumentElement(element) {
     // $FlowFixMe[incompatible-return]: assume body is always available
     return ((isElement(element) ? element.ownerDocument : // $FlowFixMe[prop-missing]
-    element.document) || window.document).documentElement;
+      element.document) || window.document).documentElement;
   }
 
   function getParentNode(element) {
@@ -2305,7 +2514,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // $FlowFixMe[prop-missing]
       element.assignedSlot || // step into the shadow DOM of the parent of a slotted node
       element.parentNode || ( // DOM Element detected
-      isShadowRoot(element) ? element.host : null) || // ShadowRoot detected
+        isShadowRoot(element) ? element.host : null) || // ShadowRoot detected
       // $FlowFixMe[incompatible-call]: HTMLElement is a Node
       getDocumentElement(element) // fallback
 
@@ -2314,7 +2523,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function getTrueOffsetParent(element) {
     if (!isHTMLElement(element) || // https://github.com/popperjs/popper-core/issues/837
-    getComputedStyle$1(element).position === 'fixed') {
+      getComputedStyle$1(element).position === 'fixed') {
       return null;
     }
 
@@ -2417,8 +2626,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var _state$modifiersData$;
 
     var state = _ref.state,
-        name = _ref.name,
-        options = _ref.options;
+      name = _ref.name,
+      options = _ref.options;
     var arrowElement = state.elements.arrow;
     var popperOffsets = state.modifiersData.popperOffsets;
     var basePlacement = getBasePlacement(state.placement);
@@ -2452,9 +2661,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function effect$1(_ref2) {
     var state = _ref2.state,
-        options = _ref2.options;
+      options = _ref2.options;
     var _options$element = options.element,
-        arrowElement = _options$element === void 0 ? '[data-popper-arrow]' : _options$element;
+      arrowElement = _options$element === void 0 ? '[data-popper-arrow]' : _options$element;
 
     if (arrowElement == null) {
       return;
@@ -2502,7 +2711,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function roundOffsetsByDPR(_ref, win) {
     var x = _ref.x,
-        y = _ref.y;
+      y = _ref.y;
     var dpr = win.devicePixelRatio || 1;
     return {
       x: round(x * dpr) / dpr || 0,
@@ -2514,19 +2723,19 @@ document.addEventListener('DOMContentLoaded', function () {
     var _Object$assign2;
 
     var popper = _ref2.popper,
-        popperRect = _ref2.popperRect,
-        placement = _ref2.placement,
-        variation = _ref2.variation,
-        offsets = _ref2.offsets,
-        position = _ref2.position,
-        gpuAcceleration = _ref2.gpuAcceleration,
-        adaptive = _ref2.adaptive,
-        roundOffsets = _ref2.roundOffsets,
-        isFixed = _ref2.isFixed;
+      popperRect = _ref2.popperRect,
+      placement = _ref2.placement,
+      variation = _ref2.variation,
+      offsets = _ref2.offsets,
+      position = _ref2.position,
+      gpuAcceleration = _ref2.gpuAcceleration,
+      adaptive = _ref2.adaptive,
+      roundOffsets = _ref2.roundOffsets,
+      isFixed = _ref2.isFixed;
     var _offsets$x = offsets.x,
-        x = _offsets$x === void 0 ? 0 : _offsets$x,
-        _offsets$y = offsets.y,
-        y = _offsets$y === void 0 ? 0 : _offsets$y;
+      x = _offsets$x === void 0 ? 0 : _offsets$x,
+      _offsets$y = offsets.y,
+      y = _offsets$y === void 0 ? 0 : _offsets$y;
 
     var _ref3 = typeof roundOffsets === 'function' ? roundOffsets({
       x: x,
@@ -2564,7 +2773,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (placement === top || (placement === left || placement === right) && variation === end) {
         sideY = bottom;
         var offsetY = isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.height : // $FlowFixMe[prop-missing]
-        offsetParent[heightProp];
+          offsetParent[heightProp];
         y -= offsetY - popperRect.height;
         y *= gpuAcceleration ? 1 : -1;
       }
@@ -2572,7 +2781,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (placement === left || (placement === top || placement === bottom) && variation === end) {
         sideX = right;
         var offsetX = isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.width : // $FlowFixMe[prop-missing]
-        offsetParent[widthProp];
+          offsetParent[widthProp];
         x -= offsetX - popperRect.width;
         x *= gpuAcceleration ? 1 : -1;
       }
@@ -2604,13 +2813,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function computeStyles(_ref5) {
     var state = _ref5.state,
-        options = _ref5.options;
+      options = _ref5.options;
     var _options$gpuAccelerat = options.gpuAcceleration,
-        gpuAcceleration = _options$gpuAccelerat === void 0 ? true : _options$gpuAccelerat,
-        _options$adaptive = options.adaptive,
-        adaptive = _options$adaptive === void 0 ? true : _options$adaptive,
-        _options$roundOffsets = options.roundOffsets,
-        roundOffsets = _options$roundOffsets === void 0 ? true : _options$roundOffsets;
+      gpuAcceleration = _options$gpuAccelerat === void 0 ? true : _options$gpuAccelerat,
+      _options$adaptive = options.adaptive,
+      adaptive = _options$adaptive === void 0 ? true : _options$adaptive,
+      _options$roundOffsets = options.roundOffsets,
+      roundOffsets = _options$roundOffsets === void 0 ? true : _options$roundOffsets;
     var commonStyles = {
       placement: getBasePlacement(state.placement),
       variation: getVariation(state.placement),
@@ -2658,12 +2867,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function effect(_ref) {
     var state = _ref.state,
-        instance = _ref.instance,
-        options = _ref.options;
+      instance = _ref.instance,
+      options = _ref.options;
     var _options$scroll = options.scroll,
-        scroll = _options$scroll === void 0 ? true : _options$scroll,
-        _options$resize = options.resize,
-        resize = _options$resize === void 0 ? true : _options$resize;
+      scroll = _options$scroll === void 0 ? true : _options$scroll,
+      _options$resize = options.resize,
+      resize = _options$resize === void 0 ? true : _options$resize;
     var window = getWindow(state.elements.popper);
     var scrollParents = [].concat(state.scrollParents.reference, state.scrollParents.popper);
 
@@ -2695,7 +2904,7 @@ document.addEventListener('DOMContentLoaded', function () {
     name: 'eventListeners',
     enabled: true,
     phase: 'write',
-    fn: function fn() {},
+    fn: function fn() { },
     effect: effect,
     data: {}
   };
@@ -2799,9 +3008,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function isScrollParent(element) {
     // Firefox wants us to check `-x` and `-y` variations as well
     var _getComputedStyle = getComputedStyle$1(element),
-        overflow = _getComputedStyle.overflow,
-        overflowX = _getComputedStyle.overflowX,
-        overflowY = _getComputedStyle.overflowY;
+      overflow = _getComputedStyle.overflow,
+      overflowX = _getComputedStyle.overflowX,
+      overflowY = _getComputedStyle.overflowY;
 
     return /auto|scroll|overlay|hidden/.test(overflow + overflowY + overflowX);
   }
@@ -2839,7 +3048,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var target = isBody ? [win].concat(win.visualViewport || [], isScrollParent(scrollParent) ? scrollParent : []) : scrollParent;
     var updatedList = list.concat(target);
     return isBody ? updatedList : // $FlowFixMe[incompatible-call]: isBody tells us target will be an HTMLElement here
-    updatedList.concat(listScrollParents(getParentNode(target)));
+      updatedList.concat(listScrollParents(getParentNode(target)));
   }
 
   function rectToClientRect(rect) {
@@ -2909,8 +3118,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function computeOffsets(_ref) {
     var reference = _ref.reference,
-        element = _ref.element,
-        placement = _ref.placement;
+      element = _ref.element,
+      placement = _ref.placement;
     var basePlacement = placement ? getBasePlacement(placement) : null;
     var variation = placement ? getVariation(placement) : null;
     var commonX = reference.x + reference.width / 2 - element.width / 2;
@@ -2978,20 +3187,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     var _options = options,
-        _options$placement = _options.placement,
-        placement = _options$placement === void 0 ? state.placement : _options$placement,
-        _options$strategy = _options.strategy,
-        strategy = _options$strategy === void 0 ? state.strategy : _options$strategy,
-        _options$boundary = _options.boundary,
-        boundary = _options$boundary === void 0 ? clippingParents : _options$boundary,
-        _options$rootBoundary = _options.rootBoundary,
-        rootBoundary = _options$rootBoundary === void 0 ? viewport : _options$rootBoundary,
-        _options$elementConte = _options.elementContext,
-        elementContext = _options$elementConte === void 0 ? popper : _options$elementConte,
-        _options$altBoundary = _options.altBoundary,
-        altBoundary = _options$altBoundary === void 0 ? false : _options$altBoundary,
-        _options$padding = _options.padding,
-        padding = _options$padding === void 0 ? 0 : _options$padding;
+      _options$placement = _options.placement,
+      placement = _options$placement === void 0 ? state.placement : _options$placement,
+      _options$strategy = _options.strategy,
+      strategy = _options$strategy === void 0 ? state.strategy : _options$strategy,
+      _options$boundary = _options.boundary,
+      boundary = _options$boundary === void 0 ? clippingParents : _options$boundary,
+      _options$rootBoundary = _options.rootBoundary,
+      rootBoundary = _options$rootBoundary === void 0 ? viewport : _options$rootBoundary,
+      _options$elementConte = _options.elementContext,
+      elementContext = _options$elementConte === void 0 ? popper : _options$elementConte,
+      _options$altBoundary = _options.altBoundary,
+      altBoundary = _options$altBoundary === void 0 ? false : _options$altBoundary,
+      _options$padding = _options.padding,
+      padding = _options$padding === void 0 ? 0 : _options$padding;
     var paddingObject = mergePaddingObject(typeof padding !== 'number' ? padding : expandToHashMap(padding, basePlacements));
     var altContext = elementContext === popper ? reference : popper;
     var popperRect = state.rects.popper;
@@ -3034,13 +3243,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     var _options = options,
-        placement = _options.placement,
-        boundary = _options.boundary,
-        rootBoundary = _options.rootBoundary,
-        padding = _options.padding,
-        flipVariations = _options.flipVariations,
-        _options$allowedAutoP = _options.allowedAutoPlacements,
-        allowedAutoPlacements = _options$allowedAutoP === void 0 ? placements : _options$allowedAutoP;
+      placement = _options.placement,
+      boundary = _options.boundary,
+      rootBoundary = _options.rootBoundary,
+      padding = _options.padding,
+      flipVariations = _options.flipVariations,
+      _options$allowedAutoP = _options.allowedAutoPlacements,
+      allowedAutoPlacements = _options$allowedAutoP === void 0 ? placements : _options$allowedAutoP;
     var variation = getVariation(placement);
     var placements$1 = variation ? flipVariations ? variationPlacements : variationPlacements.filter(function (placement) {
       return getVariation(placement) === variation;
@@ -3079,25 +3288,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function flip(_ref) {
     var state = _ref.state,
-        options = _ref.options,
-        name = _ref.name;
+      options = _ref.options,
+      name = _ref.name;
 
     if (state.modifiersData[name]._skip) {
       return;
     }
 
     var _options$mainAxis = options.mainAxis,
-        checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
-        _options$altAxis = options.altAxis,
-        checkAltAxis = _options$altAxis === void 0 ? true : _options$altAxis,
-        specifiedFallbackPlacements = options.fallbackPlacements,
-        padding = options.padding,
-        boundary = options.boundary,
-        rootBoundary = options.rootBoundary,
-        altBoundary = options.altBoundary,
-        _options$flipVariatio = options.flipVariations,
-        flipVariations = _options$flipVariatio === void 0 ? true : _options$flipVariatio,
-        allowedAutoPlacements = options.allowedAutoPlacements;
+      checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
+      _options$altAxis = options.altAxis,
+      checkAltAxis = _options$altAxis === void 0 ? true : _options$altAxis,
+      specifiedFallbackPlacements = options.fallbackPlacements,
+      padding = options.padding,
+      boundary = options.boundary,
+      rootBoundary = options.rootBoundary,
+      altBoundary = options.altBoundary,
+      _options$flipVariatio = options.flipVariations,
+      flipVariations = _options$flipVariatio === void 0 ? true : _options$flipVariatio,
+      allowedAutoPlacements = options.allowedAutoPlacements;
     var preferredPlacement = state.options.placement;
     var basePlacement = getBasePlacement(preferredPlacement);
     var isBasePlacement = basePlacement === preferredPlacement;
@@ -3232,7 +3441,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function hide(_ref) {
     var state = _ref.state,
-        name = _ref.name;
+      name = _ref.name;
     var referenceRect = state.rects.reference;
     var popperRect = state.rects.popper;
     var preventedOffsets = state.modifiersData.preventOverflow;
@@ -3274,8 +3483,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var _ref = typeof offset === 'function' ? offset(Object.assign({}, rects, {
       placement: placement
     })) : offset,
-        skidding = _ref[0],
-        distance = _ref[1];
+      skidding = _ref[0],
+      distance = _ref[1];
 
     skidding = skidding || 0;
     distance = (distance || 0) * invertDistance;
@@ -3290,17 +3499,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function offset(_ref2) {
     var state = _ref2.state,
-        options = _ref2.options,
-        name = _ref2.name;
+      options = _ref2.options,
+      name = _ref2.name;
     var _options$offset = options.offset,
-        offset = _options$offset === void 0 ? [0, 0] : _options$offset;
+      offset = _options$offset === void 0 ? [0, 0] : _options$offset;
     var data = placements.reduce(function (acc, placement) {
       acc[placement] = distanceAndSkiddingToXY(placement, state.rects, offset);
       return acc;
     }, {});
     var _data$state$placement = data[state.placement],
-        x = _data$state$placement.x,
-        y = _data$state$placement.y;
+      x = _data$state$placement.x,
+      y = _data$state$placement.y;
 
     if (state.modifiersData.popperOffsets != null) {
       state.modifiersData.popperOffsets.x += x;
@@ -3321,7 +3530,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function popperOffsets(_ref) {
     var state = _ref.state,
-        name = _ref.name;
+      name = _ref.name;
     // Offsets are the actual position the popper needs to have to be
     // properly positioned near its reference element
     // This is the most basic placement, and will be adjusted by
@@ -3349,20 +3558,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function preventOverflow(_ref) {
     var state = _ref.state,
-        options = _ref.options,
-        name = _ref.name;
+      options = _ref.options,
+      name = _ref.name;
     var _options$mainAxis = options.mainAxis,
-        checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
-        _options$altAxis = options.altAxis,
-        checkAltAxis = _options$altAxis === void 0 ? false : _options$altAxis,
-        boundary = options.boundary,
-        rootBoundary = options.rootBoundary,
-        altBoundary = options.altBoundary,
-        padding = options.padding,
-        _options$tether = options.tether,
-        tether = _options$tether === void 0 ? true : _options$tether,
-        _options$tetherOffset = options.tetherOffset,
-        tetherOffset = _options$tetherOffset === void 0 ? 0 : _options$tetherOffset;
+      checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
+      _options$altAxis = options.altAxis,
+      checkAltAxis = _options$altAxis === void 0 ? false : _options$altAxis,
+      boundary = options.boundary,
+      rootBoundary = options.rootBoundary,
+      altBoundary = options.altBoundary,
+      padding = options.padding,
+      _options$tether = options.tether,
+      tether = _options$tether === void 0 ? true : _options$tether,
+      _options$tetherOffset = options.tetherOffset,
+      tetherOffset = _options$tetherOffset === void 0 ? 0 : _options$tetherOffset;
     var overflow = detectOverflow(state, {
       boundary: boundary,
       rootBoundary: rootBoundary,
@@ -3522,7 +3731,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
       if (getNodeName(offsetParent) !== 'body' || // https://github.com/popperjs/popper-core/issues/1078
-      isScrollParent(documentElement)) {
+        isScrollParent(documentElement)) {
         scroll = getNodeScroll(offsetParent);
       }
 
@@ -3639,10 +3848,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     var _generatorOptions = generatorOptions,
-        _generatorOptions$def = _generatorOptions.defaultModifiers,
-        defaultModifiers = _generatorOptions$def === void 0 ? [] : _generatorOptions$def,
-        _generatorOptions$def2 = _generatorOptions.defaultOptions,
-        defaultOptions = _generatorOptions$def2 === void 0 ? DEFAULT_OPTIONS : _generatorOptions$def2;
+      _generatorOptions$def = _generatorOptions.defaultModifiers,
+      defaultModifiers = _generatorOptions$def === void 0 ? [] : _generatorOptions$def,
+      _generatorOptions$def2 = _generatorOptions.defaultOptions,
+      defaultOptions = _generatorOptions$def2 === void 0 ? DEFAULT_OPTIONS : _generatorOptions$def2;
     return function createPopper(reference, popper, options) {
       if (options === void 0) {
         options = defaultOptions;
@@ -3693,8 +3902,8 @@ document.addEventListener('DOMContentLoaded', function () {
           }
 
           var _state$elements = state.elements,
-              reference = _state$elements.reference,
-              popper = _state$elements.popper; // Don't proceed if `reference` or `popper` are not valid elements
+            reference = _state$elements.reference,
+            popper = _state$elements.popper; // Don't proceed if `reference` or `popper` are not valid elements
           // anymore
 
           if (!areValidElements(reference, popper)) {
@@ -3729,10 +3938,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             var _state$orderedModifie = state.orderedModifiers[index],
-                fn = _state$orderedModifie.fn,
-                _state$orderedModifie2 = _state$orderedModifie.options,
-                _options = _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2,
-                name = _state$orderedModifie.name;
+              fn = _state$orderedModifie.fn,
+              _state$orderedModifie2 = _state$orderedModifie.options,
+              _options = _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2,
+              name = _state$orderedModifie.name;
 
             if (typeof fn === 'function') {
               state = fn({
@@ -3775,9 +3984,9 @@ document.addEventListener('DOMContentLoaded', function () {
       function runModifierEffects() {
         state.orderedModifiers.forEach(function (_ref) {
           var name = _ref.name,
-              _ref$options = _ref.options,
-              options = _ref$options === void 0 ? {} : _ref$options,
-              effect = _ref.effect;
+            _ref$options = _ref.options,
+            options = _ref$options === void 0 ? {} : _ref$options,
+            effect = _ref.effect;
 
           if (typeof effect === 'function') {
             var cleanupFn = effect({
@@ -3787,7 +3996,7 @@ document.addEventListener('DOMContentLoaded', function () {
               options: options
             });
 
-            var noopFn = function noopFn() {};
+            var noopFn = function noopFn() { };
 
             effectCleanupFns.push(cleanupFn || noopFn);
           }

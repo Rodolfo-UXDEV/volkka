@@ -678,202 +678,275 @@
 
       <!-- ETAPA 3: FOTOS -->
       <div id="step-3" class="form-step" style="display: none;">
-        <p class="text-muted-light">Podem ser postadas no máximo 6 fotos</p>
+          <!-- Input de arquivo real, mas escondido -->
+          <input type="file" id="image-file-input" multiple accept="image/jpeg,image/png,image/webp" style="display: none;">
 
-        <div class="d-flex flex-wrap gap-4 align-items-end">
-          <!-- Imagem de Exemplo -->
-          <div class="image-preview-box" style="border-color: #E91E63;">
-            <img src="https://placehold.co/150x150/e91e63/white?text=Foto" alt="Preview">
-            <div class="image-preview-controls">
-              <button class="btn-icon"><i class="bi bi-star-fill"></i></button>
-              <button class="btn-icon delete"><i class="bi bi-trash-fill"></i></button>
-            </div>
+          <p class="text-muted-light">Podem ser postadas no máximo 6 fotos. A primeira é a principal.</p>
+
+          <!-- Container onde as prévias das imagens aparecerão -->
+          <div class="d-flex flex-wrap gap-4 align-items-end" id="image-preview-container">
+
+              <!-- Placeholder para Adicionar (agora é um gatilho) -->
+              <div id="add-photo-placeholder" class="image-preview-box" style="cursor: pointer;" title="Adicionar foto">
+                  <span class="upload-placeholder"><i class="bi bi-plus"></i></span>
+              </div>
           </div>
 
-          <!-- Placeholder para Adicionar -->
-          <div class="image-preview-box">
-            <span class="upload-placeholder"><i class="bi bi-plus"></i></span>
+          <div class="d-flex justify-content-center gap-3 mt-5">
+              <button id="btn-remove-all" class="btn btn-red">
+                Remover Tudo <i class="bi bi-trash-fill"></i>
+              </button>
+              <button id="btn-add-image-main" class="btn btn-add-image">
+                Adicionar <i class="bi bi-camera-fill"></i>
+              </button>
           </div>
-        </div>
-
-        <div class="d-flex justify-content-center gap-3 mt-5">
-          <button class="btn btn-pink">Remover Tudo</button>
-          <button class="btn btn-add-image">Adicionar <i class="bi bi-camera-fill"></i></button>
-        </div>
       </div>
 
       <!-- ETAPA 4: PLANOS (Conteúdo de selecao-planos.html) -->
       <div id="step-4" class="form-step" style="display: none;">
-        <!-- O conteúdo aqui é uma réplica da sua imagem 4, que é a página de planos -->
-        <div class="row">
-          <!-- Coluna Principal (Planos) -->
-          <div class="col-lg-8">
-            <!-- Card 3x3 -->
-            <div class="plan-card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <span class="plan-title">3x3</span><i class="bi bi-arrow-up-short plan-icon"></i>
-                </div>
-                <div class="plan-info">
-                  <h5>day <i class="bi bi-info-circle-fill"></i></h5>
-                  <p>3 subidas ao dia por 3 dias de</p>
-                </div>
-                <div class="text-end">
-                  <label class="form-label text-highlight-red">Selecionar um Horário</label>
-                  <select class="form-select form-select-dark">
-                    <option>Selecionar</option>
-                  </select>
-                  <div class="plan-price mt-1">5 Créditos</div>
-                </div>
+          <!-- O conteúdo aqui é uma réplica da sua imagem 4, que é a página de planos -->
+          <div class="row">
+              <!-- Coluna Principal (Planos) -->
+              <div class="col-lg-8" id="plan-container"> <!-- ID adicionado -->
+                  <!-- Card 3x3 -->
+                  <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button" data-plan-name="3x3" data-plan-credits="5" data-plan-price="8,62">
+                      <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                          <div class="d-flex align-items-center">
+                              <span class="fs-1 fw-bold">3x3</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                          </div>
+                          <div class="plan-info">
+                              <h5 class="fs-5 p-0 m-0 mb-1">dia <i class="bi bi-clock fs-6"></i></h5>
+                              <p class="fs-7 text-secondary">3 subidas ao dia por 3 dias de</p>
+                          </div>
+                          <div class="w-100 w-sm-30">
+                              <label class="form-label text-muted-light">Selecionar um Horário</label>
+                              <!-- Corrigido para muted -->
+                              <select class="form-select form-select-dark" disabled>
+                                <option selected disabled>Selecione</option>
+                                <option>09:00 - 12:00</option>
+                                <option>12:00 - 14:00</option>
+                                <option>14:00 - 16:00</option>
+                                <option>16:00 - 18:00</option>
+                                <option>18:00 - 21:00</option>
+                                <option>21:00 - 00:00</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="p-3 plan-price border-top border-1">
+                        <p class="fs-6 text-dark p-0 m-0">
+                          5 Créditos
+                        </p>
+                      </div>
+                  </div>
+                  <!-- Card 3x7 -->
+                  <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button" data-plan-name="3x7" data-plan-credits="10" data-plan-price="17,25">
+                      <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                          <div class="d-flex align-items-center">
+                              <span class="fs-1 fw-bold">3x7</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                          </div>
+                          <div class="plan-info">
+                              <h5 class="fs-5 p-0 m-0 mb-1">dia <i class="bi bi-clock fs-6"></i></h5>
+                              <p class="fs-7 text-secondary">3 subidas ao dia por 7 dias de</p>
+                          </div>
+                          <div class="w-100 w-sm-30">
+                              <label class="form-label text-muted-light">Selecionar um Horário</label>
+                              <select class="form-select form-select-dark" disabled>
+                                <option selected disabled>Selecione</option>
+                                <option>09:00 - 12:00</option>
+                                <option>12:00 - 14:00</option>
+                                <option>14:00 - 16:00</option>
+                                <option>16:00 - 18:00</option>
+                                <option>18:00 - 21:00</option>
+                                <option>21:00 - 00:00</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="p-3 plan-price border-top border-1">
+                        <p class="fs-6 text-dark p-0 m-0">
+                          10 Créditos - R$ 17,25
+                        </p>
+                      </div>
+                  </div>
+                  <!-- Card 5x1 -->
+                  <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button" data-plan-name="5x1" data-plan-credits="3" data-plan-price="">
+                      <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                          <div class="d-flex align-items-center">
+                              <span class="fs-1 fw-bold">5x1</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                          </div>
+                          <div class="plan-info">
+                              <h5 class="fs-5 p-0 m-0 mb-1">dia <i class="bi bi-clock fs-6"></i></h5>
+                              <p class="fs-7 text-secondary">5 subidas ao dia por 1 dias de</p>
+                          </div>
+                          <div class="w-100 w-sm-30">
+                              <label class="form-label text-muted-light">Selecionar um Horário</label>
+                              <select class="form-select form-select-dark" disabled>
+                                <option selected disabled>Selecione</option>
+                                <option>09:00 - 12:00</option>
+                                <option>12:00 - 14:00</option>
+                                <option>14:00 - 16:00</option>
+                                <option>16:00 - 18:00</option>
+                                <option>18:00 - 21:00</option>
+                                <option>21:00 - 00:00</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="p-3 plan-price border-top border-1">
+                        <p class="fs-6 text-dark p-0 m-0">
+                          3 Créditos
+                        </p>
+                      </div>
+                  </div>
+                  <!-- Card 5x3 -->
+                  <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button" data-plan-name="5x3" data-plan-credits="8" data-plan-price="13,80">
+                      <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                          <div class="d-flex align-items-center">
+                              <span class="fs-1 fw-bold">5x3</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                          </div>
+                          <div class="plan-info">
+                              <h5 class="fs-5 p-0 m-0 mb-1">dia <i class="bi bi-clock fs-6"></i></h5>
+                              <p class="fs-7 text-secondary">5 subidas ao dia por 3 dias de</p>
+                          </div>
+                          <div class="w-100 w-sm-30">
+                              <label class="form-label text-muted-light">Selecionar um Horário</label>
+                              <select class="form-select form-select-dark" disabled>
+                                <option selected disabled>Selecione</option>
+                                <option>09:00 - 12:00</option>
+                                <option>12:00 - 14:00</option>
+                                <option>14:00 - 16:00</option>
+                                <option>16:00 - 18:00</option>
+                                <option>18:00 - 21:00</option>
+                                <option>21:00 - 00:00</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="p-3 plan-price border-top border-1">
+                        <p class="fs-6 text-dark p-0 m-0">
+                          8 Créditos - R$ 13,80
+                        </p>
+                      </div>
+                  </div>
+                  <!-- Card 5x7 -->
+                  <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button" data-plan-name="5x7" data-plan-credits="16" data-plan-price="27,60">
+                      <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                          <div class="d-flex align-items-center">
+                              <span class="fs-1 fw-bold">5x7</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                          </div>
+                          <div class="plan-info">
+                              <h5 class="fs-5 p-0 m-0 mb-1">dia <i class="bi bi-clock fs-6"></i></h5>
+                              <p class="fs-7 text-secondary">5 subidas ao dia por 7 dias de</p>
+                          </div>
+                          <div class="w-100 w-sm-30">
+                              <label class="form-label text-muted-light">Selecionar um Horário</label>
+                              <select class="form-select form-select-dark" disabled>
+                                <option selected disabled>Selecione</option>
+                                <option>09:00 - 12:00</option>
+                                <option>12:00 - 14:00</option>
+                                <option>14:00 - 16:00</option>
+                                <option>16:00 - 18:00</option>
+                                <option>18:00 - 21:00</option>
+                                <option>21:00 - 00:00</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="p-3 plan-price border-top border-1">
+                        <p class="fs-6 text-dark p-0 m-0">
+                          16 Créditos - R$ 27,60
+                        </p>
+                      </div>
+                  </div>
+                  <!-- Card 10x1 (Ativo na imagem) -->
+                  <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1 active" role="button" data-plan-name="10x1" data-plan-credits="4" data-plan-price="6,90">
+                      <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                          <div class="d-flex align-items-center">
+                              <span class="fs-1 fw-bold">10x1</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                          </div>
+                          <div class="plan-info">
+                              <h5 class="fs-5 p-0 m-0 mb-1">noite <i class="bi bi-clock fs-6"></i></h5>
+                              <p class="fs-7 text-secondary">10 subidas ao dia por 1 dias de</p>
+                          </div>
+                          <div class="w-100 w-sm-30">
+                              <label class="form-label text-highlight-red">Selecionar um Horário</label>
+                              <select class="form-select form-select-dark" style="border-color: #E53935;">
+                                <option selected disabled>Selecione</option>
+                                <option>09:00 - 12:00</option>
+                                <option>12:00 - 14:00</option>
+                                <option>14:00 - 16:00</option>
+                                <option>16:00 - 18:00</option>
+                                <option>18:00 - 21:00</option>
+                                <option>21:00 - 00:00</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="p-3 plan-price border-top border-1">
+                        <p class="fs-6 text-dark p-0 m-0">
+                          4 Créditos
+                        </p>
+                      </div>
+                  </div>
+                  <!-- Card 10x7 -->
+                  <div class="plan-card bg-light border border-1 border-light-subtle rounded-1" role="button" data-plan-name="10x7" data-plan-credits="20" data-plan-price="34,50">
+                      <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                          <div class="d-flex align-items-center">
+                              <span class="fs-1 fw-bold">10x7</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                          </div>
+                          <div class="plan-info">
+                              <h5 class="fs-5 p-0 m-0 mb-1">noite <i class="bi bi-clock fs-6"></i></h5>
+                              <p class="fs-7 text-secondary">10 subidas ao dia por 7 dias de</p>
+                          </div>
+                          <div class="w-100 w-sm-30">
+                              <label class="form-label text-muted-light">Selecionar um Horário</label>
+                              <select class="form-select form-select-dark" disabled>
+                                <option selected disabled>Selecione</option>
+                                <option>09:00 - 12:00</option>
+                                <option>12:00 - 14:00</option>
+                                <option>14:00 - 16:00</option>
+                                <option>16:00 - 18:00</option>
+                                <option>18:00 - 21:00</option>
+                                <option>21:00 - 00:00</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="p-3 plan-price border-top border-1">
+                        <p class="fs-6 text-dark p-0 m-0">
+                          20 Créditos - R$ 34,50
+                        </p>
+                      </div>
+                  </div>
               </div>
-            </div>
-            <!-- Card 3x7 -->
-            <div class="plan-card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <span class="plan-title">3x7</span><i class="bi bi-arrow-up-short plan-icon"></i>
-                </div>
-                <div class="plan-info">
-                  <h5>day <i class="bi bi-info-circle-fill"></i></h5>
-                  <p>3 subidas ao dia por 7 dias de</p>
-                </div>
-                <div class="text-end">
-                  <label class="form-label text-muted-light">Selecionar um Horário</label>
-                  <select class="form-select form-select-dark" disabled>
-                    <option>Selecionar</option>
-                  </select>
-                  <div class="plan-price mt-1">10 Créditos - 17,25 R$</div>
-                </div>
-              </div>
-            </div>
-            <!-- Card 5x1 -->
-            <div class="plan-card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <span class="plan-title">5x1</span><i class="bi bi-arrow-up-short plan-icon"></i>
-                </div>
-                <div class="plan-info">
-                  <h5>day <i class="bi bi-info-circle-fill"></i></h5>
-                  <p>5 subidas ao dia por 1 dias de</p>
-                </div>
-                <div class="text-end">
-                  <label class="form-label text-muted-light">Selecionar um Horário</label>
-                  <select class="form-select form-select-dark" disabled>
-                    <option>Selecionar</option>
-                  </select>
-                  <div class="plan-price mt-1">3 Créditos</div>
-                </div>
-              </div>
-            </div>
-            <!-- Card 5x3 -->
-            <div class="plan-card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <span class="plan-title">5x3</span><i class="bi bi-arrow-up-short plan-icon"></i>
-                </div>
-                <div class="plan-info">
-                  <h5>day <i class="bi bi-info-circle-fill"></i></h5>
-                  <p>5 subidas ao dia por 3 dias de</p>
-                </div>
-                <div class="text-end">
-                  <label class="form-label text-muted-light">Selecionar um Horário</label>
-                  <select class="form-select form-select-dark" disabled>
-                    <option>Selecionar</option>
-                  </select>
-                  <div class="plan-price mt-1">8 Créditos - 13,80 R$</div>
-                </div>
-              </div>
-            </div>
-            <!-- Card 5x7 -->
-            <div class="plan-card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <span class="plan-title">5x7</span><i class="bi bi-arrow-up-short plan-icon"></i>
-                </div>
-                <div class="plan-info">
-                  <h5>day <i class="bi bi-info-circle-fill"></i></h5>
-                  <p>5 subidas ao dia por 7 dias de</p>
-                </div>
-                <div class="text-end">
-                  <label class="form-label text-muted-light">Selecionar um Horário</label>
-                  <select class="form-select form-select-dark" disabled>
-                    <option>Selecionar</option>
-                  </select>
-                  <div class="plan-price mt-1">16 Créditos - 27,60 R$</div>
-                </div>
-              </div>
-            </div>
-            <!-- Card 10x1 (Ativo na imagem) -->
-            <div class="plan-card active">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <span class="plan-title">10x1</span><i class="bi bi-arrow-up-short plan-icon"></i>
-                </div>
-                <div class="plan-info">
-                  <h5>night <i class="bi bi-info-circle-fill"></i></h5>
-                  <p>10 subidas ao dia por 1 dias de</p>
-                </div>
-                <div class="text-end">
-                  <label class="form-label text-highlight-red">Selecionar um Horário</label>
-                  <select class="form-select form-select-dark" style="border-color: #E53935;">
-                    <option>00:00 - 09:00</option>
-                  </select>
-                  <div class="plan-price mt-1">4 Créditos</div>
-                </div>
-              </div>
-            </div>
-            <!-- Card 10x7 -->
-            <div class="plan-card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <span class="plan-title">10x7</span><i class="bi bi-arrow-up-short plan-icon"></i>
-                </div>
-                <div class="plan-info">
-                  <h5>night <i class="bi bi-info-circle-fill"></i></h5>
-                  <p>10 subidas ao dia por 7 dias de</p>
-                </div>
-                <div class="text-end">
-                  <label class="form-label text-muted-light">Selecionar um Horário</label>
-                  <select class="form-select form-select-dark">
-                    <option>00:00 - 09:00</option>
-                  </select>
-                  <div class="plan-price mt-1">20 Créditos - 34,50 R$</div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- Coluna da Barra Lateral (Resumo) -->
-          <div class="col-lg-4">
-            <div class="summary-card sticky-top" style="top: 2rem;">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">Total:</h5>
-                <hr>
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <div>
-                    <p class="mb-0 fw-500">10x1</p>
+              <!-- Coluna da Barra Lateral (Resumo) -->
+              <div class="col-lg-4">
+                  <div class="summary-card sticky-top bg-light border border-1 border-light-subtle rounded-1" style="top: 2rem;">
+                      <div class="card-body">
+                          <h5 class="card-title fw-bold">Total:</h5>
+                          <div class="d-flex justify-content-between align-items-center mb-2">
+                              <div>
+                                  <p class="mb-0 fw-500" id="summary-plan-name">10x1</p> <!-- ID Adicionado -->
+                              </div>
+                              <div class="text-end">
+                                  <p class="mb-0 fw-bold" id="summary-plan-credits">4 Créditos</p> <!-- ID Adicionado -->
+                                  <small class="text-muted-light" id="summary-plan-price">6,90 R$</small>
+                                  <!-- ID Adicionado -->
+                              </div>
+                          </div>
+                          <hr>
+                          <a href="#" class="btn btn-primary w-100 btn-continue">CONTINUAR</a>
+                      </div>
                   </div>
-                  <div class="text-end">
-                    <p class="mb-0 fw-bold">4 Créditos</p>
-                    <small class="text-muted-light">6,90 R$</small>
-                  </div>
-                </div>
-                <hr>
-                <a href="#" class="btn btn-primary w-100 btn-continue">CONTINUAR</a>
               </div>
-            </div>
           </div>
-        </div>
       </div>
     </main>
 
     <!-- Navegação (Footer) -->
-    <footer class="d-flex justify-content-between align-items-center mt-5">
+    <footer class="d-flex justify-content-between align-items-center mt-5 mb-5">
       <button id="btn-voltar" class="btn btn-outline-red" style="visibility: hidden;">
-        <i class="bi bi-chevron-left"></i> VOLTAR
+        <i class="bi bi-chevron-left"></i>
+        VOLTAR
       </button>
       <button id="btn-proxima" class="btn btn-red">
-        PRÓXIMA <i class="bi bi-chevron-right"></i>
+        PRÓXIMA
+        <i class="bi bi-chevron-right"></i>
       </button>
     </footer>
 
