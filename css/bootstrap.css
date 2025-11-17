@@ -10906,6 +10906,10 @@ fieldset:disabled .btn {
     width: 30% !important;
   }
 
+  .p-sm-5 {
+    padding: 3rem !important;
+  }
+
   .float-sm-start {
     float: left !important;
   }
