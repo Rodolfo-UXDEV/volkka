@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Meus anúncios</title>
+
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="media/favicon.png" />
+  <!---------------->
+
+  <!-- Font style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <!---------------->
+
+  <!-- CSS Slick Carroceis -->
+  <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
+  <link rel="stylesheet" type="text/css" href="css/slick.css" />
+  <!------------------------->
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Sessão 1 -->
+  <md-header-interna></md-header-interna>
+  <!-- Fim sessão 1 -->
+
+  <!-- Sessão 2 -->
+  <div class="container mb-3">
+    <h1 class="w-100 text-center fs-2 fw-bold m-0 p-0">
+      Publicar anúncio
+    </h1>
+    <p class="text-red text-center fs-4 m-0 p-0">
+      Gratuitamente e em poucos passos
+    </p>
+  </div>
+  <!-- Fim Sessão 2 -->
+
+  <div class="container">
+
+    <!-- Stepper -->
+    <div class="stepper mb-4 mt-5 w-100 w-sm-75 m-auto">
+      <div id="step-item-1" class="step-item active">
+        <div class="step-icon"><i class="bi bi-person-fill"></i></div>
+      </div>
+      <div class="step-connector"></div>
+      <div id="step-item-2" class="step-item">
+        <div class="step-icon"><i class="bi bi-tags-fill"></i></div>
+      </div>
+      <div class="step-connector"></div>
+      <div id="step-item-3" class="step-item">
+        <div class="step-icon"><i class="bi bi-camera-fill"></i></div>
+      </div>
+      <div class="step-connector"></div>
+      <div id="step-item-4" class="step-item">
+        <div class="step-icon"><i class="bi bi-check-all"></i></div>
+      </div>
+    </div>
+
+    <!-- Conteúdo das Etapas -->
+    <main>
+      <!-- ETAPA 1: DADOS, ANÚNCIO, CONTATOS -->
+      <div id="step-1" class="form-step">
+        <!-- Seus Dados -->
+        <section class="mb-4">
+          <div class="d-flex align-items-center justify-content-between bg-red py-2 px-3 rounded-1 mb-3">
+            <p class="fs-6 text-white fw-bold m-0 p-0">
+              OS SEUS DADOS
+            </p>
+            <p class="fs-10 text-white m-0 p-0">
+              *OS CAMPOS OBRIGATÓRIOS
+            </p>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="categoria" class="form-label">* Selecione a categoria</label>
+              <select id="categoria" class="form-select">
+                <option value="" selected disabled>Por favor, escolha uma opção...</option>
+                <option value="">Acompanhante</option>
+                <option value="">Mensagens</option>
+                <option value="">Transex e Travestis</option>
+                <option value="">Acompanhante Masculinos</option>
+                <option value="">Encontro Casuais</option>
+                <!-- Outras opções -->
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="cidade" class="form-label">* Selecione a cidade</label>
+              <select id="cidade" class="form-select">
+                <option value="" selected disabled>Por favor, escolha uma opção...</option>
+                <option value="323">Abc paulista</option>
+                <option value="177">Acailandia</option>
+                <option value="131">Acrelandia</option>
+                <option value="150">Aguas claras</option>
+                <option value="133">Alagoinhas</option>
+                <option value="189">Alfenas</option>
+                <option value="224">Almirante tamandare</option>
+                <option value="182">Alta floresta</option>
+                <option value="83">Alvorada</option>
+                <option value="324">Americana</option>
+                <option value="45">Ananindeua</option>
+                <option value="20">Anápolis</option>
+                <option value="65">Angra dos reis</option>
+                <option value="21">Aparecida de goiânia</option>
+                <option value="128">Aracaju</option>
+                <option value="325">Aracatuba</option>
+                <option value="163">Aracruz</option>
+                <option value="419">Araguaina</option>
+                <option value="190">Araguari</option>
+                <option value="2">Arapiraca</option>
+                <option value="102">Araraquara</option>
+                <option value="326">Araras</option>
+                <option value="66">Araruama</option>
+                <option value="225">Araucaria</option>
+                <option value="191">Araxa</option>
+                <option value="306">Ariquemes</option>
+                <option value="67">Armação dos búzios</option>
+                <option value="68">Arraial do cabo</option>
+                <option value="327">Assis</option>
+                <option value="328">Atibaia</option>
+                <option value="329">Avare</option>
+                <option value="91">Balneário camboriú</option>
+                <option value="178">Balsas</option>
+                <option value="192">Barbacena</option>
+                <option value="244">Barcarena nova</option>
+                <option value="183">Barra do garcas</option>
+                <option value="287">Barra do pirai</option>
+                <option value="288">Barra mansa</option>
+                <option value="134">Barreiras</option>
+                <option value="330">Barretos</option>
+                <option value="103">Barueri</option>
+                <option value="104">Bauru</option>
+                <option value="331">Bebedouro</option>
+                <option value="46">Belém do pará</option>
+                <option value="289">Belford roxo</option>
+                <option value="35">Belo horizonte</option>
+                <option value="266">Bento goncalves</option>
+                <option value="332">Bertioga</option>
+                <option value="36">Betim</option>
+                <option value="333">Birigui</option>
+                <option value="92">Blumenau</option>
+                <option value="90">Boa vista</option>
+                <option value="334">Boituva</option>
+                <option value="335">Botucatu</option>
+                <option value="336">Braganca paulista</option>
+                <option value="15">Brasilia</option>
+                <option value="308">Brusque</option>
+                <option value="69">Cabo frio</option>
+                <option value="337">Cacapava</option>
+                <option value="267">Cachoeira do sul</option>
+                <option value="268">Cachoeirinha</option>
+                <option value="164">Cachoeiro de itapemirim</option>
+                <option value="263">Caico</option>
+                <option value="242">Cajazeiras</option>
+                <option value="169">Caldas novas</option>
+                <option value="135">Camacari</option>
+                <option value="253">Camarajibe</option>
+                <option value="48">Campina grande</option>
+                <option value="105">Campinas</option>
+                <option value="32">Campo grande</option>
+                <option value="226">Campo largo</option>
+                <option value="339">Campo limpo</option>
+                <option value="227">Campo mourao</option>
+                <option value="340">Campos do jordao</option>
+                <option value="70">Campos dos goytacazes</option>
+                <option value="84">Canoas</option>
+                <option value="269">Capao da canoa</option>
+                <option value="341">Caraguatatuba</option>
+                <option value="106">Carapicuíba</option>
+                <option value="16">Cariacica</option>
+                <option value="254">Carpina</option>
+                <option value="57">Caruaru</option>
+                <option value="50">Cascavel</option>
+                <option value="246">Castanhal</option>
+                <option value="170">Catalao</option>
+                <option value="342">Catanduva</option>
+                <option value="146">Caucaia</option>
+                <option value="179">Caxias</option>
+                <option value="85">Caxias do sul</option>
+                <option value="151">Ceilandia</option>
+                <option value="93">Chapecó</option>
+                <option value="165">Colatina</option>
+                <option value="228">Colombo</option>
+                <option value="309">Concordia</option>
+                <option value="193">Conselheiro lafaiete</option>
+                <option value="37">Contagem</option>
+                <option value="194">Coronel fabriciano</option>
+                <option value="343">Cosmopolis</option>
+                <option value="107">Cotia</option>
+                <option value="147">Crateus</option>
+                <option value="94">Criciúma</option>
+                <option value="344">Cubatao</option>
+                <option value="26">Cuiabá</option>
+                <option value="51">Curitiba</option>
+                <option value="108">Diadema</option>
+                <option value="195">Divinopolis</option>
+                <option value="33">Dourados</option>
+                <option value="71">Duque de caxias</option>
+                <option value="345">Eldorado sao paulo</option>
+                <option value="346">Embu das artes</option>
+                <option value="270">Erechim</option>
+                <option value="271">Esteio</option>
+                <option value="136">Eunapolis</option>
+                <option value="148">Eusebio</option>
+                <option value="196">Extrema</option>
+                <option value="229">Fazenda rio grande</option>
+                <option value="6">Feira de santana</option>
+                <option value="347">Ferraz de vasconcelos</option>
+                <option value="95">Florianópolis</option>
+                <option value="197">Formiga</option>
+                <option value="171">Formosa</option>
+                <option value="12">Fortaleza</option>
+                <option value="52">Foz do iguaçu</option>
+                <option value="348">Franca</option>
+                <option value="230">Francisco beltrao</option>
+                <option value="349">Francisco morato</option>
+                <option value="350">Franco da rocha</option>
+                <option value="291">Friburgo</option>
+                <option value="198">Frutal</option>
+                <option value="152">Gama</option>
+                <option value="255">Garanhuns</option>
+                <option value="22">Goiânia</option>
+                <option value="199">Governador valadares</option>
+                <option value="180">Grajau maranhao</option>
+                <option value="272">Gramado</option>
+                <option value="256">Gravata</option>
+                <option value="86">Gravataí</option>
+                <option value="351">Guaianases</option>
+                <option value="273">Guaiba</option>
+                <option value="153">Guara</option>
+                <option value="166">Guarapari</option>
+                <option value="231">Guarapuava</option>
+                <option value="352">Guaratingueta</option>
+                <option value="232">Guaratuba</option>
+                <option value="109">Guarujá</option>
+                <option value="110">Guarulhos</option>
+                <option value="200">Guaxupe</option>
+                <option value="420">Gurupi</option>
+                <option value="353">Hortolandia</option>
+                <option value="201">Ibirite</option>
+                <option value="354">Ibiuna</option>
+                <option value="257">Igarassu</option>
+                <option value="274">Ijui</option>
+                <option value="355">Ilhabela</option>
+                <option value="7">Ilheus</option>
+                <option value="310">Imbituba</option>
+                <option value="181">Imperatriz</option>
+                <option value="356">Indaiatuba</option>
+                <option value="202">Ipatinga</option>
+                <option value="129">Itabaiana</option>
+                <option value="292">Itaborai</option>
+                <option value="8">Itabuna</option>
+                <option value="247">Itaituba</option>
+                <option value="96">Itajaí</option>
+                <option value="203">Itajuba</option>
+                <option value="357">Itanhaem</option>
+                <option value="358">Itapecerica da serra</option>
+                <option value="311">Itapema</option>
+                <option value="293">Itaperuna</option>
+                <option value="359">Itapetininga</option>
+                <option value="360">Itapeva</option>
+                <option value="361">Itapevi</option>
+                <option value="362">Itapira</option>
+                <option value="363">Itaquaquecetuba</option>
+                <option value="364">Itatiba</option>
+                <option value="365">Itu</option>
+                <option value="204">Ituiutaba</option>
+                <option value="366">Itupeva</option>
+                <option value="58">Jaboatão dos guararapes</option>
+                <option value="367">Jaboticabal</option>
+                <option value="368">Jacarei</option>
+                <option value="369">Jaguariuna</option>
+                <option value="370">Jandira</option>
+                <option value="312">Jaragua do sul</option>
+                <option value="172">Jatai</option>
+                <option value="371">Jau</option>
+                <option value="313">Joacaba</option>
+                <option value="49">João pessoa</option>
+                <option value="97">Joinville</option>
+                <option value="137">Juazeiro</option>
+                <option value="13">Juazeiro do norte</option>
+                <option value="38">Juiz de fora</option>
+                <option value="111">Jundiaí</option>
+                <option value="321">Lagarto</option>
+                <option value="98">Lages</option>
+                <option value="154">Lago norte</option>
+                <option value="275">Lajeado</option>
+                <option value="138">Lauro de freitas</option>
+                <option value="205">Lavras</option>
+                <option value="372">Leme sao paulo</option>
+                <option value="373">Limeira</option>
+                <option value="167">Linhares</option>
+                <option value="374">Lins</option>
+                <option value="53">Londrina</option>
+                <option value="375">Lorena</option>
+                <option value="184">Lucas do rio verde</option>
+                <option value="139">Luis eduardo magalhaes</option>
+                <option value="173">Luziania</option>
+                <option value="72">Macaé</option>
+                <option value="4">Macapá</option>
+                <option value="3">Maceió</option>
+                <option value="294">Mage</option>
+                <option value="376">Mairipora</option>
+                <option value="5">Manaus</option>
+                <option value="248">Maraba</option>
+                <option value="149">Maracanau</option>
+                <option value="295">Marica</option>
+                <option value="377">Marilia</option>
+                <option value="54">Maringá</option>
+                <option value="249">Marituba</option>
+                <option value="378">Matao</option>
+                <option value="234">Matinhos</option>
+                <option value="112">Mauá</option>
+                <option value="296">Mesquita</option>
+                <option value="174">Mineiros</option>
+                <option value="379">Mococa</option>
+                <option value="113">Mogi das cruzes</option>
+                <option value="380">Mogi guacu</option>
+                <option value="381">Mogi mirim</option>
+                <option value="382">Mongagua</option>
+                <option value="383">Monte mor</option>
+                <option value="39">Montes claros</option>
+                <option value="81">Mossoró</option>
+                <option value="140">Mundo novo</option>
+                <option value="82">Natal</option>
+                <option value="314">Navegantes</option>
+                <option value="297">Nilopolis</option>
+                <option value="73">Niteroi</option>
+                <option value="235">Nova esperanca</option>
+                <option value="298">Nova friburgo</option>
+                <option value="74">Nova iguaçu</option>
+                <option value="27">Nova mutum</option>
+                <option value="206">Nova serrana</option>
+                <option value="276">Novo hamburgo</option>
+                <option value="384">Novo horizonte sao paulo</option>
+                <option value="185">Novo mundo mato grosso</option>
+                <option value="155">Nucleo bandeirante</option>
+                <option value="59">Olinda</option>
+                <option value="114">Osasco</option>
+                <option value="385">Ourinhos</option>
+                <option value="207">Ouro preto</option>
+                <option value="386">Ouro verde</option>
+                <option value="99">Palhoça</option>
+                <option value="130">Palmas</option>
+                <option value="208">Para de minas</option>
+                <option value="209">Paracatu</option>
+                <option value="299">Parati</option>
+                <option value="250">Parauapebas</option>
+                <option value="63">Parnaíba</option>
+                <option value="264">Parnamirim</option>
+                <option value="277">Passo fundo</option>
+                <option value="210">Passos</option>
+                <option value="243">Patos</option>
+                <option value="211">Patos de minas</option>
+                <option value="212">Patrocinio</option>
+                <option value="387">Paulinia</option>
+                <option value="60">Paulista</option>
+                <option value="388">Pedreiras</option>
+                <option value="278">Pelotas</option>
+                <option value="315">Penha santa catarina</option>
+                <option value="389">Peruibe</option>
+                <option value="61">Petrolina</option>
+                <option value="75">Petrópolis</option>
+                <option value="262">Picos</option>
+                <option value="390">Pindamonhangaba</option>
+                <option value="236">Pinhais</option>
+                <option value="115">Piracicaba</option>
+                <option value="391">Pirassununga</option>
+                <option value="156">Planaltina</option>
+                <option value="392">Poa</option>
+                <option value="40">Poços de calda</option>
+                <option value="55">Ponta grossa</option>
+                <option value="188">Ponta pora</option>
+                <option value="87">Porto alegre</option>
+                <option value="393">Porto feliz</option>
+                <option value="394">Porto ferreira</option>
+                <option value="9">Porto seguro</option>
+                <option value="89">Porto velho</option>
+                <option value="41">Pouso alegre</option>
+                <option value="395">Praia grande</option>
+                <option value="396">Presidente epitacio</option>
+                <option value="116">Presidente prudente</option>
+                <option value="186">Primavera do leste</option>
+                <option value="237">Prudentopolis</option>
+                <option value="300">Queimados</option>
+                <option value="157">Recanto das emas</option>
+                <option value="62">Recife</option>
+                <option value="251">Redencao</option>
+                <option value="397">Registro</option>
+                <option value="301">Resende</option>
+                <option value="214">Ribeirao das neves</option>
+                <option value="117">Ribeirão preto</option>
+                <option value="1">Rio branco</option>
+                <option value="398">Rio claro</option>
+                <option value="302">Rio das ostras</option>
+                <option value="76">Rio de janeiro</option>
+                <option value="316">Rio do sul</option>
+                <option value="279">Rio grande</option>
+                <option value="23">Rio verde</option>
+                <option value="28">Rondonópolis</option>
+                <option value="399">Salto</option>
+                <option value="10">Salvador</option>
+                <option value="158">Samambaia</option>
+                <option value="400">Santa barbara doeste</option>
+                <option value="260">Santa cruz do capibaribe</option>
+                <option value="280">Santa cruz do sul</option>
+                <option value="215">Santa luzia</option>
+                <option value="88">Santa maria</option>
+                <option value="132">Santana amapa</option>
+                <option value="401">Santana de parnaiba</option>
+                <option value="47">Santarém</option>
+                <option value="118">Santo andré</option>
+                <option value="141">Santo antonio de jesus</option>
+                <option value="119">Santos</option>
+                <option value="216">Santos dumont</option>
+                <option value="317">Sao bento do sul</option>
+                <option value="120">São bernardo do campo</option>
+                <option value="121">São carlos</option>
+                <option value="322">Sao cristovao sergipe</option>
+                <option value="318">Sao francisco do sul</option>
+                <option value="77">São gonçalo</option>
+                <option value="402">Sao joao da boa vista</option>
+                <option value="303">Sao joao de meriti</option>
+                <option value="217">Sao joao del rei</option>
+                <option value="100">São josé</option>
+                <option value="122">São josé do rio preto</option>
+                <option value="123">São josé dos campos</option>
+                <option value="56">São josé dos pinhais</option>
+                <option value="281">Sao leopoldo</option>
+                <option value="218">Sao lourenco</option>
+                <option value="261">Sao lourenco da mata</option>
+                <option value="25">São luís</option>
+                <option value="168">Sao mateus</option>
+                <option value="124">São paulo</option>
+                <option value="78">São pedro da aldeia</option>
+                <option value="403">Sao roque</option>
+                <option value="404">Sao sebastiao</option>
+                <option value="125">São vicente</option>
+                <option value="282">Sapucaia do sul</option>
+                <option value="79">Saquarema</option>
+                <option value="175">Senador canedo</option>
+                <option value="17">Serra</option>
+                <option value="142">Serrinha</option>
+                <option value="405">Sertaozinho</option>
+                <option value="42">Sete lagoas</option>
+                <option value="29">Sinop</option>
+                <option value="159">Sobradinho</option>
+                <option value="14">Sobral</option>
+                <option value="406">Socorro</option>
+                <option value="126">Sorocaba</option>
+                <option value="30">Sorriso</option>
+                <option value="160">Sudoeste octogonal</option>
+                <option value="407">Sumare</option>
+                <option value="408">Suzano</option>
+                <option value="409">Taboao da serra</option>
+                <option value="161">Taguatinga</option>
+                <option value="283">Taquara rio grande do sul</option>
+                <option value="410">Tatui</option>
+                <option value="127">Taubaté</option>
+                <option value="143">Teixeira de freitas</option>
+                <option value="238">Telemaco borba</option>
+                <option value="64">Teresina</option>
+                <option value="304">Teresopolis</option>
+                <option value="239">Toledo</option>
+                <option value="284">Torres</option>
+                <option value="285">Tramandai</option>
+                <option value="219">Tres coracoes</option>
+                <option value="34">Três lagoas</option>
+                <option value="305">Tres rios</option>
+                <option value="176">Trindade</option>
+                <option value="101">Tubarão</option>
+                <option value="252">Tucurui</option>
+                <option value="411">Tupa</option>
+                <option value="220">Uba</option>
+                <option value="412">Ubatuba</option>
+                <option value="43">Uberaba</option>
+                <option value="44">Uberlândia</option>
+                <option value="240">Umuarama</option>
+                <option value="221">Unai</option>
+                <option value="241">Uniao da vitoria</option>
+                <option value="144">Valenca</option>
+                <option value="413">Valinhos</option>
+                <option value="24">Valparaíso de goiás</option>
+                <option value="222">Varginha</option>
+                <option value="31">Várzea grande</option>
+                <option value="414">Varzea paulista</option>
+                <option value="145">Vera cruz</option>
+                <option value="223">Vespasiano</option>
+                <option value="286">Viamão</option>
+                <option value="162">Vicente pires</option>
+                <option value="319">Videira</option>
+                <option value="18">Vila velha</option>
+                <option value="307">Vilhena</option>
+                <option value="415">Vinhedo</option>
+                <option value="19">Vitória</option>
+                <option value="11">Vitória da conquista</option>
+                <option value="80">Volta redonda</option>
+                <option value="416">Votorantim</option>
+                <option value="417">Votuporanga</option>
+                <option value="320">Xanxere</option>
+                <option value="418">Zacarias</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label for="endereco" class="form-label">Endereço</label>
+              <input type="text" class="form-control" id="endereco" placeholder="Digite seu endereço!">
+            </div>
+            <div class="col-12">
+              <label for="bairro" class="form-label">Area/Zona/Bairro</label>
+              <input type="text" class="form-control" id="bairro" placeholder="Area/Zona/Bairro">
+            </div>
+          </div>
+        </section>
+
+        <!-- Seu Anúncio -->
+        <section class="mb-4">
+          <div class="d-flex align-items-center justify-content-between bg-red py-2 px-3 rounded-1 mb-3">
+            <p class="fs-6 text-white fw-bold m-0 p-0">
+              O SEU ANÚNCIO
+            </p>
+            <p class="fs-10 text-white m-0 p-0">
+              *OS CAMPOS OBRIGATÓRIOS
+            </p>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label for="idade" class="form-label">* Idade</label>
+              <input type="number" class="form-control" id="idade" placeholder="Informe sua idade">
+            </div>
+            <div class="col-12">
+              <label for="titulo" class="form-label">* Título</label>
+              <input type="text" class="form-control" id="titulo" placeholder="Informe o titulo do anúncio">
+              <small class="text-muted-light float-end">Mínimo 5 caracteres</small>
+            </div>
+            <div class="col-12">
+              <label for="texto" class="form-label">* Texto</label>
+              <textarea class="form-control" id="texto" rows="3" placeholder="Informe o texto do anúncio"></textarea>
+              <small class="text-muted-light float-end">Mínimo 20 caracteres</small>
+            </div>
+          </div>
+        </section>
+
+        <!-- Seus Contatos -->
+        <section class="mb-4">
+          <div class="d-flex align-items-center justify-content-between bg-red py-2 px-3 rounded-1 mb-3">
+            <p class="fs-6 text-white fw-bold m-0 p-0">
+              OS SEUS CONTATOS
+            </p>
+            <p class="fs-10 text-white m-0 p-0">
+              *OS CAMPOS OBRIGATÓRIOS
+            </p>
+          </div>
+          <label class="form-label">Como você gostaria de ser contactado?</label>
+          <div class="mb-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="contato" id="contatoRadio1" checked>
+              <label class="form-check-label" for="contatoRadio1">Somente por Telefone</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="contato" id="contatoRadio2">
+              <label class="form-check-label" for="contatoRadio2">Email e Telefone</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="contato" id="contatoRadio3">
+              <label class="form-check-label" for="contatoRadio3">Somente por Email</label>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="email" class="form-label">* Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Informe o seu e-mail">
+            </div>
+            <div class="col-12">
+              <label for="telefone" class="form-label">* Telefone</label>
+              <input type="tel" class="form-control" id="telefone" placeholder="Informe o seu telefone">
+            </div>
+            <div class="col-12">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckChecked" checked>
+                <label class="form-check-label" for="switchCheckChecked">Whatsapp</label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckChecked" checked>
+                <label class="form-check-label" for="switchCheckChecked">Telegram</label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Termos e reCAPTCHA -->
+        <section class="mb-4">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckChecked" checked>
+            <label class="form-check-label" for="switchCheckChecked">Termos e condições <a href="#"
+                class="link-red">Leia aqui</a></label>
+          </div>
+
+          <!-- Placeholder para reCAPTCHA -->
+          <div class="g-recaptcha-placeholder"
+            style="width: 304px; height: 78px; background-color: #3a3a3a; border: 1px solid #555; border-radius: 0.375rem; display: flex; align-items: center; justify-content: center; color: #aaa;">
+            [reCAPTCHA Placeholder]
+          </div>
+        </section>
+      </div>
+
+      <!-- ETAPA 2: SOBRE VOCÊ, SERVIÇOS, TAGS -->
+      <div id="step-2" class="form-step" style="display: none;">
+        <!-- Sobre Você -->
+        <section class="mb-4 bg-light p-4 rounded-3">
+          <h4 class="fw-bold mb-3">Sobre Você</h4>
+          <p class="text-muted-light mb-2">Sobre Mim</p>
+          <div class="tag-group">
+            <button class="tag-btn">Sbw</button>
+            <button class="tag-btn">Brasileiras</button>
+            <button class="tag-btn">Cabelo Loiro</button>
+            <button class="tag-btn">Cabelo Preto</button>
+            <button class="tag-btn">Cabelo Ruivo</button>
+            <button class="tag-btn active">Caucasiana</button>
+            <button class="tag-btn">Com silicone</button>
+            <button class="tag-btn">Curvas</button>
+            <button class="tag-btn">Magra</button>
+            <button class="tag-btn">Mulata</button>
+            <button class="tag-btn">Negra</button>
+            <button class="tag-btn">Seios Natural</button>
+          </div>
+        </section>
+
+        <!-- Serviços -->
+        <section class="mb-4 bg-light p-4 rounded-3">
+          <h4 class="fw-bold mb-3">Serviços</h4>
+          <p class="text-muted-light mb-2">Serviços</p>
+          <div class="tag-group">
+            <button class="tag-btn">Anal</button>
+            <button class="tag-btn">Atriz porno</button>
+            <button class="tag-btn">BDSM</button>
+            <button class="tag-btn">Ejaculação corporal</button>
+            <button class="tag-btn">Fetiches</button>
+            <button class="tag-btn">Massagem erótica</button>
+            <button class="tag-btn">Oral</button>
+            <button class="tag-btn">Oral sem camisinha</button>
+            <button class="tag-btn">Sexting</button>
+            <button class="tag-btn">Tratamento de namorados</button>
+            <button class="tag-btn">Strip</button>
+            <button class="tag-btn">Videochamada</button>
+          </div>
+          <p class="text-muted-light mt-4 mb-2">Local de atendimento</p>
+          <div class="tag-group">
+            <button class="tag-btn">Clubes</button>
+            <button class="tag-btn">Em casa</button>
+            <button class="tag-btn">Eventos e festas</button>
+            <button class="tag-btn">Hotel Motel</button>
+            <button class="tag-btn">Incall</button>
+            <button class="tag-btn active">Outcall</button>
+            <button class="tag-btn">Visita domiciliar</button>
+          </div>
+        </section>
+
+        <!-- Tags Personalizadas -->
+        <section class="mb-4 bg-light p-4 rounded-3">
+          <h4 class="fw-bold mb-3">Tags personalizadas</h4>
+          <p class="text-muted-light mb-2">Tags personalizadas</p>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Nova etiqueta">
+            <button class="btn btn-red" type="button">Adicionar</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- ETAPA 3: FOTOS -->
+      <div id="step-3" class="form-step" style="display: none;">
+        <!-- Input de arquivo real, mas escondido -->
+        <input type="file" id="image-file-input" multiple accept="image/jpeg,image/png,image/webp"
+          style="display: none;">
+
+        <p class="text-muted-light">Podem ser postadas no máximo 6 fotos. A primeira é a principal.</p>
+
+        <!-- Container onde as prévias das imagens aparecerão -->
+        <div class="d-flex flex-wrap gap-4 align-items-end" id="image-preview-container">
+
+          <!-- Placeholder para Adicionar (agora é um gatilho) -->
+          <div id="add-photo-placeholder" class="image-preview-box" style="cursor: pointer;" title="Adicionar foto">
+            <span class="upload-placeholder"><i class="bi bi-plus"></i></span>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center gap-3 mt-5">
+          <button id="btn-remove-all" class="btn btn-red">
+            Remover Tudo <i class="bi bi-trash-fill"></i>
+          </button>
+          <button id="btn-add-image-main" class="btn btn-add-image">
+            Adicionar <i class="bi bi-camera-fill"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ETAPA 4: PLANOS -->
+      <div id="step-4" class="form-step" style="display: none;">
+        <!-- O conteúdo aqui é uma réplica da sua imagem 4, que é a página de planos -->
+        <div class="d-flex justify-content-center align-items-center">
+          <!-- Coluna Principal (Planos) -->
+          <div class="w-100" id="plan-container"> <!-- ID adicionado -->
+            <!-- Card Grátis -->
+            <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button"
+              data-plan-name="3x3" data-plan-credits="5" data-plan-price="8,62">
+              <div
+                class="p-3 d-flex flex-column align-items-sm-center align-items-start flex-sm-row justify-content-sm-between">
+                <div class="d-flex flex-column align-items-start m-0 p-0">
+                  <p class="fs-6 fw-bold m-0 p-0">😔 Visibilidade Baixa</p>
+                  <p class="fs-6 m-0 p-0">Foto não visível, Promova!</p>
+                  <div class="progress w-100 my-2" role="progressbar" aria-label="Animated striped example"
+                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" style="width: 10%">
+                    </div>
+                  </div>
+                  <p class="fs-6 fw-bold m-0 mb-3 mb-sm-0 p-0">Nenhuma promoção selecionada</p>
+                </div>
+                <a href="#" class="w-100 w-sm-30 btn btn-red">PUBLICAR GRATUITAMENTE</a>
+              </div>
+            </div>
+            <!-- Card 3x3 -->
+            <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button"
+              data-plan-name="3x3" data-plan-credits="5" data-plan-price="8,62">
+              <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                <div class="d-flex align-items-center">
+                  <span class="fs-1 fw-bold">3x3</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                </div>
+                <div class="plan-info">
+                  <h5 class="fs-5 p-0 m-0 mb-1">dia <i class="bi bi-clock fs-6"></i></h5>
+                  <p class="fs-7 text-secondary">3 subidas ao dia por 3 dias de</p>
+                </div>
+                <div class="w-100 w-sm-30">
+                  <label class="form-label text-muted-light">Selecionar um Horário</label>
+                  <!-- Corrigido para muted -->
+                  <select class="form-select form-select-dark" disabled>
+                    <option selected disabled>Selecione</option>
+                    <option>09:00 - 12:00</option>
+                    <option>12:00 - 14:00</option>
+                    <option>14:00 - 16:00</option>
+                    <option>16:00 - 18:00</option>
+                    <option>18:00 - 21:00</option>
+                    <option>21:00 - 00:00</option>
+                  </select>
+                </div>
+              </div>
+              <div class="p-3 plan-price border-top border-1">
+                <p class="fs-6 text-dark p-0 m-0">
+                  5 Créditos
+                </p>
+              </div>
+            </div>
+            <!-- Card 3x7 -->
+            <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button"
+              data-plan-name="3x7" data-plan-credits="10" data-plan-price="17,25">
+              <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                <div class="d-flex align-items-center">
+                  <span class="fs-1 fw-bold">3x7</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                </div>
+                <div class="plan-info">
+                  <h5 class="fs-5 p-0 m-0 mb-1">dia <i class="bi bi-clock fs-6"></i></h5>
+                  <p class="fs-7 text-secondary">3 subidas ao dia por 7 dias de</p>
+                </div>
+                <div class="w-100 w-sm-30">
+                  <label class="form-label text-muted-light">Selecionar um Horário</label>
+                  <select class="form-select form-select-dark" disabled>
+                    <option selected disabled>Selecione</option>
+                    <option>09:00 - 12:00</option>
+                    <option>12:00 - 14:00</option>
+                    <option>14:00 - 16:00</option>
+                    <option>16:00 - 18:00</option>
+                    <option>18:00 - 21:00</option>
+                    <option>21:00 - 00:00</option>
+                  </select>
+                </div>
+              </div>
+              <div class="p-3 plan-price border-top border-1">
+                <p class="fs-6 text-dark p-0 m-0">
+                  10 Créditos - R$ 17,25
+                </p>
+              </div>
+            </div>
+            <!-- Card 5x1 -->
+            <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button"
+              data-plan-name="5x1" data-plan-credits="3" data-plan-price="">
+              <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                <div class="d-flex align-items-center">
+                  <span class="fs-1 fw-bold">5x1</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                </div>
+                <div class="plan-info">
+                  <h5 class="fs-5 p-0 m-0 mb-1">dia <i class="bi bi-clock fs-6"></i></h5>
+                  <p class="fs-7 text-secondary">5 subidas ao dia por 1 dias de</p>
+                </div>
+                <div class="w-100 w-sm-30">
+                  <label class="form-label text-muted-light">Selecionar um Horário</label>
+                  <select class="form-select form-select-dark" disabled>
+                    <option selected disabled>Selecione</option>
+                    <option>09:00 - 12:00</option>
+                    <option>12:00 - 14:00</option>
+                    <option>14:00 - 16:00</option>
+                    <option>16:00 - 18:00</option>
+                    <option>18:00 - 21:00</option>
+                    <option>21:00 - 00:00</option>
+                  </select>
+                </div>
+              </div>
+              <div class="p-3 plan-price border-top border-1">
+                <p class="fs-6 text-dark p-0 m-0">
+                  3 Créditos
+                </p>
+              </div>
+            </div>
+            <!-- Card 5x3 -->
+            <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button"
+              data-plan-name="5x3" data-plan-credits="8" data-plan-price="13,80">
+              <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                <div class="d-flex align-items-center">
+                  <span class="fs-1 fw-bold">5x3</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                </div>
+                <div class="plan-info">
+                  <h5 class="fs-5 p-0 m-0 mb-1">dia <i class="bi bi-clock fs-6"></i></h5>
+                  <p class="fs-7 text-secondary">5 subidas ao dia por 3 dias de</p>
+                </div>
+                <div class="w-100 w-sm-30">
+                  <label class="form-label text-muted-light">Selecionar um Horário</label>
+                  <select class="form-select form-select-dark" disabled>
+                    <option selected disabled>Selecione</option>
+                    <option>09:00 - 12:00</option>
+                    <option>12:00 - 14:00</option>
+                    <option>14:00 - 16:00</option>
+                    <option>16:00 - 18:00</option>
+                    <option>18:00 - 21:00</option>
+                    <option>21:00 - 00:00</option>
+                  </select>
+                </div>
+              </div>
+              <div class="p-3 plan-price border-top border-1">
+                <p class="fs-6 text-dark p-0 m-0">
+                  8 Créditos - R$ 13,80
+                </p>
+              </div>
+            </div>
+            <!-- Card 5x7 -->
+            <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1" role="button"
+              data-plan-name="5x7" data-plan-credits="16" data-plan-price="27,60">
+              <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                <div class="d-flex align-items-center">
+                  <span class="fs-1 fw-bold">5x7</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                </div>
+                <div class="plan-info">
+                  <h5 class="fs-5 p-0 m-0 mb-1">dia <i class="bi bi-clock fs-6"></i></h5>
+                  <p class="fs-7 text-secondary">5 subidas ao dia por 7 dias de</p>
+                </div>
+                <div class="w-100 w-sm-30">
+                  <label class="form-label text-muted-light">Selecionar um Horário</label>
+                  <select class="form-select form-select-dark" disabled>
+                    <option selected disabled>Selecione</option>
+                    <option>09:00 - 12:00</option>
+                    <option>12:00 - 14:00</option>
+                    <option>14:00 - 16:00</option>
+                    <option>16:00 - 18:00</option>
+                    <option>18:00 - 21:00</option>
+                    <option>21:00 - 00:00</option>
+                  </select>
+                </div>
+              </div>
+              <div class="p-3 plan-price border-top border-1">
+                <p class="fs-6 text-dark p-0 m-0">
+                  16 Créditos - R$ 27,60
+                </p>
+              </div>
+            </div>
+            <!-- Card 10x1 (Ativo na imagem) -->
+            <div class="plan-card bg-light mb-3 border border-1 border-light-subtle rounded-1 active" role="button"
+              data-plan-name="10x1" data-plan-credits="4" data-plan-price="6,90">
+              <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                <div class="d-flex align-items-center">
+                  <span class="fs-1 fw-bold">10x1</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                </div>
+                <div class="plan-info">
+                  <h5 class="fs-5 p-0 m-0 mb-1">noite <i class="bi bi-clock fs-6"></i></h5>
+                  <p class="fs-7 text-secondary">10 subidas ao dia por 1 dias de</p>
+                </div>
+                <div class="w-100 w-sm-30">
+                  <label class="form-label text-highlight-red">Selecionar um Horário</label>
+                  <select class="form-select form-select-dark" style="border-color: #E53935;">
+                    <option selected disabled>Selecione</option>
+                    <option>09:00 - 12:00</option>
+                    <option>12:00 - 14:00</option>
+                    <option>14:00 - 16:00</option>
+                    <option>16:00 - 18:00</option>
+                    <option>18:00 - 21:00</option>
+                    <option>21:00 - 00:00</option>
+                  </select>
+                </div>
+              </div>
+              <div class="p-3 plan-price border-top border-1">
+                <p class="fs-6 text-dark p-0 m-0">
+                  4 Créditos
+                </p>
+              </div>
+            </div>
+            <!-- Card 10x7 -->
+            <div class="plan-card bg-light border border-1 border-light-subtle rounded-1" role="button"
+              data-plan-name="10x7" data-plan-credits="20" data-plan-price="34,50">
+              <div class="p-3 d-flex flex-column align-items-start flex-sm-row justify-content-sm-between">
+                <div class="d-flex align-items-center">
+                  <span class="fs-1 fw-bold">10x7</span><i class="bi bi-arrow-up-short plan-icon"></i>
+                </div>
+                <div class="plan-info">
+                  <h5 class="fs-5 p-0 m-0 mb-1">noite <i class="bi bi-clock fs-6"></i></h5>
+                  <p class="fs-7 text-secondary">10 subidas ao dia por 7 dias de</p>
+                </div>
+                <div class="w-100 w-sm-30">
+                  <label class="form-label text-muted-light">Selecionar um Horário</label>
+                  <select class="form-select form-select-dark" disabled>
+                    <option selected disabled>Selecione</option>
+                    <option>09:00 - 12:00</option>
+                    <option>12:00 - 14:00</option>
+                    <option>14:00 - 16:00</option>
+                    <option>16:00 - 18:00</option>
+                    <option>18:00 - 21:00</option>
+                    <option>21:00 - 00:00</option>
+                  </select>
+                </div>
+              </div>
+              <div class="p-3 plan-price border-top border-1">
+                <p class="fs-6 text-dark p-0 m-0">
+                  20 Créditos - R$ 34,50
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Coluna da Barra Lateral (Resumo) -->
+        <div class="w-100 fixed-bottom">
+          <div class="summary-card sticky-top bg-light border border-1 border-light-subtle rounded-1"
+            style="top: 2rem;">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Total:</h5>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                  <p class="mb-0 fw-500" id="summary-plan-name">10x1</p> <!-- ID Adicionado -->
+                </div>
+                <div class="text-end">
+                  <p class="mb-0 fw-bold" id="summary-plan-credits">4 Créditos</p> <!-- ID Adicionado -->
+                  <small class="text-muted-light" id="summary-plan-price">6,90 R$</small>
+                  <!-- ID Adicionado -->
+                </div>
+              </div>
+              <hr>
+              <a href="#" class="btn btn-primary w-100 btn-continue">CONTINUAR</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Navegação (Footer) -->
+    <footer class="d-flex justify-content-between align-items-center mt-5 mb-5">
+      <button id="btn-voltar" class="btn btn-outline-red" style="visibility: hidden;">
+        <i class="bi bi-chevron-left"></i>
+        VOLTAR
+      </button>
+      <button id="btn-proxima" class="btn btn-red">
+        PRÓXIMA
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="container">
+    <hr class="border border-secondary-subtle border-0_5 opacity-50 mb-4">
+  </div>
+
+  <md-footer></md-footer>
+  <!-- Fim Footer -->
+
+  <!-- Modal Área do Membro -->
+  <md-modal-areamembro></md-modal-areamembro>
+  <!-- Fim Modal Área do Membro -->
+
+  <script src="js/bootstrap.bundle.js"></script>
+  <script type="module" src="js/modulos/libs.js"></script>
+</body>
+
+</html>
