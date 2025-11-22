@@ -402,10 +402,6 @@ label.active-label:has(input.form-check-input:checked) {
   margin-right: 0.75rem;
 }
 
-.summary-card {
-  padding: 1rem;
-}
-
 .summary-card hr {
   border-top: 1px solid #555;
 }
@@ -421,8 +417,6 @@ label.active-label:has(input.form-check-input:checked) {
 .summary-card .btn-continue:hover {
   background-color: #26a69a;
 }
-
-
 
 
 /*-----------------------------------*/
@@ -11590,7 +11584,9 @@ fieldset:disabled .btn {
   .gap-sm-5 {
     gap: 3rem !important;
   }
-
+  .gap-sm-7 {
+    gap: 7rem !important;
+  }
   .row-gap-sm-0 {
     row-gap: 0 !important;
   }

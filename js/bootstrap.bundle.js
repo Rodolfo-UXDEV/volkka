@@ -114,7 +114,6 @@ if (window.innerWidth <= 576) {
 //------------------------------
 
 
-
 // Código para abrir os MODAIS
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -158,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }); // Fim do DOMContentLoaded
 //------------------------------
 
+
 //--------- JS Formulario ------------
 document.addEventListener("DOMContentLoaded", function () {
   let currentStep = 1;
@@ -199,8 +199,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Botão PRÓXIMA
     if (step === totalSteps) {
-      btnProxima.innerHTML = 'TERMINAR <i class="bi bi-check-lg"></i>';
+      // Alteração aqui: Oculta o botão na última etapa
+      btnProxima.style.display = 'none';
     } else {
+      btnProxima.style.display = 'inline-block'; // Garante que aparece nas outras
       btnProxima.innerHTML = 'PRÓXIMA <i class="bi bi-chevron-right"></i>';
     }
   }
@@ -235,8 +237,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentStep < totalSteps) {
       currentStep++;
       showStep(currentStep);
+      // Rola a página suavemente para o topo (onde estão os steps)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // Lógica de "Terminar" - ex: submeter o formulário
+      // Lógica de "Terminar" removida visualmente, mas caso o usuário
+      // force a execução, podemos manter algo aqui ou simplesmente deixar vazio.
       alert("Formulário enviado!");
     }
   });
@@ -245,6 +250,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentStep > 1) {
       currentStep--;
       showStep(currentStep);
+      // Opcional: Rolar para o topo ao voltar também ajuda na orientação
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
 
@@ -395,22 +402,59 @@ document.addEventListener("DOMContentLoaded", function () {
   const summaryPlanName = document.getElementById('summary-plan-name');
   const summaryPlanCredits = document.getElementById('summary-plan-credits');
   const summaryPlanPrice = document.getElementById('summary-plan-price');
+  const summaryProgressBar = document.getElementById('summary-progress-bar'); // Novo
+
+  const progressCard = document.getElementById('progress-card');
+  const totalCard = document.getElementById('total-card');
 
   if (planContainer) {
     planContainer.addEventListener('click', function (event) {
       const clickedCard = event.target.closest('.plan-card');
 
-      // Se o clique não foi em um card, ou se o card já está ativo, não faz nada
-      if (!clickedCard || clickedCard.classList.contains('active')) {
-        return;
+      // Se o clique não foi em um card, sai da função
+      if (!clickedCard) return;
+
+      // --- CENÁRIO 1: O usuário clicou em um card JÁ ATIVO (Deselecionar) ---
+      if (clickedCard.classList.contains('active')) {
+        // CORREÇÃO: Se o clique foi no SELECT, ignoramos o toggle (saímos da função)
+        // para permitir que o dropdown abra sem fechar o card.
+        if (event.target.tagName === 'SELECT') {
+          return;
+        }
+
+        // Remove a classe active
+        clickedCard.classList.remove('active');
+
+        // Desabilita o select e reseta a cor
+        const select = clickedCard.querySelector('select');
+        if (select) {
+          select.disabled = true;
+          select.style.borderColor = '#555';
+        }
+
+        // Reseta a label
+        const label = clickedCard.querySelector('.form-label');
+        if (label) {
+          label.classList.remove('text-highlight-red');
+          label.classList.add('text-muted-light');
+        }
+
+        // Toggles: Esconde Total, Mostra Progresso
+        if (totalCard) totalCard.style.display = 'none';
+        if (progressCard) progressCard.style.display = 'block';
+
+        return; // Encerra a execução aqui
       }
+
+      // --- CENÁRIO 2: O usuário clicou em um NOVO card (Selecionar) ---
 
       // 1. Obter os dados do card clicado
       const planName = clickedCard.dataset.planName;
       const planCredits = clickedCard.dataset.planCredits;
       const planPrice = clickedCard.dataset.planPrice;
+      const planProgress = clickedCard.dataset.planProgress; // Obtém a porcentagem
 
-      // 2. Resetar todos os cards
+      // 2. Resetar todos os cards (garante que apenas um fique ativo)
       planContainer.querySelectorAll('.plan-card').forEach(card => {
         card.classList.remove('active');
         // Resetar select
@@ -444,7 +488,7 @@ document.addEventListener("DOMContentLoaded", function () {
         activeLabel.classList.remove('text-muted-light');
       }
 
-      // 4. Atualizar o sumário
+      // 4. Atualizar o sumário e Alternar Cards da Direita
       if (summaryPlanName) {
         summaryPlanName.textContent = planName;
       }
@@ -456,11 +500,20 @@ document.addEventListener("DOMContentLoaded", function () {
           summaryPlanPrice.textContent = `${planPrice} R$`;
           summaryPlanPrice.style.display = 'block';
         } else {
-          // Se não houver preço em R$, esconde o elemento
           summaryPlanPrice.textContent = '';
           summaryPlanPrice.style.display = 'none';
         }
       }
+
+      // ATUALIZAR BARRA DE PROGRESSO
+      if (summaryProgressBar && planProgress) {
+        summaryProgressBar.style.width = `${planProgress}%`;
+        summaryProgressBar.setAttribute('aria-valuenow', planProgress);
+      }
+
+      // Toggles: Mostra Total, Esconde Progresso
+      if (progressCard) progressCard.style.display = 'none';
+      if (totalCard) totalCard.style.display = 'block';
     });
   }
 
@@ -468,9 +521,6 @@ document.addEventListener("DOMContentLoaded", function () {
   showStep(currentStep);
 });
 //------------------------------
-
-
-
 
 //-----------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function () {
