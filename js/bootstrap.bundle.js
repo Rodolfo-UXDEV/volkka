@@ -402,22 +402,122 @@ document.addEventListener("DOMContentLoaded", function () {
   const summaryPlanName = document.getElementById('summary-plan-name');
   const summaryPlanCredits = document.getElementById('summary-plan-credits');
   const summaryPlanPrice = document.getElementById('summary-plan-price');
-  const summaryProgressBar = document.getElementById('summary-progress-bar'); // Novo
+  const summaryProgressBar = document.getElementById('summary-progress-bar');
+
+  // Container para listar os upgrades selecionados no Resumo
+  const summaryUpgradesContainer = document.getElementById('summary-upgrades-container');
+
+  // O Template da Seção de Upgrades (que será movido)
+  const upgradeSectionTemplate = document.getElementById('upgrade-section-template');
 
   const progressCard = document.getElementById('progress-card');
   const totalCard = document.getElementById('total-card');
 
+  // Variáveis de Estado da Etapa 4
+  let selectedPlanPrice = 0; // Armazena o preço base como número
+  let activeUpgrades = [];   // Lista de objetos {name, price} dos upgrades ativos
+
+  // Helper: Converter String de Preço (ex: "17,25") para Float (17.25)
+  function parsePrice(priceStr) {
+    if (!priceStr) return 0;
+    // Remove ' R$' e troca vírgula por ponto
+    return parseFloat(priceStr.replace(' R$', '').replace(',', '.'));
+  }
+
+  // Helper: Formatar Float para Moeda BRL
+  function formatCurrency(value) {
+    return value.toFixed(2).replace('.', ',') + " R$";
+  }
+
+  // Função Principal: Atualizar o Total
+  function updateTotalPrice() {
+    // Se não tem plano selecionado e nem upgrades, podemos sair
+    if (selectedPlanPrice === 0 && activeUpgrades.length === 0) {
+      return;
+    }
+
+    let total = selectedPlanPrice;
+
+    // Limpa o container de upgrades no resumo
+    summaryUpgradesContainer.innerHTML = '';
+
+    // Soma os upgrades e adiciona ao resumo
+    activeUpgrades.forEach(upgrade => {
+      total += upgrade.price;
+      const upgradeLabel = document.createElement('small');
+      upgradeLabel.className = 'text-highlight-pink fw-bold d-block';
+      upgradeLabel.textContent = `+ ${upgrade.name}`;
+      summaryUpgradesContainer.appendChild(upgradeLabel);
+    });
+
+    if (summaryPlanPrice) {
+      summaryPlanPrice.textContent = formatCurrency(total);
+      summaryPlanPrice.style.display = 'block';
+    }
+  }
+
+  // Função para resetar e esconder a seção de upgrades
+  function hideAndResetUpgrades() {
+    // 1. Move de volta para o container principal (ou apenas esconde e reseta)
+    // Para simplificar, vamos esconder e manter no lugar até ser movido novamente, 
+    // mas é crucial limpar os inputs.
+    upgradeSectionTemplate.classList.add('d-none');
+
+    // 2. Limpa os switches visuais
+    upgradeSectionTemplate.querySelectorAll('.upgrade-switch').forEach(switchEl => {
+      switchEl.checked = false;
+      switchEl.closest('.upgrade-card-item').classList.remove('border-highlight');
+    });
+
+    // 3. Limpa o array de dados
+    activeUpgrades = [];
+    updateTotalPrice();
+  }
+
+  // Listener para os switches de Upgrade (Usando delegação de eventos)
+  // Agora o listener está no template, que se move
+  if (upgradeSectionTemplate) {
+    upgradeSectionTemplate.addEventListener('change', function (event) {
+      if (event.target.classList.contains('upgrade-switch')) {
+        const switchInput = event.target;
+        const upgradeCard = switchInput.closest('.upgrade-card-item');
+        const upgradeName = upgradeCard.dataset.upgradeName;
+        const upgradePrice = parseFloat(upgradeCard.dataset.upgradePrice);
+
+        if (switchInput.checked) {
+          // Adiciona estilo de destaque ao card
+          upgradeCard.classList.add('border-highlight');
+          // Adiciona ao array de ativos
+          activeUpgrades.push({ name: upgradeName, price: upgradePrice });
+        } else {
+          // Remove estilo
+          upgradeCard.classList.remove('border-highlight');
+          // Remove do array
+          activeUpgrades = activeUpgrades.filter(u => u.name !== upgradeName);
+        }
+
+        updateTotalPrice();
+      }
+    });
+  }
+
   if (planContainer) {
     planContainer.addEventListener('click', function (event) {
+      // Verifica se clicou em um card de plano (e não em um upgrade dentro dele)
+      // Importante: .closest('.plan-card') vai pegar o card pai.
       const clickedCard = event.target.closest('.plan-card');
 
-      // Se o clique não foi em um card, sai da função
+      // Se o clique não foi em um card de plano, sai da função
       if (!clickedCard) return;
+
+      // Se o clique foi dentro da seção de upgrades (que agora está dentro do card), IGNORA o toggle do card
+      if (event.target.closest('#upgrade-section-template')) {
+        return;
+      }
 
       // --- CENÁRIO 1: O usuário clicou em um card JÁ ATIVO (Deselecionar) ---
       if (clickedCard.classList.contains('active')) {
-        // CORREÇÃO: Se o clique foi no SELECT, ignoramos o toggle (saímos da função)
-        // para permitir que o dropdown abra sem fechar o card.
+        // Se o clique foi no SELECT, ignoramos o toggle
         if (event.target.tagName === 'SELECT') {
           return;
         }
@@ -439,11 +539,20 @@ document.addEventListener("DOMContentLoaded", function () {
           label.classList.add('text-muted-light');
         }
 
+        // *** Lógica de Upgrade: Esconder e Resetar ***
+        hideAndResetUpgrades();
+        // Movemos de volta para o body/container para não ser destruído se algo mudar
+        document.body.appendChild(upgradeSectionTemplate);
+
+        // Reseta preço do plano base
+        selectedPlanPrice = 0;
+        updateTotalPrice();
+
         // Toggles: Esconde Total, Mostra Progresso
         if (totalCard) totalCard.style.display = 'none';
         if (progressCard) progressCard.style.display = 'block';
 
-        return; // Encerra a execução aqui
+        return;
       }
 
       // --- CENÁRIO 2: O usuário clicou em um NOVO card (Selecionar) ---
@@ -451,17 +560,17 @@ document.addEventListener("DOMContentLoaded", function () {
       // 1. Obter os dados do card clicado
       const planName = clickedCard.dataset.planName;
       const planCredits = clickedCard.dataset.planCredits;
-      const planPrice = clickedCard.dataset.planPrice;
-      const planProgress = clickedCard.dataset.planProgress; // Obtém a porcentagem
+      const planPriceStr = clickedCard.dataset.planPrice; // String original
+      const planProgress = clickedCard.dataset.planProgress;
 
-      // 2. Resetar todos os cards (garante que apenas um fique ativo)
+      // 2. Resetar todos os cards de PLANO (desativa os anteriores)
       planContainer.querySelectorAll('.plan-card').forEach(card => {
         card.classList.remove('active');
         // Resetar select
         const select = card.querySelector('select');
         if (select) {
           select.disabled = true;
-          select.style.borderColor = '#555'; // Cor padrão
+          select.style.borderColor = '#555';
         }
         // Resetar label
         const label = card.querySelector('.form-label');
@@ -471,6 +580,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
+      // *** Lógica de Upgrade: Resetar antes de mover ***
+      hideAndResetUpgrades();
+
       // 3. Ativar o card clicado
       clickedCard.classList.add('active');
 
@@ -478,7 +590,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const activeSelect = clickedCard.querySelector('select');
       if (activeSelect) {
         activeSelect.disabled = false;
-        activeSelect.style.borderColor = '#E53935'; // Cor de destaque
+        activeSelect.style.borderColor = '#E53935';
       }
 
       // Ativar a label do card clicado
@@ -488,6 +600,10 @@ document.addEventListener("DOMContentLoaded", function () {
         activeLabel.classList.remove('text-muted-light');
       }
 
+      // *** Lógica de Upgrade: Mover e Mostrar ***
+      clickedCard.appendChild(upgradeSectionTemplate);
+      upgradeSectionTemplate.classList.remove('d-none');
+
       // 4. Atualizar o sumário e Alternar Cards da Direita
       if (summaryPlanName) {
         summaryPlanName.textContent = planName;
@@ -495,15 +611,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (summaryPlanCredits) {
         summaryPlanCredits.textContent = `${planCredits} Créditos`;
       }
-      if (summaryPlanPrice) {
-        if (planPrice) {
-          summaryPlanPrice.textContent = `${planPrice} R$`;
-          summaryPlanPrice.style.display = 'block';
-        } else {
-          summaryPlanPrice.textContent = '';
-          summaryPlanPrice.style.display = 'none';
-        }
-      }
+
+      // Atualiza o preço base
+      selectedPlanPrice = parsePrice(planPriceStr);
+      updateTotalPrice(); // Recalcula total (Plano + Upgrades vazios agora)
 
       // ATUALIZAR BARRA DE PROGRESSO
       if (summaryProgressBar && planProgress) {
@@ -516,6 +627,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (totalCard) totalCard.style.display = 'block';
     });
   }
+
+
 
   // Inicializa na Etapa 1
   showStep(currentStep);
@@ -581,15 +694,6 @@ document.addEventListener('DOMContentLoaded', function () {
   updateTotal();
 });
 //-----------------------------------------------------------------
-
-
-
-
-
-
-
-
-
 
 /*!
   * Bootstrap v5.3.3 (https://getbootstrap.com/)

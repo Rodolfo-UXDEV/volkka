@@ -345,40 +345,10 @@ label.active-label:has(input.form-check-input:checked) {
 /* --- Step 4: Estilos dos Planos (Copiados de selecao-planos.html) --- */
 
 .plan-card.active,
-.time-card.active {
+.time-card.active,
+.upgrade-card-item.active {
   border-color: #E53935;
   box-shadow: 0 0 15px rgba(229, 57, 53, 0.3);
-}
-
-.plan-icon {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #888;
-}
-
-.plan-info h5 .bi-info-circle-fill {
-  font-size: 0.9rem;
-  color: #888;
-  margin-left: 0.25rem;
-}
-
-.plan-price {
-  font-size: 0.9rem;
-  color: #f0f0f0;
-  font-weight: 500;
-  margin-top: 0.5rem;
-}
-
-.form-select-dark {
-  background-color: #3a3a3a;
-  border: 1px solid #555;
-  color: #f0f0f0;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23aaa' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-}
-
-.form-select-dark:focus {
-  border-color: #c41617;
-  box-shadow: 0 0 0 0.25rem rgba(229, 57, 53, 0.25);
 }
 
 .time-card .list-group-item {
@@ -392,7 +362,7 @@ label.active-label:has(input.form-check-input:checked) {
 }
 
 .time-card .list-group-item.active {
-  background-color: #c41617;
+  background-color: #E53935;
   border-radius: 0.375rem;
   color: #fff;
 }
@@ -402,11 +372,7 @@ label.active-label:has(input.form-check-input:checked) {
   margin-right: 0.75rem;
 }
 
-.summary-card hr {
-  border-top: 1px solid #555;
-}
-
-.summary-card .btn-continue {
+.btn-continue {
   background-color: #4DB6AC;
   /* Verde-azulado da imagem */
   border: none;
@@ -414,8 +380,41 @@ label.active-label:has(input.form-check-input:checked) {
   padding: 0.75rem;
 }
 
-.summary-card .btn-continue:hover {
+.btn-continue:hover {
   background-color: #26a69a;
+}
+
+/* Switch Customizado */
+.form-check-input:checked {
+  background-color: #E91E63;
+  border-color: #E91E63;
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(233, 30, 99, 0.25);
+  border-color: #E91E63;
+}
+
+
+
+/* Estilo da seção injetada dentro do card */
+.injected-upgrades {
+  border-top: 1px dashed #555;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
@@ -10899,6 +10898,9 @@ fieldset:disabled .btn {
   .w-sm-30 {
     width: 30% !important;
   }
+  .w-sm-35 {
+    width: 35% !important;
+  }
 
   .p-sm-5 {
     padding: 3rem !important;
@@ -11584,9 +11586,11 @@ fieldset:disabled .btn {
   .gap-sm-5 {
     gap: 3rem !important;
   }
+
   .gap-sm-7 {
     gap: 7rem !important;
   }
+
   .row-gap-sm-0 {
     row-gap: 0 !important;
   }
