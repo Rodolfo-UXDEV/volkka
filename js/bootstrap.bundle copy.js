@@ -137,25 +137,111 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //--------- JS Formulario ------------
 document.addEventListener("DOMContentLoaded", function () {
-  // --- Navegação ---
   let currentStep = 1;
   const totalSteps = 4;
 
   const btnProxima = document.getElementById("btn-proxima");
   const btnVoltar = document.getElementById("btn-voltar");
-  const planContainer = document.getElementById('plan-container');
-  const totalCard = document.getElementById('total-card');
-  const progressCard = document.getElementById('progress-card');
-  const upgradeTemplate = document.getElementById('upgrade-section-template');
 
-  const sumName = document.getElementById('summary-plan-name');
-  const sumCredits = document.getElementById('summary-plan-credits');
-  const sumPrice = document.getElementById('summary-plan-price');
-  const sumProgressBar = document.getElementById('summary-progress-bar');
-  const sumProgressText = document.getElementById('summary-progress-text');
-  const sumUpgrades = document.getElementById('summary-upgrades-container');
+  // Armazena os ícones originais de cada etapa
+  const originalIcons = {
+    1: '<i class="bi bi-person-fill"></i>',
+    2: '<i class="bi bi-tags-fill"></i>',
+    3: '<i class="bi bi-camera-fill"></i>',
+    4: '<i class="bi bi-check-all"></i>'
+  };
 
-  // --- ETAPA 3 (Fotos) ---
+  // Ícone de concluído (o "check")
+  const completedIcon = '<i class="bi bi-check-lg"></i>';
+
+  // Função para mostrar a etapa correta
+  function showStep(step) {
+    // Esconde todas as etapas
+    document.querySelectorAll(".form-step").forEach((el) => {
+      el.style.display = "none";
+    });
+    // Mostra a etapa atual
+    document.getElementById(`step-${step}`).style.display = "block";
+
+    // Atualiza o stepper
+    updateStepper(step);
+
+    // Atualiza os botões
+    // Botão VOLTAR
+    if (step === 1) {
+      btnVoltar.style.visibility = "hidden";
+    } else {
+      btnVoltar.style.visibility = "visible";
+    }
+
+    // Botão PRÓXIMA
+    if (step === totalSteps) {
+      // Alteração aqui: Oculta o botão na última etapa
+      btnProxima.style.display = 'none';
+    } else {
+      btnProxima.style.display = 'inline-block'; // Garante que aparece nas outras
+      btnProxima.innerHTML = 'PRÓXIMA <i class="bi bi-chevron-right"></i>';
+    }
+  }
+
+  // Função para atualizar o stepper
+  function updateStepper(step) {
+    for (let i = 1; i <= totalSteps; i++) {
+      const stepItem = document.getElementById(`step-item-${i}`);
+      const stepIcon = stepItem.querySelector('.step-icon'); // Seleciona o contêiner do ícone
+
+      if (i < step) {
+        // Etapa concluída
+        stepItem.classList.remove("active");
+        stepItem.classList.add("completed");
+        stepIcon.innerHTML = completedIcon; // Define o ícone de "check"
+      } else if (i === step) {
+        // Etapa ativa
+        stepItem.classList.remove("completed");
+        stepItem.classList.add("active");
+        stepIcon.innerHTML = originalIcons[i]; // Restaura o ícone original
+      } else {
+        // Etapa futura
+        stepItem.classList.remove("active");
+        stepItem.classList.remove("completed");
+        stepIcon.innerHTML = originalIcons[i]; // Garante que é o ícone original
+      }
+    }
+  }
+
+  // Event Listeners para os botões
+  btnProxima.addEventListener("click", function () {
+    if (currentStep < totalSteps) {
+      currentStep++;
+      showStep(currentStep);
+      // Rola a página suavemente para o topo (onde estão os steps)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Lógica de "Terminar" removida visualmente, mas caso o usuário
+      // force a execução, podemos manter algo aqui ou simplesmente deixar vazio.
+      alert("Formulário enviado!");
+    }
+  });
+
+  btnVoltar.addEventListener("click", function () {
+    if (currentStep > 1) {
+      currentStep--;
+      showStep(currentStep);
+      // Opcional: Rolar para o topo ao voltar também ajuda na orientação
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  // Toggle para botões de tag (Etapa 2)
+  document.querySelectorAll(".tag-btn").forEach(button => {
+    button.addEventListener("click", function (e) {
+      e.preventDefault(); // Previne comportamento padrão se for <button>
+      this.classList.toggle("active");
+    });
+  });
+
+  // --- LÓGICA DA ETAPA 3: UPLOAD DE FOTOS ---
+
   const fileInput = document.getElementById('image-file-input');
   const previewContainer = document.getElementById('image-preview-container');
   const addPlaceholder = document.getElementById('add-photo-placeholder');
@@ -163,287 +249,366 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnRemoveAll = document.getElementById('btn-remove-all');
   const MAX_PHOTOS = 6;
 
-  if (fileInput) {
-    const triggerFile = () => fileInput.click();
-    addPlaceholder.addEventListener('click', triggerFile);
-    btnAddImageMain.addEventListener('click', triggerFile);
+  // Gatilhos para abrir o seletor de arquivos
+  addPlaceholder.addEventListener('click', () => fileInput.click());
+  btnAddImageMain.addEventListener('click', () => fileInput.click());
 
-    fileInput.addEventListener('change', (e) => {
-      const files = e.target.files;
-      for (const file of files) {
-        if (previewContainer.children.length - 1 >= MAX_PHOTOS) break;
-        const reader = new FileReader();
-        reader.onload = (ev) => createPreviewBox(ev.target.result);
-        reader.readAsDataURL(file);
+  // Processa os arquivos selecionados
+  fileInput.addEventListener('change', function (event) {
+    const files = event.target.files;
+    let currentPhotoCount = previewContainer.querySelectorAll('.image-preview-item').length;
+
+    for (const file of files) {
+      if (currentPhotoCount >= MAX_PHOTOS) {
+        // Usamos um 'alert' simples aqui, mas o ideal seria um modal customizado
+        console.warn(`Limite de ${MAX_PHOTOS} fotos atingido.`);
+        break;
       }
-      e.target.value = null;
-    });
 
-    function createPreviewBox(url) {
-      const isFirst = previewContainer.querySelectorAll('.image-preview-item').length === 0;
-      const div = document.createElement('div');
-      div.className = 'image-preview-box image-preview-item';
-      if (isFirst) { div.style.borderColor = '#E91E63'; }
-      div.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover;border-radius:0.5rem;"><div class="image-preview-controls"><button class="btn-icon star ${isFirst ? 'active' : ''}"><i class="bi bi-star-fill"></i></button><button class="btn-icon delete"><i class="bi bi-trash-fill"></i></button></div>`;
-      previewContainer.insertBefore(div, addPlaceholder);
-      updatePhotoState();
+      // Validação de tipo (redundante com 'accept', mas boa prática)
+      if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+        console.warn(`Arquivo ignorado (tipo inválido): ${file.name}`);
+        continue;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        createPreviewBox(e.target.result);
+        updatePhotoUploaderState();
+      };
+      reader.readAsDataURL(file);
+      currentPhotoCount++;
     }
 
-    function updatePhotoState() {
-      const count = previewContainer.querySelectorAll('.image-preview-item').length;
-      addPlaceholder.style.display = count >= MAX_PHOTOS ? 'none' : 'flex';
+    // Limpa o valor do input para permitir selecionar o mesmo arquivo novamente
+    event.target.value = null;
+  });
+
+  // Cria o card de prévia da imagem
+  function createPreviewBox(dataUrl) {
+    const isFirstImage = previewContainer.querySelectorAll('.image-preview-item').length === 0;
+
+    const box = document.createElement('div');
+    // Adicionamos .image-preview-item para contagem
+    box.classList.add('image-preview-box', 'image-preview-item');
+
+    // Marca a primeira foto como principal (borda rosa)
+    if (isFirstImage) {
+      box.style.borderColor = '#E91E63';
     }
 
-    previewContainer.addEventListener('click', (e) => {
-      if (e.target.closest('.delete')) {
-        e.target.closest('.image-preview-item').remove();
-        updatePhotoState();
-      } else if (e.target.closest('.star')) {
-        previewContainer.querySelectorAll('.star').forEach(el => el.classList.remove('active'));
-        previewContainer.querySelectorAll('.image-preview-item').forEach(el => el.style.borderColor = '#555');
-        const box = e.target.closest('.image-preview-item');
-        box.style.borderColor = '#E91E63';
-        box.querySelector('.star').classList.add('active');
-      }
-    });
-
-    btnRemoveAll.addEventListener('click', () => {
-      previewContainer.querySelectorAll('.image-preview-item').forEach(el => el.remove());
-      updatePhotoState();
-    });
+    box.innerHTML = `
+                    <img src="${dataUrl}" alt="Preview">
+                    <div class="image-preview-controls">
+                        <button class="btn-icon star ${isFirstImage ? 'active' : ''}" title="Marcar como principal">
+                            <i class="bi bi-star-fill"></i>
+                        </button>
+                        <button class="btn-icon delete" title="Excluir foto">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </div>
+                `;
+    // Insere a nova prévia *antes* do botão de adicionar (+)
+    previewContainer.insertBefore(box, addPlaceholder);
   }
 
-  // --- ETAPA 4 (Planos & Upgrades) ---
-  let state = {
-    planPrice: 0,
-    planCredits: 0,
-    planProgress: 0,
-    upgrades: []
-  };
-
-  const formatMoney = (val) => val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  const parseMoney = (str) => {
-    if (!str) return 0;
-    return parseFloat(str.replace(' R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
-  };
-
-  function updateTotal() {
-    // SOMA DOS PREÇOS (Plano + Upgrades)
-    const upgradePriceTotal = state.upgrades.reduce((acc, curr) => acc + curr.price, 0);
-    const finalPrice = state.planPrice + upgradePriceTotal;
-
-    // SOMA DOS CRÉDITOS (Plano + Upgrades)
-    const upgradeCreditsTotal = state.upgrades.reduce((acc, curr) => acc + curr.credits, 0);
-    const finalCredits = state.planCredits + upgradeCreditsTotal;
-
-    // SOMA DO DESTAQUE (Plano + Upgrades)
-    const upgradeProgressTotal = state.upgrades.reduce((acc, curr) => acc + curr.progress, 0);
-    let finalProgress = state.planProgress + upgradeProgressTotal;
-    if (finalProgress > 100) finalProgress = 100;
-
-    // Renderiza Lista de Upgrades
-    if (sumUpgrades) {
-      sumUpgrades.innerHTML = '';
-      state.upgrades.forEach(u => {
-        const el = document.createElement('small');
-        el.className = 'd-block text-highlight-pink fw-bold';
-        el.innerText = `+ ${u.name}`;
-        sumUpgrades.appendChild(el);
-      });
+  // Atualiza a visibilidade do botão de adicionar
+  function updatePhotoUploaderState() {
+    const currentPhotoCount = previewContainer.querySelectorAll('.image-preview-item').length;
+    if (currentPhotoCount >= MAX_PHOTOS) {
+      addPlaceholder.style.display = 'none';
+      btnAddImageMain.style.display = 'none';
+    } else {
+      addPlaceholder.style.display = 'flex'; // 'flex' é o padrão
+      btnAddImageMain.style.display = 'inline-block';
     }
-
-    // Atualiza Textos
-    if (sumPrice) sumPrice.innerText = formatMoney(finalPrice);
-    if (sumCredits) sumCredits.innerText = finalCredits + ' Créditos';
-
-    // Atualiza Barra
-    if (sumProgressBar) {
-      sumProgressBar.style.width = finalProgress + '%';
-      sumProgressBar.setAttribute('aria-valuenow', finalProgress);
-    }
-    if (sumProgressText) sumProgressText.innerText = finalProgress + '%';
   }
 
-  function resetUpgrades() {
-    state.upgrades = [];
-    if (upgradeTemplate) {
-      // Habilita todos e remove estilos
-      upgradeTemplate.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        cb.checked = false;
-        cb.disabled = false; // Garante que nenhum fique travado
-        const item = cb.closest('.list-group-item');
-        if (item) {
-          item.classList.remove('border-highlight', 'opacity-50');
+  // Gerencia cliques nos botões (Deletar, Marcar Principal) usando delegação
+  previewContainer.addEventListener('click', function (event) {
+    const target = event.target;
+
+    // Clicou no botão DELETAR
+    const deleteButton = target.closest('.btn-icon.delete');
+    if (deleteButton) {
+      const box = deleteButton.closest('.image-preview-box');
+      const wasMain = box.style.borderColor.includes('233, 30, 99'); // Checa se a cor é #E91E63
+
+      box.remove();
+
+      // Se a foto principal foi deletada, marca a *nova* primeira foto como principal
+      if (wasMain) {
+        const firstItem = previewContainer.querySelector('.image-preview-item');
+        if (firstItem) {
+          setAsMainPhoto(firstItem);
         }
-      });
-      upgradeTemplate.classList.add('d-none');
+      }
+      updatePhotoUploaderState();
+      return;
+    }
+
+    // Clicou no botão ESTRELA (Marcar como principal)
+    const starButton = target.closest('.btn-icon.star');
+    if (starButton) {
+      const box = starButton.closest('.image-preview-box');
+      setAsMainPhoto(box);
+    }
+  });
+
+  // Botão "Remover Tudo"
+  btnRemoveAll.addEventListener('click', function () {
+    previewContainer.querySelectorAll('.image-preview-item').forEach(box => box.remove());
+    updatePhotoUploaderState();
+  });
+
+  // Função auxiliar para definir a foto principal
+  function setAsMainPhoto(boxToMakeMain) {
+    // 1. Reseta todas as outras
+    previewContainer.querySelectorAll('.image-preview-item').forEach(box => {
+      box.style.borderColor = '#555'; // Cor padrão
+      box.querySelector('.btn-icon.star').classList.remove('active');
+    });
+
+    // 2. Ativa a selecionada
+    boxToMakeMain.style.borderColor = '#E91E63'; // Cor de destaque
+    boxToMakeMain.querySelector('.btn-icon.star').classList.add('active');
+  }
+
+  // --- LÓGICA DA ETAPA 4: SELEÇÃO DE PLANOS ---
+  const planContainer = document.getElementById('plan-container');
+  const summaryPlanName = document.getElementById('summary-plan-name');
+  const summaryPlanCredits = document.getElementById('summary-plan-credits');
+  const summaryPlanPrice = document.getElementById('summary-plan-price');
+  const summaryProgressBar = document.getElementById('summary-progress-bar');
+
+  // Container para listar os upgrades selecionados no Resumo
+  const summaryUpgradesContainer = document.getElementById('summary-upgrades-container');
+
+  // O Template da Seção de Upgrades (que será movido)
+  const upgradeSectionTemplate = document.getElementById('upgrade-section-template');
+
+  const progressCard = document.getElementById('progress-card');
+  const totalCard = document.getElementById('total-card');
+
+  // Variáveis de Estado da Etapa 4
+  let selectedPlanPrice = 0; // Armazena o preço base como número
+  let activeUpgrades = [];   // Lista de objetos {name, price} dos upgrades ativos
+
+  // Helper: Converter String de Preço (ex: "17,25") para Float (17.25)
+  function parsePrice(priceStr) {
+    if (!priceStr) return 0;
+    // Remove ' R$' e troca vírgula por ponto
+    return parseFloat(priceStr.replace(' R$', '').replace(',', '.'));
+  }
+
+  // Helper: Formatar Float para Moeda BRL
+  function formatCurrency(value) {
+    return value.toFixed(2).replace('.', ',') + " R$";
+  }
+
+  // Função Principal: Atualizar o Total
+  function updateTotalPrice() {
+    // Se não tem plano selecionado e nem upgrades, podemos sair
+    if (selectedPlanPrice === 0 && activeUpgrades.length === 0) {
+      return;
+    }
+
+    let total = selectedPlanPrice;
+
+    // Limpa o container de upgrades no resumo
+    summaryUpgradesContainer.innerHTML = '';
+
+    // Soma os upgrades e adiciona ao resumo
+    activeUpgrades.forEach(upgrade => {
+      total += upgrade.price;
+      const upgradeLabel = document.createElement('small');
+      upgradeLabel.className = 'text-highlight-pink fw-bold d-block';
+      upgradeLabel.textContent = `+ ${upgrade.name}`;
+      summaryUpgradesContainer.appendChild(upgradeLabel);
+    });
+
+    if (summaryPlanPrice) {
+      summaryPlanPrice.textContent = formatCurrency(total);
+      summaryPlanPrice.style.display = 'block';
     }
   }
 
-  // Listener Change nos Switches (Upgrades)
-  if (planContainer) {
-    planContainer.addEventListener('change', (e) => {
-      if (e.target.classList.contains('upgrade-switch')) {
-        const checkbox = e.target;
-        const item = checkbox.closest('.upgrade-card-item');
+  // Função para resetar e esconder a seção de upgrades
+  function hideAndResetUpgrades() {
+    // 1. Move de volta para o container principal (ou apenas esconde e reseta)
+    // Para simplificar, vamos esconder e manter no lugar até ser movido novamente, 
+    // mas é crucial limpar os inputs.
+    upgradeSectionTemplate.classList.add('d-none');
 
-        const price = parseFloat(item.dataset.upgradePrice) || 0;
-        const credits = parseFloat(item.dataset.upgradeCredits) || 0;
-        const progress = parseFloat(item.dataset.upgradeProgress) || 0;
-        const name = item.dataset.upgradeName;
+    // 2. Limpa os switches visuais
+    upgradeSectionTemplate.querySelectorAll('.upgrade-switch').forEach(switchEl => {
+      switchEl.checked = false;
+      switchEl.closest('.upgrade-card-item').classList.remove('border-highlight');
+    });
 
-        if (checkbox.checked) {
-          // --- LÓGICA DE EXCLUSIVIDADE MÚTUA ---
+    // 3. Limpa o array de dados
+    activeUpgrades = [];
+    updateTotalPrice();
+  }
 
-          // CASO 1: Selecionou Todos os Complementos -> Desmarca TODOS os outros
-          if (name === "Todos os Complementos") {
-            const allSwitches = upgradeTemplate.querySelectorAll('.upgrade-switch');
-            allSwitches.forEach(otherSwitch => {
-              if (otherSwitch !== checkbox && otherSwitch.checked) {
-                // Desmarca visualmente
-                otherSwitch.checked = false;
-                const otherItem = otherSwitch.closest('.upgrade-card-item');
-                otherItem.classList.remove('border-highlight');
+  // Listener para os switches de Upgrade (Usando delegação de eventos)
+  // Agora o listener está no template, que se move
+  if (upgradeSectionTemplate) {
+    upgradeSectionTemplate.addEventListener('change', function (event) {
+      if (event.target.classList.contains('upgrade-switch')) {
+        const switchInput = event.target;
+        const upgradeCard = switchInput.closest('.upgrade-card-item');
+        const upgradeName = upgradeCard.dataset.upgradeName;
+        const upgradePrice = parseFloat(upgradeCard.dataset.upgradePrice);
 
-                // Remove do estado
-                const otherName = otherItem.dataset.upgradeName;
-                state.upgrades = state.upgrades.filter(u => u.name !== otherName);
-              }
-            });
-          }
-          // CASO 2: Selecionou qualquer OUTRO upgrade -> Desmarca Todos os Complementos
-          else {
-            const allItems = upgradeTemplate.querySelectorAll('.upgrade-card-item');
-            // Procura o item de Todos os Complementos
-            for (let i = 0; i < allItems.length; i++) {
-              if (allItems[i].dataset.upgradeName === "Todos os Complementos") {
-                const renovacaoSwitch = allItems[i].querySelector('.upgrade-switch');
-
-                // Se encontrar e estiver marcado, desmarca
-                if (renovacaoSwitch && renovacaoSwitch.checked) {
-                  renovacaoSwitch.checked = false;
-                  allItems[i].classList.remove('border-highlight');
-
-                  // Remove do estado
-                  state.upgrades = state.upgrades.filter(u => u.name !== "Todos os Complementos");
-                }
-                break; // Encontrou, pode parar
-              }
-            }
-          }
-
-          // Adiciona o item atual ao estado
-          item.classList.add('border-highlight');
-          state.upgrades.push({ name, price, credits, progress });
-
+        if (switchInput.checked) {
+          // Adiciona estilo de destaque ao card
+          upgradeCard.classList.add('border-highlight');
+          // Adiciona ao array de ativos
+          activeUpgrades.push({ name: upgradeName, price: upgradePrice });
         } else {
-          // Desmarcar o item atual
-          item.classList.remove('border-highlight');
-          state.upgrades = state.upgrades.filter(u => u.name !== name);
+          // Remove estilo
+          upgradeCard.classList.remove('border-highlight');
+          // Remove do array
+          activeUpgrades = activeUpgrades.filter(u => u.name !== upgradeName);
         }
-        updateTotal();
+
+        updateTotalPrice();
       }
     });
+  }
 
-    // Listener Click nos Planos
-    planContainer.addEventListener('click', (e) => {
-      if (e.target.closest('.upgrade-card-item')) return; // Ignora upgrades
-      const card = e.target.closest('.plan-card');
-      if (!card) return;
-      if (e.target.tagName === 'SELECT') return; // Ignora select
+  if (planContainer) {
+    planContainer.addEventListener('click', function (event) {
+      // Verifica se clicou em um card de plano (e não em um upgrade dentro dele)
+      // Importante: .closest('.plan-card') vai pegar o card pai.
+      const clickedCard = event.target.closest('.plan-card');
 
-      const isAlreadyActive = card.classList.contains('active');
+      // Se o clique não foi em um card de plano, sai da função
+      if (!clickedCard) return;
 
-      // Reset visual
-      document.querySelectorAll('.plan-card').forEach(c => {
-        c.classList.remove('active');
-        const sel = c.querySelector('select');
-        if (sel) sel.disabled = true;
-        c.querySelector('.form-label').classList.replace('text-highlight-red', 'text-muted-light');
-      });
-
-      // Se desmarcou
-      if (isAlreadyActive) {
-        // Limpa upgrades
-        state.upgrades = [];
-        upgradeTemplate.classList.add('d-none');
-        upgradeTemplate.querySelectorAll('input').forEach(i => i.checked = false);
-        upgradeTemplate.querySelectorAll('.upgrade-card-item').forEach(i => i.classList.remove('border-highlight'));
-        document.body.appendChild(upgradeTemplate); // Move para fora
-
-        state.planPrice = 0; state.planCredits = 0; state.planProgress = 0;
-        updateTotal();
-
-        totalCard.style.display = 'none';
-        progressCard.style.display = 'block';
+      // Se o clique foi dentro da seção de upgrades (que agora está dentro do card), IGNORA o toggle do card
+      if (event.target.closest('#upgrade-section-template')) {
         return;
       }
 
-      // Se marcou novo
-      card.classList.add('active');
-      card.querySelector('select').disabled = false;
-      card.querySelector('.form-label').classList.replace('text-muted-light', 'text-highlight-red');
+      // --- CENÁRIO 1: O usuário clicou em um card JÁ ATIVO (Deselecionar) ---
+      if (clickedCard.classList.contains('active')) {
+        // Se o clique foi no SELECT, ignoramos o toggle
+        if (event.target.tagName === 'SELECT') {
+          return;
+        }
 
-      // Atualiza Estado Base
-      state.planPrice = parseMoney(card.dataset.planPrice);
-      state.planCredits = parseInt(card.dataset.planCredits) || 0;
-      state.planProgress = parseInt(card.dataset.planProgress) || 0;
-      if (sumName) sumName.innerText = card.dataset.planName;
+        // Remove a classe active
+        clickedCard.classList.remove('active');
 
-      // Injeta Upgrades Limpos
-      state.upgrades = [];
-      upgradeTemplate.querySelectorAll('input').forEach(i => i.checked = false);
-      upgradeTemplate.querySelectorAll('.upgrade-card-item').forEach(i => i.classList.remove('border-highlight'));
+        // Desabilita o select e reseta a cor
+        const select = clickedCard.querySelector('select');
+        if (select) {
+          select.disabled = true;
+          select.style.borderColor = '#555';
+        }
 
-      card.querySelector('.card-body').parentNode.appendChild(upgradeTemplate);
-      upgradeTemplate.classList.remove('d-none');
+        // Reseta a label
+        const label = clickedCard.querySelector('.form-label');
+        if (label) {
+          label.classList.remove('text-highlight-red');
+          label.classList.add('text-muted-light');
+        }
 
-      progressCard.style.display = 'none';
-      totalCard.style.display = 'block';
+        // *** Lógica de Upgrade: Esconder e Resetar ***
+        hideAndResetUpgrades();
+        // Movemos de volta para o body/container para não ser destruído se algo mudar
+        document.body.appendChild(upgradeSectionTemplate);
 
-      updateTotal();
-    });
-  }
+        // Reseta preço do plano base
+        selectedPlanPrice = 0;
+        updateTotalPrice();
 
-  // --- Navegação ---
-  function updateStepperUI(step) {
-    document.querySelectorAll('.form-step').forEach((el, idx) => {
-      el.style.display = (idx + 1 === step) ? 'block' : 'none';
-    });
+        // Toggles: Esconde Total, Mostra Progresso
+        if (totalCard) totalCard.style.display = 'none';
+        if (progressCard) progressCard.style.display = 'block';
 
-    document.querySelectorAll('.step-item').forEach((el, idx) => {
-      const icon = el.querySelector('.step-icon');
-      el.classList.remove('active', 'completed');
-      if (idx + 1 < step) {
-        el.classList.add('completed');
-        icon.innerHTML = '<i class="bi bi-check-lg"></i>';
-      } else if (idx + 1 === step) {
-        el.classList.add('active');
-        // Restaura ícones (simplificado)
-        const icons = ['person-fill', 'tags-fill', 'camera-fill', 'check-all'];
-        icon.innerHTML = `<i class="bi bi-${icons[idx]}"></i>`;
-      } else {
-        // Futuro
-        const icons = ['person-fill', 'tags-fill', 'camera-fill', 'check-all'];
-        icon.innerHTML = `<i class="bi bi-${icons[idx]}"></i>`;
+        return;
       }
-    });
 
-    btnVoltar.style.visibility = step === 1 ? 'hidden' : 'visible';
-    if (step === totalSteps) {
-      btnProxima.style.display = 'none';
-    } else {
-      btnProxima.style.display = 'block';
-      btnProxima.innerHTML = 'PRÓXIMA <i class="bi bi-chevron-right"></i>';
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+      // --- CENÁRIO 2: O usuário clicou em um NOVO card (Selecionar) ---
+
+      // 1. Obter os dados do card clicado
+      const planName = clickedCard.dataset.planName;
+      const planCredits = clickedCard.dataset.planCredits;
+      const planPriceStr = clickedCard.dataset.planPrice; // String original
+      const planProgress = clickedCard.dataset.planProgress;
+
+      // 2. Resetar todos os cards de PLANO (desativa os anteriores)
+      planContainer.querySelectorAll('.plan-card').forEach(card => {
+        card.classList.remove('active');
+        // Resetar select
+        const select = card.querySelector('select');
+        if (select) {
+          select.disabled = true;
+          select.style.borderColor = '#555';
+        }
+        // Resetar label
+        const label = card.querySelector('.form-label');
+        if (label) {
+          label.classList.remove('text-highlight-red');
+          label.classList.add('text-muted-light');
+        }
+      });
+
+      // *** Lógica de Upgrade: Resetar antes de mover ***
+      hideAndResetUpgrades();
+
+      // 3. Ativar o card clicado
+      clickedCard.classList.add('active');
+
+      // Ativar o select do card clicado
+      const activeSelect = clickedCard.querySelector('select');
+      if (activeSelect) {
+        activeSelect.disabled = false;
+        activeSelect.style.borderColor = '#E53935';
+      }
+
+      // Ativar a label do card clicado
+      const activeLabel = clickedCard.querySelector('.form-label');
+      if (activeLabel) {
+        activeLabel.classList.add('text-highlight-red');
+        activeLabel.classList.remove('text-muted-light');
+      }
+
+      // *** Lógica de Upgrade: Mover e Mostrar ***
+      clickedCard.appendChild(upgradeSectionTemplate);
+      upgradeSectionTemplate.classList.remove('d-none');
+
+      // 4. Atualizar o sumário e Alternar Cards da Direita
+      if (summaryPlanName) {
+        summaryPlanName.textContent = planName;
+      }
+      if (summaryPlanCredits) {
+        summaryPlanCredits.textContent = `${planCredits} Créditos`;
+      }
+
+      // Atualiza o preço base
+      selectedPlanPrice = parsePrice(planPriceStr);
+      updateTotalPrice(); // Recalcula total (Plano + Upgrades vazios agora)
+
+      // ATUALIZAR BARRA DE PROGRESSO
+      if (summaryProgressBar && planProgress) {
+        summaryProgressBar.style.width = `${planProgress}%`;
+        summaryProgressBar.setAttribute('aria-valuenow', planProgress);
+      }
+
+      // Toggles: Mostra Total, Esconde Progresso
+      if (progressCard) progressCard.style.display = 'none';
+      if (totalCard) totalCard.style.display = 'block';
+    });
   }
 
-  btnProxima.addEventListener('click', () => { if (currentStep < totalSteps) { currentStep++; updateStepperUI(currentStep); } });
-  btnVoltar.addEventListener('click', () => { if (currentStep > 1) { currentStep--; updateStepperUI(currentStep); } });
 
-  // Inicia
-  updateStepperUI(currentStep);
+
+  // Inicializa na Etapa 1
+  showStep(currentStep);
 });
 //------------------------------
 

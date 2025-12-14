@@ -710,8 +710,7 @@
           <!-- Coluna Principal (Planos) -->
           <div class="w-100 w-sm-75" id="plan-container"> <!-- ID adicionado -->
             <!-- Card 3x3 -->
-            <div class="plan-card bg-light p-4 mb-3 rounded-1 border border-light-subtle" data-plan-name="3x3"
-              data-plan-credits="5" data-plan-price="8,62" data-plan-progress="25">
+            <div class="plan-card bg-light p-4 mb-3 rounded-1 border border-light-subtle" data-plan-name="3x3" data-plan-credits="5" data-plan-price="8,62" data-plan-progress="20">
               <div
                 class="card-body d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row w-100">
                 <div class="d-flex align-items-center">
@@ -738,8 +737,7 @@
               </div>
             </div>
             <!-- Card 3x7 -->
-            <div class="plan-card bg-light p-4 mb-4 rounded-1 border border-light-subtle" data-plan-name="3x7"
-              data-plan-credits="10" data-plan-price="17,25" data-plan-progress="50">
+            <div class="plan-card bg-light p-4 mb-4 rounded-1 border border-light-subtle" data-plan-name="3x7" data-plan-credits="10" data-plan-price="17,25" data-plan-progress="20">
               <div
                 class="card-body d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row">
                 <div class="d-flex align-items-center">
@@ -766,8 +764,7 @@
               </div>
             </div>
             <!-- Card 5x1 -->
-            <div class="plan-card bg-light p-4 mb-3 rounded-1 border border-light-subtle" data-plan-name="5x1"
-              data-plan-credits="3" data-plan-price="" data-plan-progress="15">
+            <div class="plan-card bg-light p-4 mb-3 rounded-1 border border-light-subtle" data-plan-name="5x1" data-plan-credits="3" data-plan-price="" data-plan-progress="20">
               <div
                 class="card-body d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row">
                 <div class="d-flex align-items-center">
@@ -822,8 +819,7 @@
               </div>
             </div>
             <!-- Card 5x7 -->
-            <div class="plan-card bg-light p-4 mb-3 rounded-1 border border-light-subtle" data-plan-name="5x7"
-              data-plan-credits="16" data-plan-price="27,60" data-plan-progress="80">
+            <div class="plan-card bg-light p-4 mb-3 rounded-1 border border-light-subtle" data-plan-name="5x7" data-plan-credits="16" data-plan-price="27,60" data-plan-progress="20">
               <div
                 class="card-body d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row">
                 <div class="d-flex align-items-center">
@@ -849,9 +845,8 @@
                 </div>
               </div>
             </div>
-            <!-- Card 10x1 (Removido Active por padrão) -->
-            <div class="plan-card bg-light p-4 mb-3 rounded-1 border border-light-subtle" data-plan-name="10x1"
-              data-plan-credits="4" data-plan-price="6,90" data-plan-progress="20">
+            <!-- Card 10x1 -->
+            <div class="plan-card bg-light p-4 mb-3 rounded-1 border border-light-subtle" data-plan-name="10x1" data-plan-credits="4" data-plan-price="6,90" data-plan-progress="20">
               <div
                 class="card-body d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row">
                 <div class="d-flex align-items-center">
@@ -878,8 +873,7 @@
               </div>
             </div>
             <!-- Card 10x7 -->
-            <div class="plan-card bg-light p-4 mb-3 rounded-1 border border-light-subtle" data-plan-name="10x7"
-              data-plan-credits="20" data-plan-price="34,50" data-plan-progress="100">
+            <div class="plan-card bg-light p-4 mb-3 rounded-1 border border-light-subtle" data-plan-name="10x7" data-plan-credits="20" data-plan-price="34,50" data-plan-progress="20">
               <div
                 class="card-body d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row">
                 <div class="d-flex align-items-center">
@@ -913,79 +907,98 @@
           <div id="upgrade-section-template" class="injected-upgrades d-none">
             <h6 class="fw-bold text-black mb-3 ps-1">Turbine seu anúncio</h6>
 
-            <!-- Upgrade 1: Boost Premium -->
-            <div class="upgrade-card-item p-3 mb-3 rounded-1 border border-light-subtle bg-white"
-              data-upgrade-price="9.90" data-upgrade-name="Boost Premium">
+            <!-- Upgrade 1: Super Volka -->
+            <div class="upgrade-card-item p-3 mb-3 rounded-1 border border-light-subtle bg-white" data-upgrade-price="4.60" data-upgrade-credits="2" data-upgrade-progress="30" data-upgrade-name="Super Volka">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6 class="fw-bold mb-1"><i class="bi bi-rocket-takeoff-fill text-highlight-pink me-2"></i>Boost
-                    Premium</h6>
-                  <p class="text-muted-light mb-0 small">Seu anúncio aparecerá no topo das buscas.</p>
+                  <h6 class="fw-bold mb-1">
+                    <i class="bi bi-rocket-takeoff-fill text-highlight-pink me-2"></i>
+                    Super Volka
+                  </h6>
+                  <p class="text-muted-light mb-0 small">+ R$ 4,60 (2 créditos)</p>
                 </div>
                 <div class="text-end d-flex flex-column align-items-end">
                   <div class="form-check form-switch">
                     <input class="form-check-input upgrade-switch" type="checkbox"
                       style="width: 3rem; height: 1.5rem; cursor: pointer;">
                   </div>
-                  <div class="mt-1 fw-bold text-highlight-pink">+ R$ 9,90</div>
+                  <div class="mt-1 fw-bold text-highlight-pink d-none">
+                    + R$ 9,90
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Upgrade 2: Destaque de Cor -->
-            <div class="upgrade-card-item p-3 mb-3 rounded-1 border border-light-subtle bg-white"
-              data-upgrade-price="5.50" data-upgrade-name="Destaque de Cor">
+            <!-- Upgrade 2: Highlight -->
+            <div class="upgrade-card-item p-3 mb-3 rounded-1 border border-light-subtle bg-white" data-upgrade-price="2.30" data-upgrade-credits="1" data-upgrade-progress="30" data-upgrade-name="Highlight">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6 class="fw-bold mb-1"><i class="bi bi-palette-fill text-warning me-2"></i>Destaque de Cor</h6>
-                  <p class="text-muted-light mb-0 small">Seu anúncio terá uma borda colorida vibrante.</p>
+                  <h6 class="fw-bold mb-1">
+                    <i class="bi bi-palette-fill text-warning me-2"></i>
+                    Highlight
+                  </h6>
+                  <p class="text-muted-light mb-0 small">+ R$ 2,30 (1 crédito)</p>
                 </div>
                 <div class="text-end d-flex flex-column align-items-end">
                   <div class="form-check form-switch">
                     <input class="form-check-input upgrade-switch" type="checkbox"
                       style="width: 3rem; height: 1.5rem; cursor: pointer;">
                   </div>
-                  <div class="mt-1 fw-bold text-highlight-pink">+ R$ 5,50</div>
+                  <div class="mt-1 fw-bold text-highlight-pink d-none">
+                    + R$ 5,50
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Upgrade 3: Selo Verificado -->
-            <div class="upgrade-card-item p-3 mb-3 rounded-1 border border-light-subtle bg-white"
-              data-upgrade-price="15.00" data-upgrade-name="Selo Verificado">
+            <!-- Upgrade 3: Etiqueta "Novidade" -->
+            <div class="upgrade-card-item p-3 mb-3 rounded-1 border border-light-subtle bg-white" data-upgrade-price="2.30" data-upgrade-credits="1" data-upgrade-progress="30" data-upgrade-name='Etiqueta "Novidade"'>
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6 class="fw-bold mb-1"><i class="bi bi-patch-check-fill text-info me-2"></i>Selo Verificado</h6>
-                  <p class="text-muted-light mb-0 small">Badge oficial para transmitir mais confiança.</p>
+                  <h6 class="fw-bold mb-1">
+                    <i class="bi bi-patch-check-fill text-info me-2"></i>
+                    Etiqueta "Novidade"
+                  </h6>
+                  <p class="text-muted-light mb-0 small">
+                    + R$ 2,30 (1 crédito)
+                  </p>
                 </div>
                 <div class="text-end d-flex flex-column align-items-end">
                   <div class="form-check form-switch">
                     <input class="form-check-input upgrade-switch" type="checkbox"
                       style="width: 3rem; height: 1.5rem; cursor: pointer;">
                   </div>
-                  <div class="mt-1 fw-bold text-highlight-pink">+ R$ 15,00</div>
+                  <div class="mt-1 fw-bold text-highlight-pink d-none">
+                    + R$ 15,00
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Upgrade 4: Renovação Automática -->
-            <div class="upgrade-card-item p-3 mb-3 rounded-1 border border-light-subtle bg-white"
-              data-upgrade-price="7.00" data-upgrade-name="Renovação Automática">
+            <!-- Upgrade 4: Todos os Complementos -->
+            <div class="upgrade-card-item p-3 mb-3 rounded-1 border border-light-subtle bg-white" data-upgrade-price="7.00" data-upgrade-credits="4" data-upgrade-progress="80" data-upgrade-name="Todos os Complementos">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6 class="fw-bold mb-1"><i class="bi bi-arrow-repeat text-success me-2"></i>Renovação Automática</h6>
-                  <p class="text-muted-light mb-0 small">Seu anúncio será repostado a cada 24h.</p>
+                  <h6 class="fw-bold mb-1">
+                    <i class="bi bi-arrow-repeat text-success me-2"></i>
+                    Todos os Complementos
+                  </h6>
+                  <p class="text-muted-light mb-0 small">
+                    + D$ 9,20 (4 créditos)
+                  </p>
                 </div>
                 <div class="text-end d-flex flex-column align-items-end">
                   <div class="form-check form-switch">
                     <input class="form-check-input upgrade-switch" type="checkbox"
-                      style="width: 3rem; height: 1.5rem; cursor: pointer;">
+                    style="width: 3rem; height: 1.5rem; cursor: pointer;">
                   </div>
-                  <div class="mt-1 fw-bold text-highlight-pink">+ R$ 7,00</div>
+                  <div class="mt-1 fw-bold text-highlight-pink d-none">
+                    + R$ 7,00
+                  </div>
                 </div>
               </div>
             </div>
-          </div> <!-- Fim Template -->
+          </div>
 
           <!-- Coluna da Barra Lateral (Resumo & Progresso) -->
           <div
