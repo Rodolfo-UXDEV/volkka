@@ -447,7 +447,91 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 //------------------------------
 
+/**
+ * ARQUITETURA DE DADOS (Cart Data)
+ * Este script deve ser carregado na página 'publicaranuncio.html' JUNTO com o seu script atual.
+ * Ele estende a funcionalidade do botão "COMPRAR E PUBLICAR".
+ */
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Seleciona o botão de compra na Etapa 4
+  // Nota: Adicionei um ID ou classe específica no HTML para garantir a seleção correta
+  // No seu HTML atual, o botão está dentro de 'total-card'.
+  const btnComprar = document.querySelector("#total-card button");
+
+  if (btnComprar) {
+    btnComprar.addEventListener("click", function (e) {
+      e.preventDefault(); // Previne navegação imediata para processar dados
+
+      // 1. Captura o Estado Atual (Recupera do DOM ou da variável global 'state' se acessível)
+      // Como a variável 'state' do seu script original está em escopo fechado,
+      // vamos reconstruir os dados baseados no DOM renderizado para garantir consistência.
+
+      // Captura Plano Selecionado
+      const activePlanCard = document.querySelector('.plan-card.active');
+      if (!activePlanCard) {
+        alert("Por favor, selecione um plano.");
+        return;
+      }
+
+      const planData = {
+        name: activePlanCard.dataset.planName,
+        price: parseMoney(activePlanCard.dataset.planPrice),
+        credits: parseInt(activePlanCard.dataset.planCredits),
+        // Captura o horário selecionado no select dentro do card ativo
+        schedule: activePlanCard.querySelector('select').value
+      };
+
+      // Captura Upgrades Selecionados (baseado na classe de borda ativa ou checkbox)
+      const upgradesData = [];
+      document.querySelectorAll('.upgrade-switch:checked').forEach(input => {
+        const item = input.closest('.upgrade-card-item');
+        upgradesData.push({
+          name: item.dataset.upgradeName,
+          price: parseFloat(item.dataset.upgradePrice),
+          credits: parseInt(item.dataset.upgradeCredits)
+        });
+      });
+
+      // 2. Monta o Objeto de Pedido (Order Object)
+      const orderState = {
+        plan: planData,
+        upgrades: upgradesData,
+        totalPrice: planData.price + upgradesData.reduce((acc, curr) => acc + curr.price, 0),
+        totalCredits: planData.credits + upgradesData.reduce((acc, curr) => acc + curr.credits, 0),
+        timestamp: new Date().toISOString()
+      };
+
+      // 3. Persistência (Local Storage)
+      // Em uma arquitetura real, isso seria um POST para uma API que retornaria um orderID.
+      try {
+        localStorage.setItem('checkout_order', JSON.stringify(orderState));
+
+        // 4. Redirecionamento
+        window.location.href = 'carrinho.html';
+      } catch (error) {
+        console.error("Erro ao salvar dados do carrinho:", error);
+        alert("Ocorreu um erro ao processar seu pedido. Tente novamente.");
+      }
+    });
+  }
+
+  // Helper para converter string "8,62" em float 8.62
+  function parseMoney(str) {
+    if (!str) return 0;
+    return parseFloat(str.replace(' R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
+  }
+});
+
 //-----------------------------------------------------------------
+
+
+
+// Código JS Carrinho ---------------------------------------------------------------
+
+// O Código abaixo, pega os valores foram produzidos na página de publicar
+// anúncio alocar no mamemoria do navegador para serem usados na página de carrinho
+
 document.addEventListener('DOMContentLoaded', function () {
   const radioButtons = document.querySelectorAll('input[name="creditos"]');
   const totalValueElement = document.getElementById('totalValue');
@@ -505,7 +589,163 @@ document.addEventListener('DOMContentLoaded', function () {
   // Inicializa o total (caso algum rádio já venha marcado ou para garantir R$ 0,00)
   updateTotal();
 });
+
+// Código para a manipulação dos valores da página de carrinho
+document.addEventListener('DOMContentLoaded', () => {
+  loadCartData();
+  setupCreditCardMasks();
+});
+
+// 1. Carregar Dados do LocalStorage
+function loadCartData() {
+  const storedOrder = localStorage.getItem('checkout_order');
+
+  if (!storedOrder) {
+    // Fallback se não houver dados (Redirecionar ou mostrar vazio)
+    alert('Seu carrinho está vazio. Redirecionando para anúncios...');
+    window.location.href = 'publicaranuncio.html';
+    return;
+  }
+
+  const order = JSON.parse(storedOrder);
+
+  // Preencher Plano
+  document.getElementById('cart-plan-name').textContent = `Plano ${order.plan.name}`;
+  document.getElementById('cart-plan-credits').textContent = `${order.plan.credits} Créditos (${order.plan.schedule})`;
+  document.getElementById('cart-plan-price').textContent = formatMoney(order.plan.price);
+
+  // Preencher Upgrades
+  const upgradesContainer = document.getElementById('cart-upgrades-list');
+  upgradesContainer.innerHTML = '';
+
+  if (order.upgrades.length > 0) {
+    order.upgrades.forEach(u => {
+      const div = document.createElement('div');
+      div.className = 'd-flex justify-content-between font-monospace small mb-1 text-muted';
+      div.innerHTML = `
+            <span>+ ${u.name}</span>
+            <span>${formatMoney(u.price)}</span>
+          `;
+      upgradesContainer.appendChild(div);
+    });
+  } else {
+    upgradesContainer.innerHTML = '<small class="text-muted fst-italic">Nenhum extra selecionado</small>';
+  }
+
+  // Totais
+  document.getElementById('cart-total-credits').textContent = order.totalCredits;
+  document.getElementById('cart-total-price').textContent = formatMoney(order.totalPrice);
+
+  // Preencher Select de Parcelas (Lógica simples de juros simulada)
+  const selectInstallments = document.getElementById('installments-select');
+  selectInstallments.innerHTML = ''; // Limpa
+  const total = order.totalPrice;
+
+  for (let i = 1; i <= 12; i++) {
+    let value = total / i;
+    let text = `${i}x de ${formatMoney(value)} sem juros`;
+
+    // Exemplo: Juros a partir da 6ª parcela (Regra de Negócio)
+    if (i > 6) {
+      value = (total * 1.10) / i; // 10% juros total
+      text = `${i}x de ${formatMoney(value)} (c/ juros)`;
+    }
+
+    const option = document.createElement('option');
+    option.value = i;
+    option.innerText = text;
+    selectInstallments.appendChild(option);
+  }
+}
+
+// 2. Alternar entre PIX e Cartão
+window.togglePaymentForm = function (method) {
+  const pixSection = document.getElementById('pix-section');
+  const cardSection = document.getElementById('card-section');
+
+  if (method === 'pix') {
+    pixSection.classList.remove('d-none');
+    cardSection.classList.add('d-none');
+  } else {
+    pixSection.classList.add('d-none');
+    cardSection.classList.remove('d-none');
+  }
+};
+
+// 3. Utilitários
+function formatMoney(value) {
+  return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+function copyPixCode() {
+  const codeInput = document.getElementById('pix-code-input');
+  codeInput.select();
+  document.execCommand('copy'); // Fallback antigo mas funcional
+  //navigator.clipboard.writeText(codeInput.value); // Moderno (bloqueado as vezes em iframes)
+
+  const btn = document.querySelector('.input-group button');
+  const originalHtml = btn.innerHTML;
+  btn.innerHTML = '<i class="bi bi-check"></i> Copiado!';
+  btn.classList.replace('btn-outline-secondary', 'btn-success');
+  setTimeout(() => {
+    btn.innerHTML = originalHtml;
+    btn.classList.replace('btn-success', 'btn-outline-secondary');
+  }, 2000);
+}
+
+// 4. Máscaras de Input (UX básica)
+function setupCreditCardMasks() {
+  const ccNumber = document.getElementById('cc-number');
+  const ccExpiry = document.getElementById('cc-expiry');
+
+  ccNumber.addEventListener('input', (e) => {
+    let val = e.target.value.replace(/\D/g, '');
+    val = val.replace(/(\d{4})/g, '$1 ').trim();
+    e.target.value = val;
+  });
+
+  ccExpiry.addEventListener('input', (e) => {
+    let val = e.target.value.replace(/\D/g, '');
+    if (val.length >= 2) {
+      val = val.substring(0, 2) + '/' + val.substring(2, 4);
+    }
+    e.target.value = val;
+  });
+}
+
+// Listener para submissão do form (Simulação)
+document.getElementById('credit-card-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  // Aqui entraria a integração com Gateway (Stripe, Pagar.me, MercadoPago)
+  const btn = e.target.querySelector('button[type="submit"]');
+  const originalText = btn.innerHTML;
+
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processando...';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    alert('Pagamento aprovado com sucesso! Seu anúncio será publicado em instantes.');
+    // Limpar carrinho
+    localStorage.removeItem('checkout_order');
+    // Redirecionar para dashboard
+    // window.location.href = 'dashboard.html';
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+  }, 2000);
+});
 //-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*!
   * Bootstrap v5.3.3 (https://getbootstrap.com/)

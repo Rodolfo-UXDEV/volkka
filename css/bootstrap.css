@@ -396,7 +396,6 @@ label.active-label:has(input.form-check-input:checked) {
 }
 
 
-
 /* Estilo da seção injetada dentro do card */
 .injected-upgrades {
   border-top: 1px dashed #555;
@@ -415,6 +414,66 @@ label.active-label:has(input.form-check-input:checked) {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Estilos Específicos do Carrinho para manter consistência visual (DRY) */
+:root {
+  --primary-red: #E91E63;
+  /* Sua cor principal */
+  --primary-red-hover: #D81B60;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.text-highlight-red {
+  color: var(--primary-red) !important;
+}
+
+.btn-red {
+  background-color: var(--primary-red);
+  color: white;
+  border: none;
+}
+
+.btn-red:hover {
+  background-color: var(--primary-red-hover);
+  color: white;
+}
+
+.payment-option-card {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.payment-option-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Input Radio escondido, estilizando o Label pai */
+.btn-check:checked+.payment-option-card {
+  border-color: var(--primary-red);
+  background-color: #fff0f5;
+  /* Um rosa bem claro */
+}
+
+.summary-card {
+  position: sticky;
+  top: 20px;
+  /* Faz o resumo acompanhar o scroll */
+}
+
+/* Animação para o QR Code */
+.qr-blur {
+  filter: blur(4px);
+  transition: filter 0.3s;
+}
+
+.qr-blur:hover {
+  filter: blur(0);
 }
 
 
@@ -10933,15 +10992,19 @@ fieldset:disabled .btn {
   .fs-sm-3 {
     font-size: calc(1.3rem + 0.6vw) !important;
   }
+
   .fs-sm-5 {
     font-size: 1.25rem !important;
   }
+
   .fs-sm-6 {
     font-size: 1rem !important;
   }
+
   .fs-sm-7 {
     font-size: 0.8rem !important;
   }
+
   .fs-sm-8 {
     font-size: .75rem !important;
   }
@@ -10969,8 +11032,13 @@ fieldset:disabled .btn {
   .w-sm-30 {
     width: 30% !important;
   }
+
   .w-sm-35 {
     width: 35% !important;
+  }
+
+  .w-sm-auto {
+    width: auto !important;
   }
 
   .p-sm-5 {
