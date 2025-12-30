@@ -600,13 +600,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function loadCartData() {
   const storedOrder = localStorage.getItem('checkout_order');
 
-  if (!storedOrder) {
-    // Fallback se não houver dados (Redirecionar ou mostrar vazio)
-    alert('Seu carrinho está vazio. Redirecionando para anúncios...');
-    window.location.href = 'publicaranuncio.html';
-    return;
-  }
-
   const order = JSON.parse(storedOrder);
 
   // Preencher Plano
