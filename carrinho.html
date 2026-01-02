@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Meus anúncios</title>
+  <title>Carrinho</title>
 
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -55,10 +55,14 @@
           <!-- CONTEÚDO: PIX -->
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button gap-2 text-red fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                aria-expanded="true" aria-controls="collapseOne">
-                <i class="bi bi-x-diamond-fill"></i>
-                Pague com Pix
+              <button class="accordion-button gap-2 text-red fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div class="d-flex flex-column align-items-start justify-content-center gap-2">
+                  <div>
+                    <i class="bi bi-x-diamond-fill"></i>
+                    Pague com Pix
+                  </div>
+                  <img class="border border-secondary-subtle p-1 rounded-1" src="/media/Pix_logo.png" height="40" alt="">
+                </div>
               </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
@@ -100,13 +104,46 @@
             </div>
           </div>
 
+          <!-- CONTEÚDO: BOLETO -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed gap-2 text-red fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                <div class="d-flex flex-column align-items-start justify-content-center gap-2">
+                  <div>
+                    <i class="bi bi-x-diamond-fill"></i>
+                    Pague com Boleto
+                  </div>
+                  <img class="border border-secondary-subtle py-1 rounded-1" src="/media/boleto.png" height="40" alt="">
+                </div>
+              </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <div id="boleto-section" class="p-2 animate-fade">
+                  FALTA INFORMAÇÕES
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- CONTEÚDO: CATÃO DE CRÉDITO -->
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed gap-2 text-red fw-bold" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <i class="bi bi-credit-card-2-front-fill"></i>
-                Pague com Cartão de Crédito
+              <button class="accordion-button collapsed gap-2 text-red fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <div class="d-flex flex-column align-items-start justify-content-center gap-2">
+                  <div>
+                    <i class="bi bi-credit-card-2-front-fill"></i>
+                    Pague com Cartão de Crédito
+                  </div>
+                  <div class="d-flex align-items-start justify-content-start flex-wrap gap-2">
+                    <img class="border border-secondary-subtle p-1 rounded-1" src="/media/mastercard.png" height="40" alt="">
+                    <img class="border border-secondary-subtle p-1 rounded-1" src="/media/visa.png" height="40" alt="">
+                    <img class="border border-secondary-subtle p-1 rounded-1" src="/media/elo.png" height="40" alt="">
+                    <img class="border border-secondary-subtle p-1 rounded-1" src="/media/jcb.jpeg" height="40" alt="">
+                    <img class="border border-secondary-subtle p-1 rounded-1" src="/media/hiper.png" height="40" alt="">
+                    <img class="border border-secondary-subtle p-1 rounded-1" src="/media/diners.png" height="40" alt="">
+                  </div>
+                </div>
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
