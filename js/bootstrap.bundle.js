@@ -604,7 +604,7 @@ function loadCartData() {
 
   // Preencher Plano
   document.getElementById('cart-plan-name').textContent = `Plano ${order.plan.name}`;
-  document.getElementById('cart-plan-credits').textContent = `${order.plan.credits} Créditos (${order.plan.schedule})`;
+  document.getElementById('cart-plan-credits').textContent = `${order.plan.credits} Créditos`;
   document.getElementById('cart-plan-price').textContent = formatMoney(order.plan.price);
 
   // Preencher Upgrades
@@ -651,7 +651,7 @@ function loadCartData() {
   }
 }
 
-// 2. Alternar entre PIX e Cartão
+// 2. Alternar entre PIX e Cartão (REMOVER CÓDIGO)
 window.togglePaymentForm = function (method) {
   const pixSection = document.getElementById('pix-section');
   const cardSection = document.getElementById('card-section');
@@ -705,27 +705,6 @@ function setupCreditCardMasks() {
     e.target.value = val;
   });
 }
-
-// Listener para submissão do form (Simulação)
-document.getElementById('credit-card-form').addEventListener('submit', (e) => {
-  e.preventDefault();
-  // Aqui entraria a integração com Gateway (Stripe, Pagar.me, MercadoPago)
-  const btn = e.target.querySelector('button[type="submit"]');
-  const originalText = btn.innerHTML;
-
-  btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processando...';
-  btn.disabled = true;
-
-  setTimeout(() => {
-    alert('Pagamento aprovado com sucesso! Seu anúncio será publicado em instantes.');
-    // Limpar carrinho
-    localStorage.removeItem('checkout_order');
-    // Redirecionar para dashboard
-    // window.location.href = 'dashboard.html';
-    btn.innerHTML = originalText;
-    btn.disabled = false;
-  }, 2000);
-});
 //-----------------------------------------------------------------
 
 

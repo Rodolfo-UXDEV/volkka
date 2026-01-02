@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Entre na Volkka</title>
+  <title>Cadastre-se na Volkka</title>
 
   <link href="css/bootstrap.css" rel="stylesheet">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="media/favicon.png" />
-  <!---------------->
+   <!-- Favicon -->
+   <link rel="icon" type="image/png" href="media/favicon.png" />
+   <!---------------->
 
   <!-- Font style -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +23,8 @@
   <link rel="stylesheet" type="text/css" href="css/slick-theme.css"/>
   <link rel="stylesheet" type="text/css" href="css/slick.css"/>
   <!------------------------->
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -42,7 +44,7 @@
   <!-- Sessão 2 -->
   <div class="container mb-4">
     <h1 class="fs-2 fw-bold text-center mb-4">
-      Acesse a Volkka!
+      Entrar na Volkka!
     </h1>
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -82,8 +84,7 @@
   <!-- Fim Sessão 2 -->
 
   <!-- Sessão 3 -->
-  
-  <form action="dashboard.html" class="container w-md-25 w-sm-100 d-flex flex-column mb-5">
+  <form class="container w-md-25 w-sm-100 d-flex flex-column mb-5">
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">E-mail</label>
       <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Digite seu e-mail">
@@ -99,25 +100,56 @@
       </div>
     </div>
 
+    <div class="mb-3 bg-light p-0 py-2 px-3 border border-gray">
+      <p class="fs-7 fw-semibold p-0 mb-1 text-secondary">
+        Sua senha deve conter:
+      </p>
+      
+      <ul class="list-unstyled p-0 m-0">
+        <li id="minLength" class="invalid">❌ Mínimo de 8 caracteres</li>
+        <li id="uppercase" class="invalid">❌ Pelo menos uma letra maiúscula</li>
+        <li id="lowercase" class="invalid">❌ Pelo menos uma letra minúscula</li>
+        <li id="number" class="invalid">❌ Pelo menos um número</li>
+    </ul>
+    </div>
+
+    <div class="form-check form-switch py-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="aceito1">
+      <label class="form-check-label fs-10 w-100" for="aceito1">
+        <strong>Termos, Condições e Política de Privacidade</strong><br/>
+        Li os <a href="#" class="link-red">Termos e Condições</a> de uso e a <a href="#" class="link-red">Política de Privacidade</a> e autorizo o processamento dos meus dados pessoais para o fornecimento deste serviço na web.
+      </label>
+    </div>
+
+    <div class="form-check form-switch py-2 mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="aceito1">
+      <label class="form-check-label fs-10" for="aceito1">
+        <strong>Comunicações de marketing</strong><br/>
+        Autorizo que a Empresa processe meus Detalhes de contato para fins de marketing e publicidade (<a href="#" class="link-red">Política de Privacidade</a>)
+        <br/><br/>
+        <span class="text-muted">
+          <strong>O consentimento é opcional</strong>, para obter mais informações ou remover o consentimento, consulte nossa <a href="#" class="link-red">Política de Privacidade</a>. A remoção do consentimento não afetará o processamento dos dados executado antes de tal remoção.
+        </span>
+      </label>
+    </div>
+
     <iframe src="https://newassets.hcaptcha.com/captcha/v1/f4592953492b5a391687e8c5f1b4a79dd2cf26ae/static/hcaptcha.html#frame=checkbox&amp;id=0yfb5tnldyvq&amp;host=br.Volkka.com&amp;sentry=true&amp;reportapi=https%3A%2F%2Faccounts.hcaptcha.com&amp;recaptchacompat=off&amp;custom=false&amp;hl=pt&amp;tplinks=on&amp;pstissuer=https%3A%2F%2Fpst-issuer.hcaptcha.com&amp;sitekey=ced407c5-238b-4144-9b59-4dcd58092d36&amp;size=normal&amp;theme=light&amp;origin=https%3A%2F%2Fbr.Volkka.com" tabindex="0" frameborder="0" scrolling="no" allow="private-state-token-issuance 'src'; private-state-token-redemption 'src'" title="Widget contendo caixa de seleção para desafio de segurança hCaptcha" data-hcaptcha-widget-id="0yfb5tnldyvq" data-hcaptcha-response="" style="pointer-events: auto; background-color: rgba(255, 255, 255, 0); width: 303px; height: 78px; overflow: hidden;"></iframe>
     
     <button type="submit" class="py-3 fs-7 btn btn-red rounded-2 fw-medium mt-4 d-flex align-items-center justify-content-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" height="20px">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"></path>
       </svg>
-      FAZER LOGIN
+      CADASTRAR
     </button>
 
     <hr class="container border border-secondary-subtle border-0_5 opacity-50 mb-4 mt-4">
 
     <div class="d-flex flex-column align-items-center mb-5">
       <p class="fs-6 text-start text-gray ms-0 ms-md-4">
-        <a href="#" class="link-red link-red:hover fw-bold">Esqueceu sua senha?</a>
-      </p>
-      <p class="fs-6 text-start text-gray ms-0 ms-md-4">
-        Ainda não tem conta? <a href="/cadastrarse.html" class="link-red link-red:hover fw-bold">Cadastre-se</a>
+        Já tem uma conta? <a href="/login.html" class="link-red link-red:hover fw-bold">Fazer login</a>
       </p>
     </div>
+    
   </form>
   <!-- Fim Sessão 3 -->
 
@@ -466,7 +498,7 @@
     </div>
   </div>
 
-  <script src="js/bootstrap.js"></script>
+  <script src="js/bootstrap.bundle.js"></script>
 </body>
 
 </html>
