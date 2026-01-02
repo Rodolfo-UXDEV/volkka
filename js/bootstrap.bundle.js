@@ -628,6 +628,10 @@ function loadCartData() {
   // Totais
   document.getElementById('cart-total-credits').textContent = order.totalCredits;
   document.getElementById('cart-total-price').textContent = formatMoney(order.totalPrice);
+  document.getElementById('cart-total-price-modal').textContent = formatMoney(order.totalPrice);
+  document.getElementById('cart-total-price-modal-2').textContent = formatMoney(order.totalPrice);
+  document.getElementById('cart-total-price-modal-3').textContent = formatMoney(order.totalPrice);
+  document.getElementById('cart-total-price-modal-4').textContent = formatMoney(order.totalPrice);
 
   // Preencher Select de Parcelas (Lógica simples de juros simulada)
   const selectInstallments = document.getElementById('installments-select');
@@ -705,6 +709,53 @@ function setupCreditCardMasks() {
     e.target.value = val;
   });
 }
+
+/* Lógica dos modais */
+(function () {
+  'use strict';
+
+  const form = document.getElementById('navigationForm');
+  const actionContainer = document.getElementById('action-container');
+  const actionBtn = document.getElementById('btn-action');
+
+  let selectedModalId = null;
+
+  // Handler para seleção do Radio
+  function handleSelection(event) {
+    if (event.target.matches('input[name="modalSelector"]')) {
+      const radio = event.target;
+      selectedModalId = radio.value; // Pega o ID do modal (ex: modalGoogle)
+      const labelText = radio.getAttribute('data-label');
+
+      // Atualiza botão
+      actionBtn.textContent = labelText;
+
+      // Mostra botão
+      actionContainer.classList.add('visible');
+    }
+  }
+
+  // Handler para clique no botão
+  function openModal() {
+    if (!selectedModalId) return;
+
+    // Seleciona o elemento do modal no DOM
+    const modalElement = document.getElementById(selectedModalId);
+
+    if (modalElement) {
+      // Instancia e abre o modal usando a API do Bootstrap 5
+      // 'const modal' cria uma nova instância ou recupera a existente se gerenciado corretamente
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    } else {
+      console.error("Modal não encontrado ID:", selectedModalId);
+    }
+  }
+
+  form.addEventListener('change', handleSelection);
+  actionBtn.addEventListener('click', openModal);
+
+})();
 //-----------------------------------------------------------------
 
 

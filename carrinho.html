@@ -43,7 +43,7 @@
       <p class="text-muted">Revise seu plano e escolha a forma de pagamento segura.</p>
     </div>
 
-    <h4 class="mb-3 fw-bold">
+    <h4 class="mb-3 fw-bold d-none d-sm-block">
       Como você prefere pagar?
     </h4>
 
@@ -51,231 +51,83 @@
 
       <!-- COLUNA DA ESQUERDA: FORMAS DE PAGAMENTO -->
       <div class="col-lg-8 order-2 order-sm-1">
-        <div class="accordion" id="accordionExample">
-          <!-- CONTEÚDO: PIX -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button gap-2 text-red fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <div class="d-flex flex-column align-items-start justify-content-center gap-2">
-                  <div>
-                    <i class="bi bi-x-diamond-fill"></i>
-                    Pague com Pix
-                  </div>
-                  <img class="border border-secondary-subtle p-1 rounded-1" src="media/Pix_logo.png" height="40" alt="">
+        <h4 class="mb-3 fw-bold d-block d-sm-none">
+          Como você prefere pagar?
+        </h4>
+        <!-- Formulário de Seleção -->
+        <form id="navigationForm">
+          <div class="list-group mb-4">
+        
+            <!-- Opção 1 -->
+            <label class="list-group-item d-flex gap-3 align-items-center custom-radio-item">
+              <!-- Value agora aponta para o ID do Modal -->
+              <input class="form-check-input flex-shrink-0" type="radio" name="modalSelector" value="modalPix" data-label="PAGAR COM PIX">
+              <div class="d-flex flex-column align-items-start justify-content-center gap-2">
+                <div>
+                  <i class="bi bi-x-diamond-fill"></i>
+                  Pague com Pix
                 </div>
-              </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <div id="pix-section" class="p-2 animate-fade">
-                  <div class="row align-items-center">
-                    <div class="col-md-4 text-center">
-                      <!-- Placeholder QR Code -->
-                      <div class="bg-light p-2 d-inline-block rounded border">
-                        <img
-                          src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ExemploPagamentoDevArchitect"
-                          alt="QR Code Pix" class="img-fluid" id="pix-qrcode">
-                      </div>
-                    </div>
-                    <div class="col-md-8">
-                      <h5 class="fw-bold mb-3">Dados do Pix</h5>
-                      <p class="text-muted small mb-4">
-                        1. Abra o app do seu banco.<br />
-                        2. Escolha pagar Pix com QR Code ou Copia e Cola.<br />
-                        3. Escaneie o código ou copie a chave abaixo.
-                      </p>
-
-                      <label class="form-label fw-bold">Código Copia e Cola</label>
-                      <div class="input-group mb-3">
-                        <input type="text" class="form-control bg-light"
-                          value="00020126580014br.gov.bcb.pix0136123e4567-e89b-12d3-a456-426614174000..." readonly
-                          id="pix-code-input">
-                        <button class="btn btn-outline-secondary" type="button" onclick="copyPixCode()">
-                          <i class="bi bi-clipboard"></i> Copiar
-                        </button>
-                      </div>
-                      <div class="alert alert-warning py-2 small">
-                        <i class="bi bi-clock"></i> Este código expira em 10 minutos.
-                      </div>
-                    </div>
-                  </div>
+                <img class="border border-secondary-subtle p-1 rounded-1" src="media/Pix_logo.png" height="40" alt="">
+              </div>
+            </label>
+        
+            <!-- Opção 2 -->
+            <label class="list-group-item d-flex gap-3 align-items-center custom-radio-item">
+              <input class="form-check-input flex-shrink-0" type="radio" name="modalSelector" value="modalCartao" data-label="PAGAR COM CARTÃO">
+              <div class="d-flex flex-column align-items-start justify-content-center gap-2">
+                <div>
+                  <i class="bi bi-credit-card-2-front-fill"></i>
+                  Pague com Cartão de Crédito
+                </div>
+                <div class="d-flex align-items-start justify-content-start flex-wrap gap-2">
+                  <img class="border border-secondary-subtle p-1 rounded-1" src="media/mastercard.png" height="40" alt="">
+                  <img class="border border-secondary-subtle p-1 rounded-1" src="media/visa.png" height="40" alt="">
+                  <img class="border border-secondary-subtle p-1 rounded-1" src="media/elo.png" height="40" alt="">
+                  <img class="border border-secondary-subtle p-1 rounded-1" src="media/jcb.jpeg" height="40" alt="">
+                  <img class="border border-secondary-subtle p-1 rounded-1" src="media/hiper.png" height="40" alt="">
+                  <img class="border border-secondary-subtle p-1 rounded-1" src="media/diners.png" height="40" alt="">
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- CONTEÚDO: BOLETO -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed gap-2 text-red fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                <div class="d-flex flex-column align-items-start justify-content-center gap-2">
-                  <div>
-                    <i class="bi bi-x-diamond-fill"></i>
-                    Pague com Boleto
-                  </div>
-                  <img class="border border-secondary-subtle py-1 rounded-1" src="media/boleto.png" height="40" alt="">
+            </label>
+        
+            <!-- Opção 3 -->
+            <label class="list-group-item d-flex gap-3 align-items-center custom-radio-item">
+              <input class="form-check-input flex-shrink-0" type="radio" name="modalSelector" value="modalBoleto" data-label="PAGAR COM BOLETO">
+              <div class="d-flex flex-column align-items-start justify-content-center gap-2">
+                <div>
+                  <i class="bi bi-upc-scan"></i>
+                  Pague com Boleto
                 </div>
-              </button>
-            </h2>
-            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <div id="boleto-section" class="p-2 animate-fade">
-                  FALTA INFORMAÇÕES
-                </div>
+                <img class="border border-secondary-subtle py-1 rounded-1" src="media/boleto.png" height="40" alt="">
               </div>
-            </div>
-          </div>
-
-          <!-- CONTEÚDO: CATÃO DE CRÉDITO -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed gap-2 text-red fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <div class="d-flex flex-column align-items-start justify-content-center gap-2">
-                  <div>
-                    <i class="bi bi-credit-card-2-front-fill"></i>
-                    Pague com Cartão de Crédito
-                  </div>
-                  <div class="d-flex align-items-start justify-content-start flex-wrap gap-2">
-                    <img class="border border-secondary-subtle p-1 rounded-1" src="media/mastercard.png" height="40" alt="">
-                    <img class="border border-secondary-subtle p-1 rounded-1" src="media/visa.png" height="40" alt="">
-                    <img class="border border-secondary-subtle p-1 rounded-1" src="media/elo.png" height="40" alt="">
-                    <img class="border border-secondary-subtle p-1 rounded-1" src="media/jcb.jpeg" height="40" alt="">
-                    <img class="border border-secondary-subtle p-1 rounded-1" src="media/hiper.png" height="40" alt="">
-                    <img class="border border-secondary-subtle p-1 rounded-1" src="media/diners.png" height="40" alt="">
-                  </div>
-                </div>
-              </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <div id="card-section" class="p-2 animate-fade">
-                  <h5 class="fw-bold mb-4">Dados do Cartão</h5>
-                  <form id="credit-card-form" novalidate>
-                    <div class="row g-3">
-                      <div class="col-12">
-                        <label class="form-label">Número do Cartão</label>
-                        <div class="input-group">
-                          <span class="input-group-text bg-white"><i class="bi bi-credit-card"></i></span>
-                          <input type="text" class="form-control" placeholder="0000 0000 0000 0000" id="cc-number"
-                            maxlength="19" required>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <label class="form-label">Nome do Titular</label>
-                        <input type="text" class="form-control" placeholder="Como impresso no cartão" required>
-                      </div>
-
-                      <div class="col-md-3">
-                        <label class="form-label">Validade</label>
-                        <input type="text" class="form-control" placeholder="MM/AA" maxlength="5" id="cc-expiry"
-                          required>
-                      </div>
-
-                      <div class="col-md-3">
-                        <label class="form-label">CVV</label>
-                        <div class="input-group">
-                          <input type="text" class="form-control" placeholder="123" maxlength="3" required>
-                          <span class="input-group-text bg-white" title="Código de segurança atrás do cartão">
-                            <i class="bi bi-question-circle"></i>
-                          </span>
-                        </div>
-                      </div>
-
-                      <div class="col-12">
-                        <label class="form-label">Parcelamento</label>
-                        <select class="form-select" id="installments-select">
-                          <option value="1">1x sem juros</option>
-                          <!-- Opções geradas via JS -->
-                        </select>
-                      </div>
-
-                      <div class="col-12 mt-4">
-                        <button type="submit" class="btn btn-red w-100 py-2 fw-bold fs-5">
-                          <i class="bi bi-lock-fill"></i> Pagar Agora
-                        </button>
-                        <p class="text-center text-muted mt-2 small">
-                          <i class="bi bi-shield-check"></i> Pagamento processado em ambiente seguro.
-                        </p>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- CONTEÚDO: CRÉDITOS (CRÉDITOS DISPONIVEIS) -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed gap-2 text-red fw-bold" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseTree" aria-expanded="false" aria-controls="collapseTree">
+            </label>
+        
+            <!-- Opção 4 -->
+            <label class="list-group-item d-flex gap-3 align-items-center custom-radio-item">
+              <input class="form-check-input flex-shrink-0" type="radio" name="modalSelector" value="modalCredito1" data-label="PAGAR COM CRÉDITOS">
+              <span class="pt-1 form-checked-content">
                 <i class="bi bi-coin"></i>
                 Pague com seus Créditos (CRÉDITOS DISPONIVEIS)
-              </button>
-            </h2>
-            <div id="collapseTree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <div class="p-2 animate-fade">
-                  <div class="">
-                    <p class="m-0 p-0 text-success">
-                      Créditos disponíveis: <strong>10</strong>
-                    </p>
-                    <p class="m-0 p-0 text-secondary-emphasis my-2">
-                      Créditos usados: <strong>8</strong>
-                    </p>
-                    <p class="m-0 p-0 text-secondary-emphasis mb-3">
-                      Créditos restantes: <strong>2</strong>
-                    </p>
-                    <button type="submit" class="btn btn-red w-100 py-2 fw-bold fs-5">
-                      <i class="bi bi-coin"></i>
-                      Pagar com Créditos
-                    </button>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- CONTEÚDO: CRÉDITOS (CRÉDITOS INDISPONIVEIS) -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed gap-2 text-red fw-bold" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              </span>
+            </label>
+
+            <!-- Opção 5 -->
+            <label class="list-group-item d-flex gap-3 align-items-center custom-radio-item">
+              <input class="form-check-input flex-shrink-0" type="radio" name="modalSelector" value="modalCredito2" data-label="PAGAR COM CRÉDITOS">
+              <span class="pt-1 form-checked-content">
                 <i class="bi bi-coin"></i>
                 Pague com seus Créditos (CRÉDITOS INDISPONIVEIS)
-              </button>
-            </h2>
-            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <div class="p-2 animate-fade">
-                  <div class="">
-                    <p class="m-0 p-0 text-warning">
-                      Créditos disponíveis: <strong>0</strong>
-                    </p>
-                    <p class="m-0 p-0 text-secondary-emphasis my-2">
-                      Créditos usados: <strong>8</strong>
-                    </p>
-                    <p class="m-0 p-0 text-secondary-emphasis mb-3">
-                      Créditos restantes: <strong>0</strong>
-                    </p>
-                    <div class="d-flex align-items-center justify-content-center p-3 mb-2 bg-warning text-dark w-100 gap-2 rounded-3">
-                      <i class="bi bi-exclamation-triangle-fill fs-1"></i>
-                      <p class="m-0 p-0 fs-6 lh-sm">
-                        É necessário comprar um pacote de créditos para pagar esta promoção com créditos
-                      </p>
-                    </div>
-                    <button type="submit" class="btn btn-red w-100 py-2 fw-bold fs-5" onclick="window.location.href='../creditos.html';">
-                      <i class="bi bi-coin"></i>
-                      Comprar Créditos
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+              </span>
+            </label>
           </div>
-
-        </div>
+        
+          <!-- Container do Botão -->
+          <div id="action-container" class="d-grid">
+            <button type="button" id="btn-action" class="btn btn-red btn-lg fw-bold">
+              Abrir Modal
+            </button>
+          </div>
+        </form>
       </div>
 
       <!-- COLUNA DA DIREITA: RESUMO (Sticky) -->
@@ -336,6 +188,233 @@
   <!-- Modal Área do Membro -->
   <md-modal-areamembro></md-modal-areamembro>
   <!-- Fim Modal Área do Membro -->
+
+  <!-- ================= MODAIS DIFERENTES ================= -->
+  
+  <!-- Modal 1: Pagar com PIX -->
+  <div class="modal fade" id="modalPix" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-x-diamond-fill"></i>
+            Pagar com PIX
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="pix-section" class="p-2 animate-fade">
+            <div class="d-flex align-items-center justify-content-center flex-column align-items-center">
+              <!-- Placeholder QR Code -->
+              <div class="bg-light p-2 d-inline-block rounded border">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=ExemploPagamentoDevArchitect" alt="QR Code Pix" class="img-fluid" id="pix-qrcode">
+              </div>
+              <div class="d-flex justify-content-between align-items-start flex-column py-3 border-bottom w-100">
+                <h5 class="fw-bold m-0">Total a pagar</h5>
+                <h4 class="fw-bold text-red m-0" id="cart-total-price-modal">R$ 0,00</h4>
+              </div>
+              <div class="w-100 mt-3">
+                <h5 class="fw-bold mb-3">Dados do Pix</h5>
+                <p class="text-muted small mb-4">
+                  1. Abra o app do seu banco.<br />
+                  2. Escolha pagar Pix com QR Code ou Copia e Cola.<br />
+                  3. Escaneie o código ou copie a chave abaixo.
+                </p>
+              </div>
+              
+              <label class="form-label fw-bold">Código Copia e Cola</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control bg-light"
+                  value="00020126580014br.gov.bcb.pix0136123e4567-e89b-12d3-a456-426614174000..." readonly id="pix-code-input">
+                <button class="btn btn-outline-secondary" type="button" onclick="copyPixCode()">
+                  <i class="bi bi-clipboard"></i> Copiar
+                </button>
+              </div>
+              <div class="alert alert-warning py-2 small w-100">
+                <i class="bi bi-clock"></i> Este código expira em 10 minutos.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Pagar com Cartão -->
+  <div class="modal fade" id="modalCartao" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-credit-card-2-front-fill"></i>
+            Pagar com Cartão de Crédito
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="card-section" class="p-2 animate-fade">
+            <div class="d-flex justify-content-between align-items-start flex-column pb-3 mb-3 border-bottom w-100">
+              <h5 class="fw-bold m-0">Total a pagar</h5>
+              <h4 class="fw-bold text-red m-0" id="cart-total-price-modal-2">R$ 0,00</h4>
+            </div>
+            <h5 class="fw-bold mb-4">Dados do Cartão</h5>
+            <form id="credit-card-form" novalidate>
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label">Número do Cartão</label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="bi bi-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="0000 0000 0000 0000" id="cc-number" maxlength="19"
+                      required>
+                  </div>
+                </div>
+          
+                <div class="col-12">
+                  <label class="form-label">Nome do Titular</label>
+                  <input type="text" class="form-control" placeholder="Como impresso no cartão" required>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">CPF do Titular</label>
+                  <input type="text" class="form-control" placeholder="Como impresso no cartão" required>
+                </div>
+          
+                <div class="col-md-6">
+                  <label class="form-label">Validade</label>
+                  <input type="text" class="form-control" placeholder="MM/AA" maxlength="5" id="cc-expiry" required>
+                </div>
+          
+                <div class="col-md-6">
+                  <label class="form-label">CVV</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="123" maxlength="3" required>
+                    <span class="input-group-text bg-white" title="Código de segurança atrás do cartão">
+                      <i class="bi bi-question-circle"></i>
+                    </span>
+                  </div>
+                </div>
+          
+                <div class="col-12">
+                  <label class="form-label">Parcelamento</label>
+                  <select class="form-select" id="installments-select">
+                    <option value="1">1x sem juros</option>
+                    <!-- Opções geradas via JS -->
+                  </select>
+                </div>
+          
+                <div class="col-12 mt-4">
+                  <button type="submit" class="btn btn-red w-100 py-2 fw-bold fs-5">
+                    <i class="bi bi-lock-fill"></i> Pagar Agora
+                  </button>
+                  <p class="text-center text-muted mt-2 small">
+                    <i class="bi bi-shield-check"></i> Pagamento processado em ambiente seguro.
+                  </p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Pagar com Boleto -->
+  <div class="modal fade" id="modalBoleto" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-upc-scan"></i>
+            Pagar com Boleto
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="boleto-section" class="p-2 animate-fade">
+            FALTA INFORMAÇÕES
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Pagar com Créditos (DISPONIVEIS) -->
+  <div class="modal fade" id="modalCredito1" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-upc-scan"></i>
+            Pagar com Créditos
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-between align-items-start flex-column pb-3 mb-3 border-bottom w-100">
+            <h5 class="fw-bold m-0">Total a pagar</h5>
+            <h4 class="fw-bold text-red m-0" id="cart-total-price-modal-3">R$ 0,00</h4>
+          </div>
+          <div id="credito-section">
+            <p class="m-0 p-0 text-success">
+              Créditos disponíveis: <strong>10</strong>
+            </p>
+            <p class="m-0 p-0 text-secondary-emphasis my-2">
+              Créditos usados: <strong>8</strong>
+            </p>
+            <p class="m-0 p-0 text-secondary-emphasis mb-3">
+              Créditos restantes: <strong>2</strong>
+            </p>
+            <button type="submit" class="btn btn-red w-100 py-2 fw-bold fs-5">
+              <i class="bi bi-coin"></i>
+              Pagar com Créditos
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Pagar com Créditos (INDISPONIVEIS) -->
+  <div class="modal fade" id="modalCredito2" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-upc-scan"></i>
+            Pagar com Créditos
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-between align-items-start flex-column pb-3 mb-3 border-bottom w-100">
+            <h5 class="fw-bold m-0">Total a pagar</h5>
+            <h4 class="fw-bold text-red m-0" id="cart-total-price-modal-4">R$ 0,00</h4>
+          </div>
+          <div id="credito-section">
+            <p class="m-0 p-0 text-warning">
+              Créditos disponíveis: <strong>0</strong>
+            </p>
+            <p class="m-0 p-0 text-secondary-emphasis my-2">
+              Créditos usados: <strong>8</strong>
+            </p>
+            <p class="m-0 p-0 text-secondary-emphasis mb-3">
+              Créditos restantes: <strong>0</strong>
+            </p>
+            <div class="d-flex align-items-center justify-content-center p-3 mb-3 bg-warning text-dark w-100 gap-2 rounded-3">
+              <i class="bi bi-exclamation-triangle-fill fs-1"></i>
+              <p class="m-0 p-0 fs-6 lh-sm">
+                É necessário comprar um pacote de créditos para pagar esta promoção com créditos
+              </p>
+            </div>
+            <button type="submit" class="btn btn-red w-100 py-2 fw-bold fs-5" onclick="window.location.href='../creditos.html';">
+              <i class="bi bi-coin"></i>
+              Comprar Créditos
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="js/bootstrap.bundle.js"></script>
   <script type="module" src="js/modulos/libs.js"></script>
