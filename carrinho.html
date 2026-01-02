@@ -418,6 +418,54 @@
 
   <script src="js/bootstrap.bundle.js"></script>
   <script type="module" src="js/modulos/libs.js"></script>
+  <script>
+    /* Lógica dos modais */
+      (function () {
+        'use strict';
+
+        const form = document.getElementById('navigationForm');
+        const actionContainer = document.getElementById('action-container');
+        const actionBtn = document.getElementById('btn-action');
+
+        let selectedModalId = null;
+
+        // Handler para seleção do Radio
+        function handleSelection(event) {
+          if (event.target.matches('input[name="modalSelector"]')) {
+            const radio = event.target;
+            selectedModalId = radio.value; // Pega o ID do modal (ex: modalGoogle)
+            const labelText = radio.getAttribute('data-label');
+
+            // Atualiza botão
+            actionBtn.textContent = labelText;
+
+            // Mostra botão
+            actionContainer.classList.add('visible');
+          }
+        }
+
+        // Handler para clique no botão
+        function openModal() {
+          if (!selectedModalId) return;
+
+          // Seleciona o elemento do modal no DOM
+          const modalElement = document.getElementById(selectedModalId);
+
+          if (modalElement) {
+            // Instancia e abre o modal usando a API do Bootstrap 5
+            // 'const modal' cria uma nova instância ou recupera a existente se gerenciado corretamente
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+          } else {
+            console.error("Modal não encontrado ID:", selectedModalId);
+          }
+        }
+
+        form.addEventListener('change', handleSelection);
+        actionBtn.addEventListener('click', openModal);
+
+      })();
+  </script>
 </body>
 
 </html>
