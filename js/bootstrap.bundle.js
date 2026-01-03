@@ -628,6 +628,7 @@ function loadCartData() {
   // Totais
   document.getElementById('cart-total-credits').textContent = order.totalCredits;
   document.getElementById('cart-total-price').textContent = formatMoney(order.totalPrice);
+  document.getElementById('cart-total-price-2').textContent = formatMoney(order.totalPrice);
   document.getElementById('cart-total-price-modal').textContent = formatMoney(order.totalPrice);
   document.getElementById('cart-total-price-modal-2').textContent = formatMoney(order.totalPrice);
   document.getElementById('cart-total-price-modal-3').textContent = formatMoney(order.totalPrice);
@@ -710,16 +711,6 @@ function setupCreditCardMasks() {
   });
 }
 //-----------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -122,10 +122,19 @@
           </div>
         
           <!-- Container do Botão -->
-          <div id="action-container" class="d-grid">
-            <button type="button" id="btn-action" class="btn btn-red btn-lg fw-bold">
-              Abrir Modal
-            </button>
+          <div class="fixed-bottom">
+            <div class="d-grid bg-white py-4 border-top" id="action-container">
+              <div class="container">
+                <div class="d-flex justify-content-start gap-2 align-items-center pb-2">
+                  <h5 class="fw-bold m-0">Total a pagar:</h5>
+                  <h4 class="fw-bold text-red m-0" id="cart-total-price-2">R$ 0,00</h4>
+                </div>
+                <button type="button" id="btn-action" class="btn btn-red btn-lg fw-bold w-100">
+                  Abrir Modal
+                </button>
+              </div>
+              
+            </div>
           </div>
         </form>
       </div>
