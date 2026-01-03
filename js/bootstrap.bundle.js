@@ -627,6 +627,9 @@ function loadCartData() {
 
   // Totais
   document.getElementById('cart-total-credits').textContent = order.totalCredits;
+  document.getElementById('cart-total-credits-1').textContent = order.totalCredits;
+  document.getElementById('cart-total-credits-2').textContent = order.totalCredits;
+  document.getElementById('cart-total-credits-3').textContent = order.totalCredits;
   document.getElementById('cart-total-price').textContent = formatMoney(order.totalPrice);
   document.getElementById('cart-total-price-2').textContent = formatMoney(order.totalPrice);
   document.getElementById('cart-total-price-modal').textContent = formatMoney(order.totalPrice);
