@@ -18,7 +18,7 @@
 @media screen and (max-width: 768px) {
   .hero-home {
     background-image: url(../media/imagem-mobile.jpg);
-    background-position: center;
+    background-position: center right;
     background-size: cover;
     height: 70vh;
     width: 100%;
