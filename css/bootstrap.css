@@ -8,11 +8,21 @@
 /* Inicio CSS Personalizado */
 
 .hero-home {
-  background-image: url(../media/baner-principal.jpg);
+  background-image: url(../media/imagem-banner.png);
   background-position: center;
   background-size: cover;
   height: 70vh;
   width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-home {
+    background-image: url(../media/imagem-mobile.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 70vh;
+    width: 100%;
+  }
 }
 
 .hero-card {
