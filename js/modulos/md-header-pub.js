@@ -58,7 +58,7 @@ export class MDHeaderpub extends HTMLElement {
                             </ul>
                         </div>
 
-                        <button type="button" class="fs-6 btn btn-red rounded-2 fw-medium px-4 py-2 d-none d-lg-block" onclick="window.location.href='Cadastrar-se.html';">
+                        <button type="button" class="fs-6 btn btn-red rounded-2 fw-medium px-4 py-2 d-none d-lg-block" onclick="window.location.href='cadastrarse.html';">
                             CADASTRE GRÁTIS
                         </button>
                         
@@ -78,7 +78,7 @@ export class MDHeaderpub extends HTMLElement {
                                     <p class="fs-2 fw-semibold d-flex align-items-center gap-2 mb-4">
                                         <img src="media/logo-fogo-preto.png" width="20" alt=""> volkka
                                     </p>
-                                    <a href="Cadastrar-se.html" class="link-red fw-bold d-flex align-items-center gap-2 mb-3">CADASTRE GRÁTIS</a>
+                                    <a href="cadastrarse.html" class="link-red fw-bold d-flex align-items-center gap-2 mb-3">CADASTRE GRÁTIS</a>
                                     <a href="login.html" class="link-red fw-bold d-flex align-items-center gap-2">LOGIN</a>
                                 </div>
                             </div>

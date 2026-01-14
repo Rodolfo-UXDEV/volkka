@@ -17,8 +17,8 @@
 
 @media screen and (max-width: 768px) {
   .hero-home {
-    background-image: url(../media/imagem-mobile.jpg);
-    background-position: center right;
+    background-image: url(../media/imagem-mobile.jpeg);
+    background-position: center;
     background-size: cover;
     height: 70vh;
     width: 100%;
@@ -27,7 +27,7 @@
 
 .hero-card {
   width: 100%;
-  min-height: 180px;
+  min-height: 280px;
   background-size: cover;
   background-position: center;
   transition: padding .25s ease;
