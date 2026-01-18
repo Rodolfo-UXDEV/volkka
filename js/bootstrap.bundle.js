@@ -60,10 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
 window.addEventListener("scroll", function () {
   var elemento = document.getElementById("meuElemento");
 
-  if (window.scrollY > 600) { // Se rolar mais de 200px, exibe
-    elemento.style.display = "block";
-  } else {
-    elemento.style.display = "none";
+  // Só executa a lógica se o elemento realmente existir na página
+  if (elemento) {
+    if (window.scrollY > 600) {
+      elemento.style.display = "block";
+    } else {
+      elemento.style.display = "none";
+    }
   }
 });
 //------------------------------
@@ -441,6 +444,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   btnProxima.addEventListener('click', () => { if (currentStep < totalSteps) { currentStep++; updateStepperUI(currentStep); } });
   btnVoltar.addEventListener('click', () => { if (currentStep > 1) { currentStep--; updateStepperUI(currentStep); } });
+  
 
   // Inicia
   updateStepperUI(currentStep);
@@ -454,48 +458,59 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Seleciona o botão de compra na Etapa 4
-  // Nota: Adicionei um ID ou classe específica no HTML para garantir a seleção correta
-  // No seu HTML atual, o botão está dentro de 'total-card'.
   const btnComprar = document.querySelector("#total-card button");
 
   if (btnComprar) {
     btnComprar.addEventListener("click", function (e) {
-      e.preventDefault(); // Previne navegação imediata para processar dados
+      // Impede qualquer ação padrão imediatamente
+      e.preventDefault();
 
-      // 1. Captura o Estado Atual (Recupera do DOM ou da variável global 'state' se acessível)
-      // Como a variável 'state' do seu script original está em escopo fechado,
-      // vamos reconstruir os dados baseados no DOM renderizado para garantir consistência.
-
-      // Captura Plano Selecionado
+      // 1. Captura Plano Selecionado
       const activePlanCard = document.querySelector('.plan-card.active');
+
       if (!activePlanCard) {
-        alert("Por favor, selecione um plano.");
-        return;
+        alert("Por favor, selecione um plano primeiro.");
+        return; // BLOQUEIA AQUI
       }
+
+      // 2. CAPTURA E VALIDAÇÃO DO HORÁRIO
+      const selectHorario = activePlanCard.querySelector('.seletor-horario');
+
+      // Verificação robusta do valor do select
+      if (!selectHorario || selectHorario.value === "" || selectHorario.value === null) {
+        alert("⚠️ Por favor, selecione um horário disponível.");
+        if (selectHorario) {
+          selectHorario.focus();
+          selectHorario.style.border = "2px solid red"; // Alerta visual
+        }
+        return; // BLOQUEIA AQUI (O redirect não acontece)
+      }
+
+      // Definição da variável que faltava no seu código anterior
+      const horarioSelecionado = selectHorario.value;
 
       const planData = {
         name: activePlanCard.dataset.planName,
         price: parseMoney(activePlanCard.dataset.planPrice),
-        credits: parseInt(activePlanCard.dataset.planCredits),
-        // Captura o horário selecionado no select dentro do card ativo
-        schedule: activePlanCard.querySelector('.form-select').value
+        credits: parseInt(activePlanCard.dataset.planCredits) || 0,
+        schedule: horarioSelecionado // USANDO A VARIÁVEL CORRETA
       };
 
-      // Captura Upgrades Selecionados (baseado na classe de borda ativa ou checkbox)
+      // 3. Captura Upgrades
       const upgradesData = [];
-      document.querySelectorAll('.upgrade-switch:checked').forEach(input => {
-        const item = input.closest('.upgrade-card-item');
-        upgradesData.push({
-          name: item.dataset.upgradeName,
-          price: parseFloat(item.dataset.upgradePrice),
-          credits: parseInt(item.dataset.upgradeCredits)
-        });
+      document.querySelectorAll('.upgrade-card-item.active, .upgrade-switch:checked').forEach(itemElement => {
+        const item = itemElement.closest('.upgrade-card-item');
+        if (item) {
+          upgradesData.push({
+            name: item.dataset.upgradeName,
+            price: parseMoney(item.dataset.upgradePrice),
+            credits: parseInt(item.dataset.upgradeCredits) || 0
+          });
+        }
       });
 
-      // 2. Monta o Objeto de Pedido (Order Object)
+      // 4. Monta o Objeto de Pedido
       const orderState = {
-        horario: valorParaEnvio,
         plan: planData,
         upgrades: upgradesData,
         totalPrice: planData.price + upgradesData.reduce((acc, curr) => acc + curr.price, 0),
@@ -503,24 +518,23 @@ document.addEventListener("DOMContentLoaded", function () {
         timestamp: new Date().toISOString()
       };
 
-      // 3. Persistência (Local Storage)
-      // Em uma arquitetura real, isso seria um POST para uma API que retornaria um orderID.
+      // 5. Persistência e Redirecionamento Final
       try {
         localStorage.setItem('checkout_order', JSON.stringify(orderState));
-
-        // 4. Redirecionamento
+        // SÓ CHEGA AQUI SE PASSAR POR TODAS AS VALIDAÇÕES ACIMA
         window.location.href = 'carrinho.html';
       } catch (error) {
-        console.error("Erro ao salvar dados do carrinho:", error);
-        alert("Ocorreu um erro ao processar seu pedido. Tente novamente.");
+        console.error("Erro ao salvar:", error);
+        alert("Erro ao processar pedido.");
       }
     });
   }
 
-  // Helper para converter string "8,62" em float 8.62
-  function parseMoney(str) {
-    if (!str) return 0;
-    return parseFloat(str.replace(' R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
+  function parseMoney(val) {
+    if (!val) return 0;
+    if (typeof val === 'number') return val;
+    let cleanVal = val.toString().replace(/[R$\s.]/g, '').replace(',', '.');
+    return parseFloat(cleanVal) || 0;
   }
 });
 
@@ -611,20 +625,24 @@ function loadCartData() {
 
   // Preencher Upgrades
   const upgradesContainer = document.getElementById('cart-upgrades-list');
-  upgradesContainer.innerHTML = '';
 
-  if (order.upgrades.length > 0) {
-    order.upgrades.forEach(u => {
-      const div = document.createElement('div');
-      div.className = 'd-flex justify-content-between font-monospace small mb-1 text-muted';
-      div.innerHTML = `
+  if (upgradesContainer) { // Garante que o elemento existe na página atual
+    upgradesContainer.innerHTML = '';
+
+    // Verifica se 'order' existe e se 'upgrades' é um array
+    if (order && Array.isArray(order.upgrades) && order.upgrades.length > 0) {
+      order.upgrades.forEach(u => {
+        const div = document.createElement('div');
+        div.className = 'd-flex justify-content-between font-monospace small mb-1 text-muted';
+        div.innerHTML = `
             <span>+ ${u.name}</span>
             <span>${formatMoney(u.price)}</span>
           `;
-      upgradesContainer.appendChild(div);
-    });
-  } else {
-    upgradesContainer.innerHTML = '<small class="text-muted fst-italic">Nenhum extra selecionado</small>';
+        upgradesContainer.appendChild(div);
+      });
+    } else {
+      upgradesContainer.innerHTML = '<small class="text-muted fst-italic">Nenhum extra selecionado</small>';
+    }
   }
 
   // Totais
