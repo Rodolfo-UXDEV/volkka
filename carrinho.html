@@ -37,10 +37,11 @@
 
   <div class="container py-5">
 
-    <!-- Título -->
-    <div class="mb-5 text-center">
-      <h1 class="fw-bold">Finalizar Compra</h1>
-      <p class="text-muted">Revise seu plano e escolha a forma de pagamento segura.</p>
+    <div id="alertaSucesso" class="alert alert-success mt-4 d-none" role="alert">
+      <h4 class="alert-heading">✅ Pagamento Bem-Sucedido!</h4>
+      <p class="m-0 p-0">
+        Sua transação foi processada. Redirecionando para <strong>Meus anúncios</strong> em <strong id="contador">10</strong> segundos...
+      </p>
     </div>
 
     <h4 class="mb-3 fw-bold d-none d-sm-block">
@@ -159,7 +160,14 @@
                 <h6 class="fw-bold mb-0" id="cart-plan-name">Plano Carregando...</h6>
                 <small class="text-muted" id="cart-plan-credits">...</small>
               </div>
-              <span class="fw-bold" id="cart-plan-price">R$ 0,00</span>
+              <span class="fw-bold m-0 p-0" id="cart-plan-price">R$ 0,00</span>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <p>
+                Horário Selecionado:
+              </p>
+              <p id="cart-plan-horario" class="fw-bold"></p>
             </div>
 
             <!-- Lista de Upgrades (Dinâmica) -->
@@ -375,7 +383,7 @@
             <p class="m-0 p-0 text-secondary-emphasis mb-3">
               Créditos restantes: <strong>2</strong>
             </p>
-            <button type="submit" class="btn btn-red w-100 py-2 fw-bold fs-5">
+            <button type="button" class="btn btn-red w-100 py-2 fw-bold fs-5" data-bs-dismiss="modal" id="btnPagar">
               <i class="bi bi-coin"></i>
               Pagar com Créditos
             </button>
@@ -476,6 +484,31 @@
         actionBtn.addEventListener('click', openModal);
 
       })();
+  </script>
+
+  <script>
+    document.getElementById('btnPagar').addEventListener('click', function () {
+      // 1. Esconde o botão e mostra o alerta
+      this.classList.add('d-none');
+      const alerta = document.getElementById('alertaSucesso');
+      alerta.classList.remove('d-none');
+
+      // 2. Configurações do redirecionamento
+      let tempoRestante = 10;
+      const urlDestino = '../gerenciarseuanuncio.html'; // Altere para sua página de destino
+      const contadorTexto = document.getElementById('contador');
+
+      // 3. Atualiza o número do contador na tela a cada segundo
+      const intervalo = setInterval(() => {
+        tempoRestante--;
+        contadorTexto.textContent = tempoRestante;
+
+        if (tempoRestante <= 0) {
+          clearInterval(intervalo);
+          window.location.href = urlDestino;
+        }
+      }, 1000);
+    });
   </script>
 </body>
 

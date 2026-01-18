@@ -8,6 +8,7 @@
   <title>Configurações da Conta</title>
 
   <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
    <!-- Favicon -->
    <link rel="icon" type="image/png" href="media/favicon.png" />
@@ -138,7 +139,7 @@
 
   <!-- Sessão 6 -->
   <div class="container mb-5">
-    <a href="#" target="_blank" class="d-flex justify-content-end gap-1 link-red fs-7 fw-bold">
+    <a class="d-flex justify-content-end gap-1 link-red fs-7 fw-bold" data-bs-toggle="modal" data-bs-target="#ModalExcluirConta">
       <svg width="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
         <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0L284.2 0c12.1 0 23.2 6.8 28.6 17.7L320 32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 96C14.3 96 0 81.7 0 64S14.3 32 32 32l96 0 7.2-14.3zM32 128l384 0 0 320c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64l0-320zm96 64c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16z"/>
       </svg>
@@ -211,6 +212,48 @@
             </div>
             <button type="submit" class="btn btn-red">Enviar</button>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Excluir conta -->
+  <div class="modal fade" id="ModalExcluirConta" tabindex="-1" aria-labelledby="ModalExcluirConta" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-body w-100 d-flex align-items-center justify-content-center flex-column">
+          <i class="bi bi-exclamation-circle text-red" style="font-size: 100px; line-height: 100px;"></i>
+          <h2 class="fs-5 text-center fw-bold pt-4">
+            Tem certeza que deseja excluir a sua conta?
+          </h2>
+          <p class="text-center fs-6 mb-2">
+            Todos os recursos serão apagados e não será possível recuperar, você terá que criar uma nova conta!
+          </p>
+        </div>
+        <div class="modal-footer d-flex border-0">
+          <button type="button" class="btn btn-outline-red flex-fill" data-bs-dismiss="modal">
+            Não, cancele.
+          </button>
+          <button type="button" class="btn btn-red flex-fill" data-bs-target="#ModalContaExcludaSucesso" data-bs-toggle="modal" data-bs-dismiss="modal">
+            Sim, excluir conta!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Conta Excluida com Sucesso -->
+  <div class="modal fade" id="ModalContaExcludaSucesso" tabindex="-1" aria-labelledby="ModalContaExcludaSucesso" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-body w-100 d-flex align-items-center justify-content-center flex-column">
+          <i class="bi bi-check-circle text-red" style="font-size: 100px; line-height: 100px;"></i>
+          <h2 class="fs-5 text-center fw-bold pt-4">
+            Conta Excluida com Sucesso!
+          </h2>
+        </div>
+        <div class="modal-footer d-flex border-0">
+          <button type="button" class="btn btn-outline-red flex-fill" data-bs-dismiss="modal">Fechar</button>
         </div>
       </div>
     </div>

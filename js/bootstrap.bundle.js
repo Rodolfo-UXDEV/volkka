@@ -479,7 +479,7 @@ document.addEventListener("DOMContentLoaded", function () {
         price: parseMoney(activePlanCard.dataset.planPrice),
         credits: parseInt(activePlanCard.dataset.planCredits),
         // Captura o horário selecionado no select dentro do card ativo
-        schedule: activePlanCard.querySelector('select').value
+        schedule: activePlanCard.querySelector('.form-select').value
       };
 
       // Captura Upgrades Selecionados (baseado na classe de borda ativa ou checkbox)
@@ -495,6 +495,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // 2. Monta o Objeto de Pedido (Order Object)
       const orderState = {
+        horario: valorParaEnvio,
         plan: planData,
         upgrades: upgradesData,
         totalPrice: planData.price + upgradesData.reduce((acc, curr) => acc + curr.price, 0),
@@ -603,6 +604,7 @@ function loadCartData() {
   const order = JSON.parse(storedOrder);
 
   // Preencher Plano
+  document.getElementById('cart-plan-horario').textContent = `${order.plan.schedule}`;
   document.getElementById('cart-plan-name').textContent = `Plano ${order.plan.name}`;
   document.getElementById('cart-plan-credits').textContent = `${order.plan.credits} Créditos`;
   document.getElementById('cart-plan-price').textContent = formatMoney(order.plan.price);

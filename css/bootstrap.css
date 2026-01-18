@@ -500,7 +500,6 @@ body {
    transform: translateY(0);
    visibility: visible;
  }
-
 /*-----------------------------------*/
 
 :root,
@@ -4404,6 +4403,16 @@ fieldset:disabled .btn {
   --bs-btn-box-shadow: 0 0 0 #000;
   --bs-btn-focus-shadow-rgb: 49, 132, 253;
   text-decoration: underline;
+}
+
+.btn-outline-green {
+  --bs-btn-color: #198754;
+  --bs-btn-border-color: #198754;
+  --bs-btn-hover-color: #FFFFFF;
+  --bs-btn-hover-bg: #198754;
+  --bs-btn-hover-border-color: #198754;
+  --bs-icon-hover-color: #ffffff;
+  --bs-icon-color: #198754;
 }
 
 .btn-link:focus-visible {
@@ -8584,32 +8593,38 @@ fieldset:disabled .btn {
 .link-gray {
   color: #747373 !important;
   text-decoration: none !important;
+  cursor: pointer;
 }
 
 .link-gray:hover {
   color: #8a281b !important;
+  cursor: pointer;
 }
 
 .link-red {
   color: #c41617 !important;
   text-decoration: none !important;
   fill: #c41617 !important;
+  cursor: pointer;
 }
 
 .link-red:hover {
   color: #8a281b !important;
   fill: #8a281b !important;
+  cursor: pointer;
 }
 
 .link-blue {
   color: #11ABE3 !important;
   text-decoration: none !important;
   fill: #11ABE3 !important;
+  cursor: pointer;
 }
 
 .link-blue:hover {
   color: #0E9ACD !important;
   fill: #0E9ACD !important;
+  cursor: pointer;
 }
 
 .link-body-emphasis {
@@ -10356,6 +10371,10 @@ fieldset:disabled .btn {
 
 .text-teal {
   color: var(--bs-teal);
+}
+
+.text-green {
+  color: var(--bs-green);
 }
 
 .text-body-secondary {
