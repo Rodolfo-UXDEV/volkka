@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const formatMoney = (val) => val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   const parseMoney = (str) => {
     if (!str) return 0;
-    return parseFloat(str.replace(' R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
+    return parseFloat(str.replace('R$', '').replace(',', '.').trim()) || 0;
   };
 
   function updateTotal() {
@@ -533,7 +533,23 @@ document.addEventListener("DOMContentLoaded", function () {
   function parseMoney(val) {
     if (!val) return 0;
     if (typeof val === 'number') return val;
-    let cleanVal = val.toString().replace(/[R$\s.]/g, '').replace(',', '.');
+
+    let cleanVal = val.toString().trim();
+
+    // 1. Se tiver vírgula e ponto (ex: 1.250,50), removemos o ponto de milhar
+    if (cleanVal.includes(',') && cleanVal.includes('.')) {
+      cleanVal = cleanVal.replace(/\./g, '');
+    }
+
+    // 2. Se o ponto for usado como milhar (ex: 1.500), mas não tem vírgula
+    // Verificamos se o ponto está na posição de milhar (3 casas antes do fim)
+    else if (cleanVal.includes('.') && cleanVal.split('.').pop().length === 3) {
+      // Opcional: tratar casos específicos de milhar sem decimal
+    }
+
+    // 3. Troca a vírgula decimal por ponto para o parseFloat entender
+    cleanVal = cleanVal.replace('R$', '').replace(/\s/g, '').replace(',', '.');
+
     return parseFloat(cleanVal) || 0;
   }
 });

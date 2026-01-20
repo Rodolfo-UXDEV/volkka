@@ -37,13 +37,6 @@
 
   <div class="container py-5">
 
-    <div id="alertaSucesso" class="alert alert-success mt-4 d-none" role="alert">
-      <h4 class="alert-heading">✅ Pagamento Bem-Sucedido!</h4>
-      <p class="m-0 p-0">
-        Sua transação foi processada. Redirecionando para <strong>Meus anúncios</strong> em <strong id="contador">10</strong> segundos...
-      </p>
-    </div>
-
     <h4 class="mb-3 fw-bold d-none d-sm-block">
       Como você prefere pagar?
     </h4>
@@ -381,7 +374,7 @@
             <p class="m-0 p-0 text-secondary-emphasis mb-3">
               Créditos restantes: <strong>2</strong>
             </p>
-            <button type="button" class="btn btn-red w-100 py-2 fw-bold fs-5" data-bs-dismiss="modal" id="btnPagar">
+            <button type="button" class="btn btn-red w-100 py-2 fw-bold fs-5" data-bs-target="#ModalCarragementoCupom" data-bs-toggle="modal" id="btnPagar">
               <i class="bi bi-coin"></i>
               Pagar com Créditos
             </button>
@@ -435,8 +428,9 @@
 
   <script src="js/bootstrap.bundle.js"></script>
   <script type="module" src="js/modulos/libs.js"></script>
+
+  <!-- Lógica dos modais -->
   <script>
-    /* Lógica dos modais */
       (function () {
         'use strict';
 
@@ -484,13 +478,9 @@
       })();
   </script>
 
+  <!-- Lógica dos modal -->
   <script>
     document.getElementById('btnPagar').addEventListener('click', function () {
-      // 1. Esconde o botão e mostra o alerta
-      this.classList.add('d-none');
-      const alerta = document.getElementById('alertaSucesso');
-      alerta.classList.remove('d-none');
-
       // 2. Configurações do redirecionamento
       let tempoRestante = 10;
       const urlDestino = '../gerenciarseuanuncio.html'; // Altere para sua página de destino
@@ -508,6 +498,25 @@
       }, 1000);
     });
   </script>
+
+  <!-- Modal Pagamento bem Sucedido -->
+  <div class="modal fade" id="ModalCarragementoCupom" tabindex="-1" aria-labelledby="ModalCarragementoCupom" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-body w-100 d-flex align-items-center justify-content-center flex-column">
+          <i class="bi bi-check-circle-fill text-green" style="font-size: 100px; line-height: 100px; color: --bs-green;"></i>
+          <h2 class="alert-heading fs-5 text-center fw-bold pt-4">
+            Pagamento Bem-Sucedido!
+          </h2>
+          <p class="m-0 p-0 text-center">
+            Sua transação foi processada.<br/>
+            Redirecionando para <strong>Meus anúncios</strong> em <strong id="contador">10</strong> segundos...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fim Modal Pagamento bem Sucedido -->
 </body>
 
 </html>
